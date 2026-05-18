@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://getexcelops.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://getexcelops.com/pages/templates</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://getexcelops.com/pages/reorder</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getexcelops.com/pages/sql</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getexcelops.com/pages/blog</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getexcelops.com/pages/about</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://getexcelops.com/pages/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://getexcelops.com/pages/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>
