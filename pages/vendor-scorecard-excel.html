@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Score and Compare Vendors Using Excel | ExcelOps</title>
+  <meta name="description" content="Build a weighted vendor scorecard in Excel to compare suppliers on delivery, quality, price, and responsiveness. Free template included.">
+  <link rel="canonical" href="https://getexcelops.com/pages/vendor-scorecard-excel">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .article-hero{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:3rem 2rem;color:#fff;text-align:center}
+    .article-hero .cat{font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;color:var(--teal2);font-weight:600;margin-bottom:.75rem}
+    .article-hero h1{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;margin-bottom:.75rem;max-width:700px;margin-left:auto;margin-right:auto}
+    .article-hero .meta{font-size:.85rem;color:#94a3b8}
+    .article-body{max-width:740px;margin:0 auto;padding:3rem 2rem}
+    .article-body h2{font-size:1.3rem;font-weight:700;margin:2rem 0 .875rem;color:var(--text)}
+    .article-body h3{font-size:1.05rem;font-weight:600;margin:1.5rem 0 .5rem;color:var(--text)}
+    .article-body p{color:var(--text2);margin-bottom:1rem;line-height:1.8;font-size:.95rem}
+    .article-body ul,.article-body ol{padding-left:1.5rem;margin-bottom:1rem}
+    .article-body li{color:var(--text2);margin-bottom:.5rem;line-height:1.7;font-size:.95rem}
+    .formula-box{background:var(--navy);color:#7dd3fc;padding:1.25rem 1.5rem;border-radius:var(--rad2);font-family:monospace;font-size:.9rem;margin:1.25rem 0;overflow-x:auto}
+    .step-box{background:#fff;border:1px solid var(--border);border-radius:var(--rad);padding:1.25rem 1.5rem;margin:.75rem 0;display:flex;gap:1rem;align-items:flex-start}
+    .step-num{width:32px;height:32px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.875rem;flex-shrink:0;margin-top:.1rem}
+    .step-box h3{font-size:.95rem;font-weight:600;margin-bottom:.35rem}
+    .step-box p{font-size:.875rem;color:var(--text3);margin:0;line-height:1.6}
+    .tip-box{background:rgba(14,165,160,.05);border-left:3px solid var(--teal);border-radius:0 var(--rad2) var(--rad2) 0;padding:.875rem 1rem;font-size:.875rem;color:var(--text2);margin:1.5rem 0}
+    .warn-box{background:rgba(217,119,6,.05);border-left:3px solid #d97706;border-radius:0 var(--rad2) var(--rad2) 0;padding:.875rem 1rem;font-size:.875rem;color:var(--text2);margin:1.5rem 0}
+    .data-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+    .data-table th{background:var(--navy);color:#fff;padding:.625rem 1rem;text-align:left;font-weight:600}
+    .data-table td{padding:.625rem 1rem;border-bottom:1px solid var(--border);color:var(--text2)}
+    .data-table tr:nth-child(even) td{background:var(--bg)}
+    .dl-cta{background:linear-gradient(135deg,var(--navy),#0f3460);border-radius:var(--rad);padding:2rem;text-align:center;margin:2rem 0;color:#fff}
+    .dl-cta h3{font-size:1.1rem;margin-bottom:.5rem}
+    .dl-cta p{color:#94a3b8;font-size:.875rem;margin-bottom:1.25rem}
+    .related-posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem}
+    .related-card{background:#fff;border:1px solid var(--border);border-radius:var(--rad);padding:1.25rem;text-decoration:none;color:inherit;transition:all .2s}
+    .related-card:hover{box-shadow:0 4px 15px rgba(0,0,0,.08);transform:translateY(-2px)}
+    .related-card .rc-cat{font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;color:var(--teal);font-weight:600;margin-bottom:.4rem}
+    .related-card h4{font-size:.875rem;font-weight:600;line-height:1.4}
+    .faq-list{display:flex;flex-direction:column;gap:.75rem}
+    .faq-item{background:#fff;border:1px solid var(--border);border-radius:var(--rad2);overflow:hidden}
+    .faq-q{padding:1rem 1.25rem;font-weight:600;font-size:.9rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-q:hover{color:var(--teal)}
+    .faq-q .arrow{transition:transform .2s;font-size:.75rem}
+    .faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+    .faq-a{display:none;padding:0 1.25rem 1rem;font-size:.875rem;color:var(--text3);line-height:1.6}
+    .faq-item.open .faq-a{display:block}
+    .breadcrumb{font-size:.8rem;color:var(--text3);margin-bottom:1.5rem}
+    .breadcrumb a{color:var(--text3);text-decoration:none}
+    .breadcrumb a:hover{color:var(--teal)}
+    .breadcrumb span{margin:0 6px}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/index.html"><div class="logo-mark">EO</div>ExcelOps</a>
+  <div class="nav-links">
+    <a href="/pages/templates.html">Templates</a>
+    <a href="/pages/sql.html">SQL Reports</a>
+    <a href="/pages/blog.html">Blog</a>
+    <a href="/pages/about.html">About</a>
+    <a href="/pages/contact.html">Contact</a>
+  </div>
+  <a class="nav-cta" href="/pages/templates.html">Free Templates ↗</a>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/pages/templates.html">Templates</a>
+  <a href="/pages/sql.html">SQL Reports</a>
+  <a href="/pages/blog.html">Blog</a>
+  <a href="/pages/about.html">About</a>
+  <a href="/pages/contact.html">Contact</a>
+</div>
+<div class="article-hero">
+  <div class="cat">Purchasing</div>
+  <h1>How to Score and Compare Vendors Using Excel</h1>
+  <div class="meta">⏱ 13 min read · Purchasing · Vendor Management · Scoring</div>
+</div>
+<div class="article-body">
+  <div class="breadcrumb"><a href="/index.html">Home</a><span>›</span><a href="/pages/blog.html">Blog</a><span>›</span> How to Score and Compare Vendors Using Excel</div>
+  <p>Gut feeling is not a vendor evaluation strategy. If you're choosing between suppliers based on who calls you back fastest or who gave you the best quote last year, you're leaving money and reliability on the table. A vendor scorecard in Excel gives you an objective, repeatable way to evaluate and compare suppliers.</p>
+
+<h2>The 5 Criteria That Matter Most</h2>
+<table class="data-table">
+<tr><th>Criteria</th><th>Weight</th><th>What to Measure</th></tr>
+<tr><td>On-Time Delivery</td><td>30%</td><td>% of orders delivered on or before promised date</td></tr>
+<tr><td>Product Quality</td><td>25%</td><td>Defect rate, return rate, inspection pass rate</td></tr>
+<tr><td>Price Competitiveness</td><td>20%</td><td>Price vs market rate, willingness to negotiate</td></tr>
+<tr><td>Communication</td><td>15%</td><td>Response time, proactive updates, issue resolution</td></tr>
+<tr><td>Compliance &amp; Docs</td><td>10%</td><td>Correct invoices, certifications, documentation</td></tr>
+</table>
+<p>Weights should add up to 100%. Adjust based on what matters most to your business.</p>
+
+<h2>Step 1 — Set Up the Scoring Sheet</h2>
+<p>Create columns: Criteria | Weight | Vendor A Score | Vendor B Score | Vendor C Score | Best Vendor</p>
+
+<h2>Step 2 — Score Each Vendor 1-5</h2>
+<table class="data-table">
+<tr><th>Score</th><th>Meaning</th></tr>
+<tr><td>5</td><td>Excellent — exceeds expectations consistently</td></tr>
+<tr><td>4</td><td>Good — meets expectations with minor issues</td></tr>
+<tr><td>3</td><td>Acceptable — meets basic requirements</td></tr>
+<tr><td>2</td><td>Poor — frequent issues requiring management</td></tr>
+<tr><td>1</td><td>Unacceptable — significant ongoing problems</td></tr>
+</table>
+
+<h2>Step 3 — Calculate Weighted Scores</h2>
+<p>For each vendor, multiply each score by its weight and sum the results:</p>
+<div class="formula-box">=SUMPRODUCT(WeightColumn, VendorScoreColumn)
+=SUMPRODUCT(B2:B6, C2:C6)</div>
+
+<h2>Step 4 — Identify the Best Vendor per Criteria</h2>
+<div class="formula-box">=INDEX(VendorNames,MATCH(MAX(ScoreRange),ScoreRange,0))
+=INDEX(C1:E1,MATCH(MAX(C2:E2),C2:E2,0))</div>
+
+<h2>Step 5 — Add a Recommendation Logic</h2>
+<div class="formula-box">=IF(WeightedScore>=4,"✓ Recommended",IF(WeightedScore>=3,"⚠ Acceptable","✗ Review Required"))</div>
+
+<div class="tip-box">💡 <strong>Review scores quarterly.</strong> Vendors that score poorly get a 30-day improvement plan. Vendors that consistently score below 3 should be replaced.</div>
+
+<h2>How to Use the Scorecard in Negotiations</h2>
+<p>Share the scorecard criteria with vendors upfront. Most suppliers perform better when they know exactly what they're being measured on. Use the scores as leverage in price negotiations — a vendor scoring 4.5 has earned better rates than one scoring 2.5.</p>
+
+<h2>FAQ</h2>
+<div class="faq-list">
+<div class="faq-item"><div class="faq-q">How many vendors should I score at once? <span class="arrow">▼</span></div><div class="faq-a">Score all active vendors quarterly. For major categories where you're evaluating new suppliers, score 3-5 candidates side by side. More than 5 candidates in a single evaluation gets unwieldy.</div></div>
+<div class="faq-item"><div class="faq-q">Should I share the scores with my vendors? <span class="arrow">▼</span></div><div class="faq-a">Yes — transparency improves performance. Share the criteria and weights upfront, and share scores quarterly. Most vendors respond positively to objective feedback and use it to improve. Vendors who react badly to honest feedback are telling you something important.</div></div>
+</div>
+  <div class="dl-cta"><h3>📋 Get the Pre-Built Vendor Scorecard Template</h3><p>Free download — no sign-up required.</p><a class="btn btn-primary" href="/templates/04_Vendor_Scorecard.xlsx" download>⬇ Download Free Template</a></div>
+  <h2>Related Articles</h2>
+  <div class="related-posts"><a class="related-card" href="/pages/purchase-order-tracker-excel.html"><div class="rc-cat">Purchasing</div><h4>Track Purchase Orders in Excel Like a Pro</h4></a><a class="related-card" href="/pages/inventory-kpi-excel.html"><div class="rc-cat">KPI</div><h4>The 7 Inventory KPIs Every Manager Should Track</h4></a><a class="related-card" href="/pages/warehouse-kpi-dashboard-excel.html"><div class="rc-cat">Dashboard</div><h4>Build a Warehouse KPI Dashboard</h4></a></div>
+</div>
+<div class="cta-band"><h2>Get Free Excel Templates Every Week</h2><p>Join operations managers getting templates, formulas, and tutorials straight to their inbox.</p><form class="email-form" action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c" method="post" target="_blank"><input type="email" name="EMAIL" placeholder="your@email.com" required><button type="submit">Get Free Templates →</button></form></div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col"><a class="logo" href="/index.html" style="margin-bottom:.75rem;display:inline-flex"><div class="logo-mark">EO</div> ExcelOps</a><p>Practical Excel templates and tools for operations teams.</p></div>
+      <div class="footer-col"><h4>Tools</h4><a href="/pages/reorder.html">Reorder Calculator</a><a href="/pages/sql.html">SQL to Excel</a><a href="/pages/templates.html">Templates</a></div>
+      <div class="footer-col"><h4>Templates</h4><a href="/templates/01_Inventory_Dashboard.xlsx" download>Inventory Dashboard</a><a href="/templates/02_Warehouse_KPI_Dashboard.xlsx" download>Warehouse KPI</a><a href="/templates/06_Reorder_Report.xlsx" download>Reorder Report</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/pages/about.html">About</a><a href="/pages/blog.html">Blog</a><a href="/pages/contact.html">Contact</a><a href="/pages/privacy.html">Privacy Policy</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 ExcelOps · GetExcelOps.com</div>
+  </div>
+</footer>
+<script src="/js/main.js"></script>
+</body></html>
