@@ -8,4 +8,13 @@
   <url><loc>https://getexcelops.com/pages/about</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://getexcelops.com/pages/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://getexcelops.com/pages/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://getexcelops.com/pages/low-stock-alert-excel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getexcelops.com/pages/sql-to-excel-export</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getexcelops.com/pages/warehouse-kpi-dashboard-excel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getexcelops.com/pages/purchase-order-tracker-excel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getexcelops.com/pages/automate-inventory-report-excel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getexcelops.com/pages/inventory-kpi-excel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getexcelops.com/pages/reorder-point-excel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getexcelops.com/pages/inventory-value-cogs-excel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getexcelops.com/pages/vendor-scorecard-excel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
