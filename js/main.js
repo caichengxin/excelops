@@ -10,22 +10,6 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => btn.parentElement.classList.toggle('open'));
 });
 
-// Email signup
-document.querySelectorAll('.email-form').forEach(form => {
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const input = form.querySelector('input[type="email"]');
-    const btn = form.querySelector('button');
-    if (input && input.value) {
-      input.value = '';
-      const orig = btn.textContent;
-      btn.textContent = '✓ You\'re on the list!';
-      btn.style.background = '#16a34a';
-      setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 3000);
-    }
-  });
-});
-
 // Template filter
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
