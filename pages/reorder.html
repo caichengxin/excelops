@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Reorder Point Calculator Excel — Free Tool | ExcelOps</title>
+  <meta name="description" content="Free reorder point calculator. Enter average daily sales, lead time, and safety stock to get your exact reorder point and the Excel formula to use.">
+  <link rel="canonical" href="https://getexcelops.com/pages/reorder">
+</head><body><nav>
+  <a class="logo" href="/index.html">
+    <div class="logo-mark">EO</div>
+    ExcelOps
+  </a>
+  <div class="nav-links">
+    <a href="/pages/templates.html">Templates</a>
+    <a href="/pages/sql.html">SQL Reports</a>
+    <a href="/pages/blog.html">Blog</a>
+    <a href="/pages/about.html">About</a>
+    <a href="/pages/contact.html">Contact</a>
+  </div>
+  <a class="nav-cta" href="/pages/templates.html">Free Templates ↗</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/pages/templates.html">Templates</a>
+  <a href="/pages/sql.html">SQL Reports</a>
+  <a href="/pages/blog.html">Blog</a>
+  <a href="/pages/about.html">About</a>
+  <a href="/pages/contact.html">Contact</a>
+</div>
+<div class="page-hero"><h1>🔁 Reorder Point Calculator</h1>
+  <p>Calculate the exact stock level to trigger a purchase order — and get the Excel formula to automate it.</p></div>
+<div class="section" style="max-width:780px">
+  <div class="breadcrumb"><a href="/index.html">Home</a><span>›</span> Reorder Point Calculator</div>
+  <div class="calc-box">
+    <div class="calc-grid">
+      <div><label class="calc-label" for="rc-sales">Average Daily Sales (units)</label><input class="calc-input" type="number" id="rc-sales" placeholder="e.g. 25" min="0" oninput="calcReorder()"></div>
+      <div><label class="calc-label" for="rc-lead">Lead Time (days)</label><input class="calc-input" type="number" id="rc-lead" placeholder="e.g. 7" min="0" oninput="calcReorder()"></div>
+      <div><label class="calc-label" for="rc-safety">Safety Stock (units)</label><input class="calc-input" type="number" id="rc-safety" placeholder="e.g. 50" min="0" oninput="calcReorder()"></div>
+      <div><label class="calc-label" for="rc-maxsales">Max Daily Sales (optional)</label><input class="calc-input" type="number" id="rc-maxsales" placeholder="e.g. 40" min="0" oninput="calcReorder()"></div>
+    </div>
+    <div id="rc-result" style="display:none">
+      <div class="calc-result-box">
+        <div class="big-lbl">Your Reorder Point</div>
+        <div class="big-num" id="rc-value">—</div>
+        <div style="font-size:.85rem;color:#94a3b8">units</div>
+        <div style="font-family:monospace;font-size:.85rem;color:#7dd3fc;background:rgba(0,0,0,.25);padding:.625rem 1rem;border-radius:6px;margin-top:1rem" id="rc-formula-text"></div>
+      </div>
+      <div style="margin-top:1.5rem">
+        <h3 style="font-size:.95rem;font-weight:600;margin-bottom:.5rem">Your Excel Formula</h3>
+        <div class="excel-code" id="rc-excel"></div>
+        <div class="note">Place a new order when stock reaches <strong id="rc-rec">—</strong>. At this level you have enough stock to last through your lead time plus safety buffer.</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:grid;gap:1rem;margin-top:2rem">
+    <div class="info-card"><h3>📐 The Formula</h3><p><strong>Reorder Point = (Average Daily Sales × Lead Time) + Safety Stock</strong></p><p>If your stock is at or below this number, place an order now to avoid a stockout before the next delivery arrives.</p></div>
+    <div class="grid-3" style="gap:1rem">
+      <div class="info-card"><h3>📊 Avg Daily Sales</h3><p>Average units sold per day over the last 30–90 days. Pull from your sales report.</p></div>
+      <div class="info-card"><h3>🚚 Lead Time</h3><p>Days from placing an order to receiving stock. Include supplier processing + shipping time.</p></div>
+      <div class="info-card"><h3>🛡️ Safety Stock</h3><p>Buffer for demand spikes or delays. Rule of thumb: (Max Daily Sales − Avg Daily Sales) × Lead Time.</p></div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:2rem">📥 Want this built into your spreadsheet? <a href="/templates/06_Reorder_Report.xlsx" download style="color:var(--teal);font-weight:500">Download the free Reorder Report template</a> — formula pre-built for every SKU.</div>
+</div>
+<div class="cta-band"><h2>Get the Reorder Report Template — Free</h2><p>Reorder points calculated for every SKU automatically.</p><form class="email-form"><input type="email" placeholder="your@email.com" required><button type="submit">Send Me the Template →</button></form></div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a class="logo" href="/index.html" style="margin-bottom:.75rem;display:inline-flex">
+          <div class="logo-mark">EO</div> ExcelOps
+        </a>
+        <p>Practical Excel templates and tools for inventory, warehouse, and business operations.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <a href="/pages/reorder.html">Reorder Calculator</a>
+        <a href="/pages/sql.html">SQL to Excel</a>
+        <a href="/pages/templates.html">Templates</a>
+        <a href="/pages/blog.html">Tutorials</a>
+      </div>
+      <div class="footer-col">
+        <h4>Templates</h4>
+        <a href="/templates/01_Inventory_Dashboard.xlsx" download>Inventory Dashboard</a>
+        <a href="/templates/02_Warehouse_KPI_Dashboard.xlsx" download>Warehouse KPI</a>
+        <a href="/templates/03_Purchase_Order_Tracker.xlsx" download>Purchase Order</a>
+        <a href="/templates/06_Reorder_Report.xlsx" download>Reorder Report</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/pages/about.html">About</a>
+        <a href="/pages/blog.html">Blog</a>
+        <a href="/pages/contact.html">Contact</a>
+        <a href="/pages/privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 ExcelOps · GetExcelOps.com · Built for operations teams who get things done.</div>
+  </div>
+</footer><script src="/js/main.js"></script>
+</body>
+</html>
