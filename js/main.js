@@ -26,18 +26,6 @@ document.querySelectorAll('.email-form').forEach(form => {
   });
 });
 
-// Contact form
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const btn = contactForm.querySelector('.form-submit');
-    btn.textContent = '✓ Message sent! We\'ll reply within 24h.';
-    btn.style.background = '#16a34a';
-    btn.disabled = true;
-  });
-}
-
 // Template filter
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
