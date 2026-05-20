@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Shortcut Finder — Windows & Mac Shortcuts | ExcelOps</title>
+  <meta name="description" content="Search 100+ Excel keyboard shortcuts by action. Get Windows shortcut, Mac shortcut, and Ribbon path instantly. Free Excel shortcut finder tool.">
+  <meta name="keywords" content="excel shortcuts, excel keyboard shortcuts, excel shortcut finder, excel windows shortcuts, excel mac shortcuts">
+  <meta property="og:title" content="Excel Shortcut Finder — ExcelOps">
+  <meta property="og:description" content="Search 100+ Excel shortcuts by what you want to do. Get Windows, Mac & Ribbon path instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getexcelops.com/pages/excel-shortcut-finder">
+  <link rel="canonical" href="https://getexcelops.com/pages/excel-shortcut-finder">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* ── Shortcut Finder specific styles ── */
+    .sf-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+    .sf-badge {
+      display: inline-block;
+      background: rgba(59,130,246,0.15);
+      color: #93c5fd;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(59,130,246,0.3);
+      margin-bottom: 1.25rem;
+    }
+    .sf-hero h1 {
+      color: #fff;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      margin-bottom: .75rem;
+      line-height: 1.25;
+    }
+    .sf-hero h1 span { color: #60a5fa; }
+    .sf-hero p {
+      color: #94a3b8;
+      font-size: 15px;
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .sf-search-wrap {
+      max-width: 580px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+    }
+    .sf-search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: #64748b;
+      pointer-events: none;
+    }
+    .sf-search-wrap input {
+      width: 100%;
+      padding: 15px 110px 15px 48px;
+      font-size: 15px;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.07);
+      color: #fff;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color .2s, background .2s;
+    }
+    .sf-search-wrap input::placeholder { color: #475569; }
+    .sf-search-wrap input:focus {
+      border-color: #3b82f6;
+      background: rgba(255,255,255,0.1);
+    }
+    .sf-kbd {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      color: #475569;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 5px;
+      padding: 3px 8px;
+      pointer-events: none;
+    }
+    .sf-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 1.5rem;
+    }
+    .sf-stat-num { color: #fff; font-size: 20px; font-weight: 600; }
+    .sf-stat-lbl { color: #64748b; font-size: 11px; margin-top: 2px; }
+
+    /* ── Main content area ── */
+    .sf-main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+    }
+    .sf-filter-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .sf-pill {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      color: #64748b;
+      cursor: pointer;
+      transition: all .15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .sf-pill:hover { border-color: #3b82f6; color: #3b82f6; }
+    .sf-pill.active {
+      background: #0f172a;
+      color: #fff;
+      border-color: #0f172a;
+    }
+    .sf-meta {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Shortcut Cards ── */
+    .sf-card {
+      background: #fff;
+      border: 1px solid #e8ecf0;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      transition: border-color .15s;
+    }
+    .sf-card:hover { border-color: #cbd5e1; }
+    .sf-card.open { border-color: #3b82f6; }
+    .sf-card-head {
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .sf-card.open .sf-card-head {
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .sf-card-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+    .sf-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .sf-dot.basics     { background: #06b6d4; }
+    .sf-dot.celledit   { background: #f97316; }
+    .sf-dot.data       { background: #3b82f6; }
+    .sf-dot.formatting { background: #8b5cf6; }
+    .sf-dot.navigation { background: #10b981; }
+    .sf-dot.formulas   { background: #f59e0b; }
+    .sf-dot.view       { background: #ef4444; }
+    .sf-dot.insertdel  { background: #ec4899; }
+    .sf-action {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .sf-cat-lbl {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 1px;
+    }
+    .sf-chips {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .sf-chip {
+      font-family: 'DM Sans', monospace;
+      font-size: 11px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 4px 9px;
+      color: #334155;
+      white-space: nowrap;
+    }
+    .sf-chip-os {
+      font-size: 9px;
+      color: #94a3b8;
+      display: block;
+      margin-bottom: 1px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .sf-chevron {
+      color: #cbd5e1;
+      font-size: 14px;
+      transition: transform .2s;
+      flex-shrink: 0;
+    }
+    .sf-card.open .sf-chevron { transform: rotate(180deg); }
+
+    /* ── Card body (expanded) ── */
+    .sf-card-body { display: none; padding: 1.25rem; }
+    .sf-card.open .sf-card-body { display: block; }
+    .sf-ribbon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #64748b;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 7px;
+      padding: 8px 12px;
+      margin-bottom: 1rem;
+    }
+    .sf-ribbon svg { flex-shrink: 0; }
+    .sf-desc {
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+    .sf-copy-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .sf-copy-btn {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      color: #64748b;
+      cursor: pointer;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .12s;
+    }
+    .sf-copy-btn:hover { background: #f8fafc; border-color: #cbd5e1; }
+    .sf-copy-btn.copied { color: #10b981; border-color: #10b981; }
+    .sf-related {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #f1f5f9;
+    }
+    .sf-related-lbl {
+      font-size: 11px;
+      color: #94a3b8;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .sf-related-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .sf-rtag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 5px;
+      border: 1px solid #e2e8f0;
+      color: #64748b;
+      cursor: pointer;
+      transition: all .12s;
+    }
+    .sf-rtag:hover { border-color: #3b82f6; color: #3b82f6; }
+
+    /* ── No results ── */
+    .sf-empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+    .sf-empty-icon { font-size: 32px; margin-bottom: .75rem; }
+
+    /* ── SEO intro block ── */
+    .sf-intro {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 0;
+    }
+    .sf-intro h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: .5rem;
+    }
+    .sf-intro p {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 600px) {
+      .sf-chips { display: none; }
+      .sf-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="/index.html">
+    <div class="logo-mark">EO</div>
+    ExcelOps
+  </a>
+  <div class="nav-links">
+    <a href="/pages/templates.html">Templates</a>
+    <a href="/pages/sql.html">SQL Reports</a>
+    <a href="/pages/excel-shortcut-finder.html" class="active">Excel Shortcuts</a>
+    <a href="/pages/blog.html">Blog</a>
+    <a href="/pages/about.html">About</a>
+    <a href="/pages/contact.html">Contact</a>
+  </div>
+  <a class="nav-cta" href="/pages/templates.html">Free Templates ↗</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/pages/templates.html">Templates</a>
+  <a href="/pages/sql.html">SQL Reports</a>
+  <a href="/pages/excel-shortcut-finder.html">Excel Shortcuts</a>
+  <a href="/pages/blog.html">Blog</a>
+  <a href="/pages/about.html">About</a>
+  <a href="/pages/contact.html">Contact</a>
+</div>
+
+<!-- HERO -->
+<div class="sf-hero">
+  <div class="sf-badge">⌨ Excel Shortcut Finder</div>
+  <h1>What do you want to <span>do in Excel?</span></h1>
+  <p>Search 100+ shortcuts by action — get Windows, Mac & Ribbon path instantly</p>
+  <div class="sf-search-wrap">
+    <svg class="sf-search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="sf-input" type="text" placeholder="e.g. freeze panes, filter data, insert date…" autocomplete="off" />
+    <span class="sf-kbd">Ctrl K</span>
+  </div>
+  <div class="sf-stats">
+    <div><div class="sf-stat-num">100+</div><div class="sf-stat-lbl">Excel Shortcuts</div></div>
+    <div><div class="sf-stat-num">5</div><div class="sf-stat-lbl">Categories</div></div>
+    <div><div class="sf-stat-num">Win + Mac</div><div class="sf-stat-lbl">Both platforms</div></div>
+  </div>
+</div>
+
+<!-- SEO INTRO -->
+<div class="sf-intro">
+  <h2>Find Any Excel Shortcut in Seconds</h2>
+  <p>Stop memorizing and start searching. Type what you want to do — filter data, freeze panes, remove duplicates — and instantly get the keyboard shortcut for Windows and Mac, plus the exact Ribbon menu path. Built for operations teams who live in Excel every day.</p>
+</div>
+
+<!-- MAIN TOOL -->
+<div class="sf-main">
+  <div class="sf-filter-row">
+    <button class="sf-pill active" data-f="all">All</button>
+    <button class="sf-pill" data-f="Basics">Basics</button>
+    <button class="sf-pill" data-f="Cell Editing">Cell Editing</button>
+    <button class="sf-pill" data-f="Data">Data</button>
+    <button class="sf-pill" data-f="Formatting">Formatting</button>
+    <button class="sf-pill" data-f="Navigation">Navigation</button>
+    <button class="sf-pill" data-f="Formulas">Formulas</button>
+    <button class="sf-pill" data-f="View">View</button>
+    <button class="sf-pill" data-f="Insert & Delete">Insert & Delete</button>
+  </div>
+  <div class="sf-meta" id="sf-meta">Showing all shortcuts</div>
+  <div id="sf-list"></div>
+</div>
+
+<!-- EMAIL CTA -->
+<div class="cta-band">
+  <h2>Get Free Excel Templates Every Week</h2>
+  <p>Join operations managers getting templates, formulas, and tutorials straight to their inbox.</p>
+  <form class="email-form" action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c&amp;f_id=00e7c2e1f0" method="post" target="_blank">
+    <input type="email" name="EMAIL" placeholder="your@email.com" required>
+    <button type="submit">Subscribe Free →</button>
+  </form>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a class="logo" href="/index.html" style="margin-bottom:.75rem;display:inline-flex">
+          <div class="logo-mark">EO</div> ExcelOps
+        </a>
+        <p>Practical Excel templates and tools for inventory, warehouse, and business operations teams.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <a href="/pages/reorder.html">Reorder Calculator</a>
+        <a href="/pages/sql.html">SQL to Excel Guide</a>
+        <a href="/pages/excel-shortcut-finder.html">Shortcut Finder</a>
+        <a href="/pages/templates.html">Template Library</a>
+        <a href="/pages/blog.html">Formula Tutorials</a>
+      </div>
+      <div class="footer-col">
+        <h4>Templates</h4>
+        <a href="/templates/01_Inventory_Dashboard.xlsx" download>Inventory Dashboard</a>
+        <a href="/templates/02_Warehouse_KPI_Dashboard.xlsx" download>Warehouse KPI</a>
+        <a href="/templates/03_Purchase_Order_Tracker.xlsx" download>Purchase Order</a>
+        <a href="/templates/04_Vendor_Scorecard.xlsx" download>Vendor Scorecard</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/pages/about.html">About</a>
+        <a href="/pages/blog.html">Blog</a>
+        <a href="/pages/contact.html">Contact</a>
+        <a href="/pages/privacy.html">Privacy Policy</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 ExcelOps · <a href="https://getexcelops.com" style="color:#475569">GetExcelOps.com</a> · Built for operations teams who get things done.</div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script>
+const SF_DATA = [
+  // ── Basics ──
+  { id:"copy", action:"Copy", cat:"Basics", win:"Ctrl + C", mac:"Cmd + C", ribbon:"Home → Copy", desc:"Copies the selected cells to the clipboard. The copied range shows a moving dashed border. Press Escape to cancel.", tags:["copy","clipboard","duplicate"], related:["Cut","Paste","Paste Special"] },
+  { id:"cut", action:"Cut", cat:"Basics", win:"Ctrl + X", mac:"Cmd + X", ribbon:"Home → Cut", desc:"Cuts the selected cells to the clipboard. The cell content is removed once you paste elsewhere.", tags:["cut","move","clipboard"], related:["Copy","Paste","Paste values only"] },
+  { id:"paste", action:"Paste", cat:"Basics", win:"Ctrl + V", mac:"Cmd + V", ribbon:"Home → Paste", desc:"Pastes the clipboard contents into the selected cell. Pastes everything including values, formulas, and formatting.", tags:["paste","clipboard","insert"], related:["Paste Special","Paste values only","Copy"] },
+  { id:"undo", action:"Undo", cat:"Basics", win:"Ctrl + Z", mac:"Cmd + Z", ribbon:"Quick Access Toolbar → Undo", desc:"Reverses the last action. Press repeatedly to undo multiple steps. Excel keeps up to 100 undo steps by default.", tags:["undo","reverse","back","mistake"], related:["Redo","Save"] },
+  { id:"redo", action:"Redo", cat:"Basics", win:"Ctrl + Y", mac:"Cmd + Shift + Z", ribbon:"Quick Access Toolbar → Redo", desc:"Re-applies the last action that was undone. Only works after using Undo.", tags:["redo","repeat","forward"], related:["Undo","Save"] },
+  { id:"save", action:"Save", cat:"Basics", win:"Ctrl + S", mac:"Cmd + S", ribbon:"File → Save", desc:"Saves the current workbook. If the file has never been saved, opens the Save As dialog.", tags:["save","file","disk"], related:["Save As","Undo","New workbook"] },
+  { id:"save-as", action:"Save As", cat:"Basics", win:"F12", mac:"Cmd + Shift + S", ribbon:"File → Save As", desc:"Opens the Save As dialog to save the file with a new name, location, or format (e.g. .xlsx, .csv, .pdf).", tags:["save as","rename","export","file","f12"], related:["Save","Print"] },
+  { id:"new-wb", action:"New workbook", cat:"Basics", win:"Ctrl + N", mac:"Cmd + N", ribbon:"File → New", desc:"Opens a new blank workbook in a separate window.", tags:["new","workbook","blank","file"], related:["Open file","Close workbook","Save As"] },
+  { id:"open", action:"Open file", cat:"Basics", win:"Ctrl + O", mac:"Cmd + O", ribbon:"File → Open", desc:"Opens the file browser to open an existing Excel workbook.", tags:["open","file","browse"], related:["New workbook","Close workbook","Save"] },
+  { id:"close-wb", action:"Close workbook", cat:"Basics", win:"Ctrl + W", mac:"Cmd + W", ribbon:"File → Close", desc:"Closes the current workbook. Prompts to save if there are unsaved changes.", tags:["close","exit","workbook","file"], related:["Save","New workbook","Open file"] },
+  { id:"print", action:"Print", cat:"Basics", win:"Ctrl + P", mac:"Cmd + P", ribbon:"File → Print", desc:"Opens the Print dialog where you can preview, set print area, choose printer, and adjust page settings.", tags:["print","printer","page","output"], related:["Save As","Save"] },
+  { id:"select-all-basics", action:"Select all", cat:"Basics", win:"Ctrl + A", mac:"Cmd + A", ribbon:"No menu path — keyboard only", desc:"Selects all cells in the current data region. Press again to select the entire sheet.", tags:["select","all","everything"], related:["Copy","Cut","Paste"] },
+  { id:"find", action:"Find", cat:"Basics", win:"Ctrl + F", mac:"Cmd + F", ribbon:"Home → Find & Select → Find", desc:"Opens the Find dialog to search for text or values in the sheet. Press Ctrl+H to switch to Find & Replace.", tags:["find","search","lookup"], related:["Find & Replace","Go To Special"] },
+  { id:"spell-check", action:"Spell check", cat:"Basics", win:"F7", mac:"F7", ribbon:"Review → Spelling", desc:"Runs a spell check on the active sheet, starting from the current cell.", tags:["spell","check","spelling","grammar"], related:["Find & Replace","Find"] },
+
+  // ── Cell Editing ──
+  { id:"edit-cell", action:"Edit cell (enter edit mode)", cat:"Cell Editing", win:"F2", mac:"F2", ribbon:"No menu path — keyboard only", desc:"Places the cursor inside the active cell so you can edit its content directly. Press Escape to cancel, Enter to confirm.", tags:["edit","cell","f2","enter","modify"], related:["Delete cell content","Fill Down","Cell line break"] },
+  { id:"delete-content", action:"Delete cell content", cat:"Cell Editing", win:"Delete", mac:"Delete", ribbon:"Home → Clear → Clear Contents", desc:"Clears the content of selected cells without removing the cells themselves. Formatting is preserved.", tags:["delete","clear","content","remove","erase"], related:["Edit cell (enter edit mode)","Cut","Undo"] },
+  { id:"clear-all", action:"Clear all (content + formatting)", cat:"Cell Editing", win:"Alt → H → E → A", mac:"No direct shortcut", ribbon:"Home → Clear → Clear All", desc:"Removes both content and formatting from the selected cells. Use with caution — this cannot be undone in one step.", tags:["clear","all","format","content","erase","reset"], related:["Delete cell content","Format cells dialog","Undo"] },
+  { id:"fill-down", action:"Fill Down", cat:"Cell Editing", win:"Ctrl + D", mac:"Cmd + D", ribbon:"Home → Fill → Down", desc:"Copies the content of the top cell into all selected cells below it. Select the source cell and destination cells first.", tags:["fill","down","copy","repeat","ctrl d"], related:["Fill Right","Flash Fill","Copy"] },
+  { id:"fill-right", action:"Fill Right", cat:"Cell Editing", win:"Ctrl + R", mac:"Cmd + R", ribbon:"Home → Fill → Right", desc:"Copies the content of the leftmost cell into all selected cells to its right.", tags:["fill","right","copy","repeat","ctrl r"], related:["Fill Down","Flash Fill","Copy"] },
+  { id:"fill-series", action:"Fill series (AutoFill)", cat:"Cell Editing", win:"Alt → H → FI → S", mac:"No direct shortcut", ribbon:"Home → Fill → Series", desc:"Fills a range with a series of numbers, dates, or custom sequences. Drag the fill handle from a cell as an alternative.", tags:["fill","series","autofill","sequence","numbers","dates"], related:["Fill Down","Flash Fill","Insert current date"] },
+  { id:"line-break", action:"Cell line break", cat:"Cell Editing", win:"Alt + Enter", mac:"Ctrl + Option + Enter", ribbon:"No menu path — keyboard only", desc:"Inserts a line break inside a cell without moving to the next cell. Useful for multi-line labels or addresses.", tags:["line break","newline","enter","cell","wrap","multiline"], related:["Wrap text","Edit cell (enter edit mode)","Fill Down"] },
+  { id:"ctrl-enter", action:"Fill same value into multiple cells", cat:"Cell Editing", win:"Ctrl + Enter", mac:"Cmd + Enter", ribbon:"No menu path — keyboard only", desc:"Select multiple cells, type a value or formula, then press Ctrl+Enter to fill all selected cells at once.", tags:["fill","multiple","cells","same","ctrl enter","bulk"], related:["Fill Down","Fill Right","AutoSum"] },
+  { id:"repeat-action", action:"Repeat last action", cat:"Cell Editing", win:"F4 / Ctrl + Y", mac:"Cmd + Y", ribbon:"No menu path — keyboard only", desc:"Repeats the last formatting or editing action on the current selection. Useful for applying the same format to multiple areas.", tags:["repeat","last","action","f4","redo"], related:["Undo","Redo","Format cells dialog"] },
+  { id:"add-comment", action:"Add comment / note", cat:"Cell Editing", win:"Shift + F2", mac:"Fn + Shift + F2", ribbon:"Review → New Comment", desc:"Inserts a comment (note) on the selected cell. Comments are visible on hover and useful for explaining data.", tags:["comment","note","annotation","shift f2"], related:["Edit cell (enter edit mode)","Spell check"] },
+
+  // ── Data ──
+  { id:"filter", action:"Toggle AutoFilter", cat:"Data", win:"Ctrl + Shift + L", mac:"Cmd + Shift + F", ribbon:"Data → Filter", desc:"Add or remove filter dropdowns on your data range. Click the dropdown arrows to filter by value, color, or condition.", tags:["filter","sort","dropdown","autofilter"], related:["Remove duplicates","Create pivot table","Flash Fill"] },
+  { id:"date", action:"Insert current date", cat:"Data", win:"Ctrl + ;", mac:"Ctrl + ;", ribbon:"No menu path — keyboard only", desc:"Stamps today's date as a static value. Combine with Ctrl+Shift+; for the current time to create a full timestamp.", tags:["date","today","timestamp","insert","time"], related:["Flash Fill","Insert current time"] },
+  { id:"time", action:"Insert current time", cat:"Data", win:"Ctrl + Shift + ;", mac:"Ctrl + Shift + ;", ribbon:"No menu path — keyboard only", desc:"Stamps the current time as a static value. Use after Ctrl+; and a space to get a full date-time stamp.", tags:["time","now","timestamp","insert"], related:["Insert current date","Flash Fill"] },
+  { id:"dupe", action:"Remove duplicates", cat:"Data", win:"Alt → A → M", mac:"No direct shortcut", ribbon:"Data → Remove Duplicates", desc:"Scan selected columns for duplicate rows and remove them, keeping only the first occurrence. Choose which columns to check.", tags:["duplicate","remove","unique","clean","dedup"], related:["Toggle AutoFilter","Flash Fill","Create pivot table"] },
+  { id:"pivot", action:"Create pivot table", cat:"Data", win:"Alt → N → V → T", mac:"No direct shortcut", ribbon:"Insert → PivotTable", desc:"Summarize large datasets by grouping, counting, or aggregating values. One of Excel's most powerful analysis tools.", tags:["pivot","summarize","group","aggregate","report","table"], related:["Toggle AutoFilter","AutoSum","Group rows"] },
+  { id:"find-replace", action:"Find & Replace", cat:"Data", win:"Ctrl + H", mac:"Cmd + H", ribbon:"Home → Find & Select → Replace", desc:"Replace one value with another across the sheet or entire workbook. Use wildcards (* ?) for pattern matching.", tags:["find","replace","search","change","wildcard"], related:["Toggle AutoFilter","Flash Fill","Go To Special"] },
+  { id:"flash", action:"Flash Fill", cat:"Data", win:"Ctrl + E", mac:"Cmd + E", ribbon:"Data → Flash Fill", desc:"Auto-fills a column based on a pattern Excel detects from your examples. Great for splitting names, reformatting dates, or extracting text.", tags:["flash fill","pattern","autofill","text","split","smart fill"], related:["Find & Replace","Insert current date","Remove duplicates"] },
+  { id:"sort-az", action:"Sort A to Z", cat:"Data", win:"Alt → A → S → A", mac:"No direct shortcut", ribbon:"Data → Sort A to Z", desc:"Sorts the selected column or range in ascending order. Select a single cell in the column before using.", tags:["sort","ascending","az","order","arrange"], related:["Toggle AutoFilter","Remove duplicates","Create pivot table"] },
+  { id:"text-to-col", action:"Text to columns", cat:"Data", win:"Alt → A → E", mac:"No direct shortcut", ribbon:"Data → Text to Columns", desc:"Split text in one column into multiple columns by a delimiter like comma, space, or tab. Essential for cleaning imported data.", tags:["text","split","columns","delimiter","csv","clean"], related:["Flash Fill","Remove duplicates","Find & Replace"] },
+  { id:"paste-val", action:"Paste values only", cat:"Data", win:"Ctrl + Alt + V → V → Enter", mac:"Cmd + Ctrl + V → V → Enter", ribbon:"Home → Paste → Paste Values", desc:"Pastes only the cell values, stripping all formulas and formatting. Prevents formula errors when moving data between sheets.", tags:["paste","values","no formula","special"], related:["Paste Special","Flash Fill","Find & Replace"] },
+
+  // ── Formatting ──
+  { id:"bold", action:"Bold", cat:"Formatting", win:"Ctrl + B", mac:"Cmd + B", ribbon:"Home → Bold", desc:"Toggle bold formatting on selected cells or text within a cell.", tags:["bold","format","text","style"], related:["Italic","Underline","Paste Special"] },
+  { id:"italic", action:"Italic", cat:"Formatting", win:"Ctrl + I", mac:"Cmd + I", ribbon:"Home → Italic", desc:"Toggle italic formatting on selected cells or text within a cell.", tags:["italic","format","text","style"], related:["Bold","Underline","Paste Special"] },
+  { id:"underline", action:"Underline", cat:"Formatting", win:"Ctrl + U", mac:"Cmd + U", ribbon:"Home → Underline", desc:"Toggle underline formatting on selected cells or text within a cell.", tags:["underline","format","text","style"], related:["Bold","Italic","Paste Special"] },
+  { id:"paste-special", action:"Paste Special", cat:"Formatting", win:"Ctrl + Alt + V", mac:"Cmd + Ctrl + V", ribbon:"Home → Paste → Paste Special", desc:"Opens the Paste Special dialog. Choose to paste values, formats, formulas, column widths, or transpose rows to columns.", tags:["paste","special","values","transpose","format"], related:["Paste values only","Lock cell reference ($)","Find & Replace"] },
+  { id:"format-cells", action:"Format cells dialog", cat:"Formatting", win:"Ctrl + 1", mac:"Cmd + 1", ribbon:"Home → Format → Format Cells", desc:"Opens the full Format Cells dialog with tabs for Number, Alignment, Font, Border, Fill, and Protection.", tags:["format","cells","dialog","number","border","font"], related:["Bold","Paste Special","Wrap text"] },
+  { id:"wrap-text", action:"Wrap text", cat:"Formatting", win:"Alt → H → W", mac:"No direct shortcut", ribbon:"Home → Wrap Text", desc:"Makes long text wrap inside the cell instead of overflowing into adjacent cells.", tags:["wrap","text","overflow","cell"], related:["Format cells dialog","Merge & center","Bold"] },
+  { id:"merge", action:"Merge & center", cat:"Formatting", win:"Alt → H → M → C", mac:"No direct shortcut", ribbon:"Home → Merge & Center", desc:"Merges the selected cells into one and centers the content. Use sparingly — merged cells can break formulas and sorting.", tags:["merge","center","combine","cells"], related:["Wrap text","Format cells dialog","Paste Special"] },
+  { id:"currency", action:"Apply currency format", cat:"Formatting", win:"Ctrl + Shift + $", mac:"Cmd + Shift + $", ribbon:"Home → Number Format → Currency", desc:"Applies the currency format with two decimal places to the selected cells.", tags:["currency","dollar","format","number","money"], related:["Apply percentage format","Format cells dialog"] },
+  { id:"percent", action:"Apply percentage format", cat:"Formatting", win:"Ctrl + Shift + %", mac:"Cmd + Shift + %", ribbon:"Home → Number Format → Percentage", desc:"Applies percentage format to the selected cells. Note: 0.5 becomes 50%.", tags:["percent","percentage","format","number"], related:["Apply currency format","Format cells dialog"] },
+  { id:"conditional", action:"Conditional formatting", cat:"Formatting", win:"Alt → H → L", mac:"No direct shortcut", ribbon:"Home → Conditional Formatting", desc:"Apply color scales, data bars, or custom rules to highlight cells based on their values.", tags:["conditional","formatting","highlight","color","rules"], related:["Format cells dialog","Toggle AutoFilter","Remove duplicates"] },
+
+  // ── Navigation ──
+  { id:"col", action:"Select entire column", cat:"Navigation", win:"Ctrl + Space", mac:"Ctrl + Space", ribbon:"No menu path — keyboard only", desc:"Selects every cell in the active column. Combine with Shift to extend the selection across multiple columns.", tags:["select","column","entire","ctrl space"], related:["Select entire row","Select all cells","Go To Special"] },
+  { id:"row", action:"Select entire row", cat:"Navigation", win:"Shift + Space", mac:"Shift + Space", ribbon:"No menu path — keyboard only", desc:"Selects every cell in the active row. Hold Shift after to extend selection to multiple rows.", tags:["select","row","entire","shift space"], related:["Select entire column","Select all cells","Hide row"] },
+  { id:"select-all", action:"Select all cells", cat:"Navigation", win:"Ctrl + A", mac:"Cmd + A", ribbon:"No menu path — keyboard only", desc:"Selects all cells in the current data region. Press again to select the entire sheet.", tags:["select","all","entire","sheet"], related:["Select entire column","Select entire row","Go To Special"] },
+  { id:"go-to", action:"Go To Special", cat:"Navigation", win:"Ctrl + G → Alt + S", mac:"Cmd + G → S", ribbon:"Home → Find & Select → Go To Special", desc:"Navigate to specific cell types: blanks, formulas, constants, errors, or last cell. Essential for cleaning data.", tags:["go to","special","blank","formula","navigate"], related:["Find & Replace","Select all cells","Toggle AutoFilter"] },
+  { id:"end-arrow", action:"Jump to last used cell in row/column", cat:"Navigation", win:"Ctrl + Arrow key", mac:"Cmd + Arrow key", ribbon:"No menu path — keyboard only", desc:"Jumps to the last non-empty cell in the direction of the arrow. If cell is empty, jumps to the next non-empty cell.", tags:["jump","last","end","navigate","arrow","move"], related:["Select entire column","Go To Special","Select all cells"] },
+  { id:"next-sheet", action:"Move to next sheet", cat:"Navigation", win:"Ctrl + Page Down", mac:"Fn + Ctrl + Down", ribbon:"No menu path — keyboard only", desc:"Switches to the next worksheet tab to the right.", tags:["sheet","tab","next","navigate","switch"], related:["Move to previous sheet","New sheet","Rename sheet"] },
+  { id:"prev-sheet", action:"Move to previous sheet", cat:"Navigation", win:"Ctrl + Page Up", mac:"Fn + Ctrl + Up", ribbon:"No menu path — keyboard only", desc:"Switches to the previous worksheet tab to the left.", tags:["sheet","tab","previous","navigate","switch"], related:["Move to next sheet","New sheet","Rename sheet"] },
+  { id:"new-sheet", action:"New sheet", cat:"Navigation", win:"Shift + F11", mac:"Fn + Shift + F11", ribbon:"Right-click tab → Insert Sheet", desc:"Inserts a new blank worksheet to the left of the active sheet.", tags:["new","sheet","tab","insert","add"], related:["Move to next sheet","Rename sheet","Delete sheet"] },
+
+  // ── Formulas ──
+  { id:"lock", action:"Lock cell reference ($)", cat:"Formulas", win:"F4", mac:"Cmd + T", ribbon:"No menu path — keyboard only", desc:"Cycles through absolute and relative references while editing a formula: A1 → $A$1 → A$1 → $A1 → A1. Press while the cursor is on a cell reference.", tags:["lock","dollar","absolute","reference","formula","anchor"], related:["AutoSum","Evaluate formula","Trace dependents"] },
+  { id:"autosum", action:"AutoSum selected range", cat:"Formulas", win:"Alt + =", mac:"Cmd + Shift + T", ribbon:"Home → AutoSum", desc:"Automatically inserts a SUM formula for the cells above or to the left of the active cell. Works for multiple columns at once.", tags:["sum","add","total","autosum","formula"], related:["Lock cell reference ($)","Evaluate formula","Create pivot table"] },
+  { id:"evaluate", action:"Evaluate formula", cat:"Formulas", win:"Alt → M → V", mac:"No direct shortcut", ribbon:"Formulas → Evaluate Formula", desc:"Step through a formula one calculation at a time to find errors. Highlights each part of the formula as it evaluates.", tags:["evaluate","formula","debug","step","error"], related:["Lock cell reference ($)","Trace dependents","Show formulas"] },
+  { id:"show-formulas", action:"Show formulas", cat:"Formulas", win:"Ctrl + `", mac:"Ctrl + `", ribbon:"Formulas → Show Formulas", desc:"Toggles between showing formula results and the actual formula text in all cells. Useful for auditing a sheet.", tags:["show","formulas","audit","toggle","view"], related:["Evaluate formula","Trace dependents","Go To Special"] },
+  { id:"trace", action:"Trace dependents", cat:"Formulas", win:"Ctrl + ]", mac:"Ctrl + ]", ribbon:"Formulas → Trace Dependents", desc:"Draws arrows showing which cells depend on the active cell. Useful for understanding formula relationships.", tags:["trace","dependents","arrows","audit","formula"], related:["Show formulas","Evaluate formula","Lock cell reference ($)"] },
+  { id:"calc-now", action:"Recalculate all formulas", cat:"Formulas", win:"F9", mac:"F9", ribbon:"Formulas → Calculate Now", desc:"Forces Excel to recalculate all formulas in the workbook. Useful when automatic calculation is turned off.", tags:["calculate","recalculate","refresh","formula","f9"], related:["Show formulas","Evaluate formula","AutoSum"] },
+
+  // ── View ──
+  { id:"freeze", action:"Freeze panes", cat:"View", win:"Alt → W → F → F", mac:"No direct shortcut", ribbon:"View → Freeze Panes → Freeze Panes", desc:"Locks rows or columns so they stay visible while scrolling. Select the cell below and to the right of where you want to freeze.", tags:["freeze","lock","scroll","header","panes","rows"], related:["Split window","Zoom in","Hide row"] },
+  { id:"split", action:"Split window", cat:"View", win:"Alt → W → S", mac:"No direct shortcut", ribbon:"View → Split", desc:"Splits the worksheet into multiple panes that can be scrolled independently. Great for comparing different parts of a large sheet.", tags:["split","window","pane","scroll","compare"], related:["Freeze panes","Zoom in","New sheet"] },
+  { id:"zoom-in", action:"Zoom in", cat:"View", win:"Ctrl + Mouse scroll up", mac:"Cmd + Mouse scroll up", ribbon:"View → Zoom → Zoom In", desc:"Increases the zoom level to make cells larger. Alternatively use the zoom slider in the bottom-right corner.", tags:["zoom","in","magnify","view","size"], related:["Zoom out","Freeze panes","Full screen"] },
+  { id:"zoom-out", action:"Zoom out", cat:"View", win:"Ctrl + Mouse scroll down", mac:"Cmd + Mouse scroll down", ribbon:"View → Zoom → Zoom Out", desc:"Decreases the zoom level to show more cells at once. Useful for seeing the full picture of a large spreadsheet.", tags:["zoom","out","shrink","view","size"], related:["Zoom in","Freeze panes","Full screen"] },
+  { id:"hide-row", action:"Hide row", cat:"View", win:"Ctrl + 9", mac:"Cmd + 9", ribbon:"Home → Format → Hide & Unhide → Hide Rows", desc:"Hides the selected rows. Use Ctrl+Shift+9 (or Cmd+Shift+9 on Mac) to unhide. Select surrounding rows first to unhide.", tags:["hide","row","visible","unhide"], related:["Hide column","Freeze panes","Select entire row"] },
+  { id:"hide-col", action:"Hide column", cat:"View", win:"Ctrl + 0", mac:"Cmd + 0", ribbon:"Home → Format → Hide & Unhide → Hide Columns", desc:"Hides the selected columns. Select surrounding columns and press Ctrl+Shift+0 to unhide.", tags:["hide","column","visible","unhide"], related:["Hide row","Freeze panes","Select entire column"] },
+  { id:"group-rows", action:"Group rows", cat:"View", win:"Alt + Shift + →", mac:"Cmd + Shift + K", ribbon:"Data → Group", desc:"Groups selected rows so they can be collapsed/expanded with a click. Useful for organising large reports with sections.", tags:["group","rows","collapse","expand","outline"], related:["Ungroup rows","Create pivot table","Hide row"] },
+
+  // ── Insert & Delete ──
+  { id:"insert-row", action:"Insert row", cat:"Insert & Delete", win:"Ctrl + Shift + +", mac:"Cmd + Shift + +", ribbon:"Home → Insert → Insert Sheet Rows", desc:"Inserts a new blank row above the selected row. Select multiple rows first to insert the same number of rows.", tags:["insert","row","add","new","plus"], related:["Delete row","Insert column","Select entire row"] },
+  { id:"delete-row", action:"Delete row", cat:"Insert & Delete", win:"Ctrl + -", mac:"Cmd + -", ribbon:"Home → Delete → Delete Sheet Rows", desc:"Deletes the selected rows and shifts the remaining rows up. Select entire rows with Shift+Space first.", tags:["delete","row","remove","minus"], related:["Insert row","Delete column","Hide row"] },
+  { id:"insert-col", action:"Insert column", cat:"Insert & Delete", win:"Ctrl + Shift + +", mac:"Cmd + Shift + +", ribbon:"Home → Insert → Insert Sheet Columns", desc:"Inserts a new blank column to the left of the selected column. Select the entire column first with Ctrl+Space.", tags:["insert","column","add","new","plus"], related:["Delete column","Insert row","Select entire column"] },
+  { id:"delete-col", action:"Delete column", cat:"Insert & Delete", win:"Ctrl + -", mac:"Cmd + -", ribbon:"Home → Delete → Delete Sheet Columns", desc:"Deletes the selected columns and shifts remaining columns left. Select entire columns with Ctrl+Space first.", tags:["delete","column","remove","minus"], related:["Insert column","Delete row","Hide column"] },
+  { id:"insert-cell", action:"Insert cells / shift down", cat:"Insert & Delete", win:"Ctrl + Shift + +", mac:"Cmd + Shift + +", ribbon:"Home → Insert → Insert Cells", desc:"Opens the Insert dialog to add cells and shift existing cells down or right. Select the number of cells you want to insert first.", tags:["insert","cells","shift","down","right"], related:["Delete cells","Insert row","Insert column"] },
+  { id:"delete-cell", action:"Delete cells / shift up", cat:"Insert & Delete", win:"Ctrl + -", mac:"Cmd + -", ribbon:"Home → Delete → Delete Cells", desc:"Opens the Delete dialog to remove cells and shift remaining cells up or left.", tags:["delete","cells","shift","up","left"], related:["Insert cells / shift down","Delete row","Clear all"] },
+  { id:"insert-sheet", action:"Insert new sheet", cat:"Insert & Delete", win:"Shift + F11", mac:"Fn + Shift + F11", ribbon:"Right-click tab → Insert Sheet", desc:"Inserts a new blank worksheet to the left of the current sheet.", tags:["insert","sheet","new","tab","worksheet"], related:["Delete sheet","Rename sheet","Move to next sheet"] },
+  { id:"delete-sheet", action:"Delete sheet", cat:"Insert & Delete", win:"Alt → H → D → S", mac:"No direct shortcut", ribbon:"Right-click tab → Delete", desc:"Permanently deletes the active worksheet. This cannot be undone — make sure you have a backup.", tags:["delete","sheet","remove","tab","worksheet"], related:["Insert new sheet","Rename sheet","Hide row"] },
+  { id:"rename-sheet", action:"Rename sheet", cat:"Insert & Delete", win:"Alt → H → O → R", mac:"Double-click tab", ribbon:"Right-click tab → Rename", desc:"Allows you to rename the active worksheet tab. You can also double-click the tab name directly.", tags:["rename","sheet","tab","name","worksheet"], related:["Insert new sheet","Delete sheet","Move to next sheet"] },
+  { id:"insert-hyperlink", action:"Insert hyperlink", cat:"Insert & Delete", win:"Ctrl + K", mac:"Cmd + K", ribbon:"Insert → Link", desc:"Opens the Insert Hyperlink dialog to add a link to a URL, file, email address, or another location in the workbook.", tags:["hyperlink","link","url","insert","ctrl k"], related:["Insert new sheet","Add comment / note"] },
+];
+
+let activeF = "all", query = "", openId = null;
+
+function catClass(cat) {
+  return { Basics:"basics", "Cell Editing":"celledit", Data:"data", Formatting:"formatting", Navigation:"navigation", Formulas:"formulas", View:"view", "Insert & Delete":"insertdel" }[cat] || "data";
+}
+
+function matches(s) {
+  const catOk = activeF === "all" || s.cat === activeF;
+  if (!query) return catOk;
+  const q = query.toLowerCase();
+  return catOk && (
+    s.action.toLowerCase().includes(q) ||
+    s.desc.toLowerCase().includes(q) ||
+    s.tags.some(t => t.toLowerCase().includes(q))
+  );
+}
+
+function copyIcon() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
+}
+function checkIcon() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+}
+function ribbonIcon() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>`;
+}
+
+function render() {
+  const filtered = SF_DATA.filter(matches);
+  const meta = document.getElementById("sf-meta");
+  const list = document.getElementById("sf-list");
+  meta.textContent = `Showing ${filtered.length} shortcut${filtered.length !== 1 ? "s" : ""}`;
+
+  if (!filtered.length) {
+    list.innerHTML = `<div class="sf-empty"><div class="sf-empty-icon">🔍</div>No shortcuts found for "<strong>${query}</strong>".<br>Try different keywords like "filter", "freeze", or "formula".</div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map(s => `
+    <div class="sf-card${openId === s.id ? " open" : ""}" data-id="${s.id}">
+      <div class="sf-card-head">
+        <div class="sf-card-left">
+          <div class="sf-dot ${catClass(s.cat)}"></div>
+          <div>
+            <div class="sf-action">${s.action}</div>
+            <div class="sf-cat-lbl">${s.cat}</div>
+          </div>
+        </div>
+        <div class="sf-chips">
+          <div class="sf-chip"><span class="sf-chip-os">Win</span>${s.win}</div>
+          <div class="sf-chip"><span class="sf-chip-os">Mac</span>${s.mac}</div>
+        </div>
+        <svg class="sf-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sf-card-body">
+        <div class="sf-ribbon">${ribbonIcon()} ${s.ribbon}</div>
+        <div class="sf-desc">${s.desc}</div>
+        <div class="sf-copy-row">
+          <button class="sf-copy-btn" data-copy="${s.win}" data-id="${s.id}-win">${copyIcon()} Copy Win shortcut</button>
+          <button class="sf-copy-btn" data-copy="${s.mac}" data-id="${s.id}-mac">${copyIcon()} Copy Mac shortcut</button>
+        </div>
+        ${s.related.length ? `
+        <div class="sf-related">
+          <div class="sf-related-lbl">Related shortcuts</div>
+          <div class="sf-related-tags">${s.related.map(r => `<span class="sf-rtag" data-rel="${r}">${r}</span>`).join("")}</div>
+        </div>` : ""}
+      </div>
+    </div>
+  `).join("");
+}
+
+document.getElementById("sf-list").addEventListener("click", e => {
+  // copy button
+  const copyBtn = e.target.closest(".sf-copy-btn");
+  if (copyBtn) {
+    const txt = copyBtn.dataset.copy;
+    navigator.clipboard?.writeText(txt).catch(() => {});
+    copyBtn.classList.add("copied");
+    copyBtn.innerHTML = checkIcon() + " Copied!";
+    setTimeout(() => { copyBtn.classList.remove("copied"); copyBtn.innerHTML = copyIcon() + " Copy " + (copyBtn.dataset.id?.includes("-win") ? "Win" : "Mac") + " shortcut"; }, 1500);
+    return;
+  }
+  // related tag
+  const rtag = e.target.closest(".sf-rtag");
+  if (rtag) {
+    document.getElementById("sf-input").value = rtag.dataset.rel;
+    query = rtag.dataset.rel;
+    openId = null;
+    render();
+    document.getElementById("sf-input").focus();
+    return;
+  }
+  // card toggle
+  const card = e.target.closest(".sf-card");
+  if (card) {
+    openId = openId === card.dataset.id ? null : card.dataset.id;
+    render();
+  }
+});
+
+document.getElementById("sf-input").addEventListener("input", e => {
+  query = e.target.value;
+  openId = null;
+  render();
+});
+
+document.querySelectorAll(".sf-pill").forEach(p => p.addEventListener("click", () => {
+  document.querySelectorAll(".sf-pill").forEach(x => x.classList.remove("active"));
+  p.classList.add("active");
+  activeF = p.dataset.f;
+  openId = null;
+  render();
+}));
+
+// Ctrl+K focus
+document.addEventListener("keydown", e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+    e.preventDefault();
+    document.getElementById("sf-input").focus();
+  }
+  if (e.key === "Escape") {
+    document.getElementById("sf-input").blur();
+  }
+});
+
+render();
+</script>
+</body>
+</html>
