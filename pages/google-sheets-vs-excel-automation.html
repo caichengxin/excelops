@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Sheets vs Excel for Business Automation — Which Is Better? | ExcelOps</title>
+  <meta name="description" content="An honest comparison of Google Sheets vs Excel for business automation. Which is better for inventory, reporting, and operations teams in 2026?">
+  <link rel="canonical" href="https://getexcelops.com/pages/google-sheets-vs-excel-automation">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+.article-hero{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:3rem 2rem;color:#fff;text-align:center}
+.article-hero .cat{font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;color:var(--teal2);font-weight:600;margin-bottom:.75rem}
+.article-hero h1{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;margin-bottom:.75rem;max-width:700px;margin-left:auto;margin-right:auto}
+.article-hero .meta{font-size:.85rem;color:#94a3b8}
+.article-body{max-width:740px;margin:0 auto;padding:3rem 2rem}
+.article-body h2{font-size:1.3rem;font-weight:700;margin:2rem 0 .875rem;color:var(--text)}
+.article-body h3{font-size:1.05rem;font-weight:600;margin:1.5rem 0 .5rem;color:var(--text)}
+.article-body p{color:var(--text2);margin-bottom:1rem;line-height:1.8;font-size:.95rem}
+.article-body ul,.article-body ol{padding-left:1.5rem;margin-bottom:1rem}
+.article-body li{color:var(--text2);margin-bottom:.5rem;line-height:1.7;font-size:.95rem}
+.formula-box{background:var(--navy);color:#7dd3fc;padding:1.25rem 1.5rem;border-radius:var(--rad2);font-family:monospace;font-size:.9rem;margin:1.25rem 0;overflow-x:auto;white-space:pre}
+.step-box{background:#fff;border:1px solid var(--border);border-radius:var(--rad);padding:1.25rem 1.5rem;margin:.75rem 0;display:flex;gap:1rem;align-items:flex-start}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.875rem;flex-shrink:0;margin-top:.1rem}
+.step-box h3{font-size:.95rem;font-weight:600;margin-bottom:.35rem}
+.step-box p{font-size:.875rem;color:var(--text3);margin:0;line-height:1.6}
+.tip-box{background:rgba(14,165,160,.05);border-left:3px solid var(--teal);border-radius:0 var(--rad2) var(--rad2) 0;padding:.875rem 1rem;font-size:.875rem;color:var(--text2);margin:1.5rem 0}
+.warn-box{background:rgba(217,119,6,.05);border-left:3px solid #d97706;border-radius:0 var(--rad2) var(--rad2) 0;padding:.875rem 1rem;font-size:.875rem;color:var(--text2);margin:1.5rem 0}
+.data-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.data-table th{background:var(--navy);color:#fff;padding:.625rem 1rem;text-align:left;font-weight:600}
+.data-table td{padding:.625rem 1rem;border-bottom:1px solid var(--border);color:var(--text2)}
+.data-table tr:nth-child(even) td{background:var(--bg)}
+.dl-cta{background:linear-gradient(135deg,var(--navy),#0f3460);border-radius:var(--rad);padding:2rem;text-align:center;margin:2rem 0;color:#fff}
+.dl-cta h3{font-size:1.1rem;margin-bottom:.5rem}
+.dl-cta p{color:#94a3b8;font-size:.875rem;margin-bottom:1.25rem}
+.related-posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem}
+.related-card{background:#fff;border:1px solid var(--border);border-radius:var(--rad);padding:1.25rem;text-decoration:none;color:inherit;transition:all .2s}
+.related-card:hover{box-shadow:0 4px 15px rgba(0,0,0,.08);transform:translateY(-2px)}
+.related-card .rc-cat{font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;color:var(--teal);font-weight:600;margin-bottom:.4rem}
+.related-card h4{font-size:.875rem;font-weight:600;line-height:1.4}
+.faq-list{display:flex;flex-direction:column;gap:.75rem}
+.faq-item{background:#fff;border:1px solid var(--border);border-radius:var(--rad2);overflow:hidden}
+.faq-q{padding:1rem 1.25rem;font-weight:600;font-size:.9rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q:hover{color:var(--teal)}
+.faq-q .arrow{transition:transform .2s;font-size:.75rem}
+.faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+.faq-a{display:none;padding:0 1.25rem 1rem;font-size:.875rem;color:var(--text3);line-height:1.6}
+.faq-item.open .faq-a{display:block}
+.breadcrumb{font-size:.8rem;color:var(--text3);margin-bottom:1.5rem}
+.breadcrumb a{color:var(--text3);text-decoration:none}
+.breadcrumb a:hover{color:var(--teal)}
+.breadcrumb span{margin:0 6px}
+
+/* Scenario cards for the 8 use cases */
+.scenario-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin:1.5rem 0}
+.scenario-card{background:#fff;border:1px solid var(--border);border-radius:var(--rad);padding:1.25rem 1.5rem;display:flex;gap:1rem;align-items:flex-start}
+.scenario-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0}
+.scenario-card h3{font-size:.9rem;font-weight:600;margin:0 0 .35rem;color:var(--text)}
+.scenario-card p{font-size:.8rem;color:var(--text3);margin:0;line-height:1.6}
+
+/* Connection method cards */
+.method-card{background:#fff;border:1px solid var(--border);border-radius:var(--rad);padding:1.5rem;margin:.875rem 0}
+.method-card .method-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
+.method-badge{font-size:.7rem;padding:.2rem .6rem;border-radius:20px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.badge-easy{background:rgba(14,165,160,.1);color:var(--teal)}
+.badge-medium{background:rgba(245,158,11,.1);color:#d97706}
+.badge-advanced{background:rgba(99,102,241,.1);color:#6366f1}
+.method-card h3{font-size:.975rem;font-weight:700;margin:0;color:var(--text)}
+.method-card p{font-size:.875rem;color:var(--text2);margin:.5rem 0;line-height:1.7}
+.method-card .method-steps{list-style:none;padding:0;margin:.75rem 0 0;display:flex;flex-direction:column;gap:.4rem}
+.method-card .method-steps li{font-size:.825rem;color:var(--text3);padding-left:1.25rem;position:relative;line-height:1.6}
+.method-card .method-steps li::before{content:"→";position:absolute;left:0;color:var(--teal);font-weight:700}
+.method-card .method-limit{font-size:.775rem;background:rgba(217,119,6,.06);border-left:3px solid #d97706;padding:.4rem .75rem;border-radius:0 var(--rad2) var(--rad2) 0;margin-top:.75rem;color:#92400e}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/index.html"><div class="logo-mark">EO</div>ExcelOps</a>
+  <div class="nav-links">
+    <a href="/pages/templates.html">Templates</a>
+    <a href="/pages/sql.html">SQL Reports</a>
+    <a href="/pages/blog.html">Blog</a>
+    <a href="/pages/about.html">About</a>
+    <a href="/pages/contact.html">Contact</a>
+  </div>
+  <a class="nav-cta" href="/pages/templates.html">Free Templates ↗</a>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/pages/templates.html">Templates</a>
+  <a href="/pages/sql.html">SQL Reports</a>
+  <a href="/pages/blog.html">Blog</a>
+  <a href="/pages/about.html">About</a>
+  <a href="/pages/contact.html">Contact</a>
+</div>
+
+<div class="article-hero">
+  <div class="cat">Spreadsheet Automation</div>
+  <h1>Google Sheets vs Excel for Business Automation — Which Is Better?</h1>
+  <div class="meta">⏱ 12 min read · Spreadsheet Automation</div>
+</div>
+
+<div class="article-body">
+  <div class="breadcrumb"><a href="/index.html">Home</a><span>›</span><a href="/pages/blog.html">Blog</a><span>›</span> Google Sheets vs Excel for Business Automation</div>
+
+  <p>Both Google Sheets and Excel can automate spreadsheet tasks, but they do it differently and each has genuine strengths. If you are choosing between them for your operations team, here is the honest comparison based on real business use cases.</p>
+
+  <h2>The Short Answer</h2>
+  <p>For operations, inventory, and warehouse teams in a business environment: <strong>Excel is still the better choice for complex automation</strong>. Google Sheets wins on collaboration and cost. Your decision should come down to which matters more for your team.</p>
+
+  <h2>Automation Capability Comparison</h2>
+  <table class="data-table">
+    <tr><th>Feature</th><th>Excel</th><th>Google Sheets</th></tr>
+    <tr><td>Built-in automation language</td><td>VBA — mature, powerful</td><td>Apps Script — JavaScript-based</td></tr>
+    <tr><td>Data import from databases</td><td>Power Query — excellent</td><td>Limited, requires workarounds</td></tr>
+    <tr><td>Connect to external APIs</td><td>Power Query + VBA</td><td>Apps Script — flexible</td></tr>
+    <tr><td>Send automated emails</td><td>VBA + Outlook</td><td>Apps Script + Gmail — excellent</td></tr>
+    <tr><td>Scheduled automation</td><td>Task Scheduler + VBA</td><td>Built-in triggers — easier</td></tr>
+    <tr><td>Handle large datasets</td><td>Better (1M+ rows)</td><td>Slower above 100k rows</td></tr>
+    <tr><td>Offline access</td><td>Full functionality</td><td>Limited offline mode</td></tr>
+    <tr><td>Cost</td><td>Microsoft 365 subscription</td><td>Free with Google account</td></tr>
+  </table>
+
+  <h2>Where Google Sheets Wins</h2>
+  <h3>Real-time collaboration</h3>
+  <p>Multiple people editing simultaneously with zero conflicts. Excel's co-authoring is improving but still behind Google Sheets in reliability.</p>
+
+  <h3>Scheduled automation without a computer</h3>
+  <p>Google Apps Script triggers run in the cloud. You set a daily trigger and it runs at that time — no computer needs to be on. Excel requires Windows Task Scheduler and a running PC.</p>
+
+  <h3>Free cost</h3>
+  <p>Google Sheets is free for individuals and teams under a certain size. Excel requires a Microsoft 365 subscription.</p>
+
+  <h3>Sending emails via Gmail</h3>
+  <p>Google Apps Script integrates natively with Gmail. Sending automated emails from Google Sheets is easier than from Excel + Outlook.</p>
+
+  <h2>Where Excel Wins</h2>
+  <h3>Power Query for data import</h3>
+  <p>Nothing in Google Sheets matches Power Query for connecting to databases, combining multiple files, and automated data cleaning. This alone makes Excel the better choice for teams pulling data from SQL or ERP systems.</p>
+
+  <h3>Handling large datasets</h3>
+  <p>Excel handles millions of rows. Google Sheets struggles above 100,000–200,000 rows and becomes unusably slow above 500,000.</p>
+
+  <h3>Complex formula performance</h3>
+  <p>Heavy SUMIFS, VLOOKUP, and array formula workbooks run significantly faster in Excel than in Google Sheets.</p>
+
+  <h3>VBA maturity</h3>
+  <p>VBA has 30+ years of community resources, examples, and documentation. Apps Script is capable but younger, with less inventory/operations-specific code available.</p>
+
+  <h2>Our Recommendation for Operations Teams</h2>
+  <table class="data-table">
+    <tr><th>Your Situation</th><th>Use</th></tr>
+    <tr><td>Connect to SQL database or ERP</td><td>Excel</td></tr>
+    <tr><td>Team collaboration across locations</td><td>Google Sheets</td></tr>
+    <tr><td>Large dataset (100k+ rows)</td><td>Excel</td></tr>
+    <tr><td>Automated emails without a PC running</td><td>Google Sheets</td></tr>
+    <tr><td>Complex VBA automation</td><td>Excel</td></tr>
+    <tr><td>Zero budget for software</td><td>Google Sheets</td></tr>
+    <tr><td>Already on Microsoft 365</td><td>Excel</td></tr>
+  </table>
+
+  <div class="tip-box">💡 Many teams use both: Google Sheets for shared team trackers and collaboration, Excel for complex reports and database-connected dashboards. They are not mutually exclusive.</div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NEW SECTION 1 — 8 COMMON USE CASES
+  ════════════════════════════════════════════════════════ -->
+  <h2>8 Most Common Use Cases Where Teams Run Both Together</h2>
+  <p>Many operations teams do not pick one platform exclusively — they use Google Sheets and Excel for different jobs and pass data between them. Here are the eight scenarios that come up most often.</p>
+
+  <div class="scenario-grid">
+
+    <div class="scenario-card">
+      <div class="scenario-num">1</div>
+      <div>
+        <h3>Field Team → Reporting Manager</h3>
+        <p>Warehouse staff log daily counts or shipments in a shared Google Sheet on their phones or tablets. The operations manager pulls that data into Excel for weekly KPI reporting and pivot analysis.</p>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-num">2</div>
+      <div>
+        <h3>Supplier Order Forms</h3>
+        <p>Vendors fill in a Google Form / Google Sheet (no Microsoft license needed on their end). Purchasing team imports submitted orders into Excel to match against PO logs and run VLOOKUP against the vendor master list.</p>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-num">3</div>
+      <div>
+        <h3>Live Inventory Tracker + Monthly Report</h3>
+        <p>A Google Sheet acts as the live shared inventory count — anyone in the warehouse can update it in real time. At month-end, the data is exported to Excel for COGS calculation, trend charts, and management reporting.</p>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-num">4</div>
+      <div>
+        <h3>Customer Orders Input → Fulfillment Dashboard</h3>
+        <p>Sales reps enter customer orders into Google Sheets throughout the day. The fulfillment team refreshes a Power Query connection in Excel to pull the latest orders and generate pick lists automatically.</p>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-num">5</div>
+      <div>
+        <h3>Automated Email Alerts from Sheets → Excel Analysis</h3>
+        <p>Google Apps Script sends a daily low-stock alert email (no server needed). The attached CSV is opened in Excel for deeper reorder point calculation using historical lead time data.</p>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-num">6</div>
+      <div>
+        <h3>Multi-Location Stock Consolidation</h3>
+        <p>Each warehouse location maintains its own Google Sheet. Head office uses Power Query in Excel to combine all location files into a single consolidated stock report with one refresh click.</p>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-num">7</div>
+      <div>
+        <h3>Vendor Scorecard Collection</h3>
+        <p>Purchasing managers at different sites score vendors in a shared Google Sheet. The central team imports scores into Excel, applies weighted formulas, and produces the quarterly vendor ranking report.</p>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-num">8</div>
+      <div>
+        <h3>Budget vs Actual Tracking</h3>
+        <p>Department heads update their spend in a shared Google Sheet (accessible from anywhere). Finance team pulls actuals into Excel alongside the budget model to run variance analysis and forecasting.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NEW SECTION 2 — HOW TO CONNECT GOOGLE SHEETS TO EXCEL
+  ════════════════════════════════════════════════════════ -->
+  <h2>How to Connect Google Sheets and Excel — 5 Methods</h2>
+  <p>Once you decide to use both platforms together, you need a reliable way to move data between them. Here are the five most practical methods, ordered from simplest to most automated.</p>
+
+  <!-- Method 1 -->
+  <div class="method-card">
+    <div class="method-header">
+      <span class="method-badge badge-easy">Easiest</span>
+      <h3>① Download as .xlsx and Open in Excel</h3>
+    </div>
+    <p>The most straightforward method. No setup required. Best for one-off exports or when you only need the data occasionally.</p>
+    <ul class="method-steps">
+      <li>Open your Google Sheet</li>
+      <li>Go to <strong>File → Download → Microsoft Excel (.xlsx)</strong></li>
+      <li>Open the downloaded file in Excel</li>
+      <li>Formatting and most formulas are preserved; Google-specific functions (IMPORTRANGE, QUERY) will not work</li>
+    </ul>
+    <div class="method-limit">⚠ Limitation: Manual process — not suitable for recurring reports. Every download creates a new file.</div>
+  </div>
+
+  <!-- Method 2 -->
+  <div class="method-card">
+    <div class="method-header">
+      <span class="method-badge badge-easy">Easy</span>
+      <h3>② Power Query — Import via Google Sheets Publish URL</h3>
+    </div>
+    <p>The best method for operations teams already using Excel. Set it up once and refresh with one click. The Google Sheet acts as a live data source.</p>
+    <ul class="method-steps">
+      <li>In Google Sheets: <strong>File → Share → Publish to web</strong> → choose the sheet → select <strong>CSV</strong> format → click Publish → copy the URL</li>
+      <li>In Excel: <strong>Data → Get Data → From Web</strong> → paste the published CSV URL</li>
+      <li>Load into Excel — Power Query will pull the latest Google Sheet data each time you refresh</li>
+      <li>To refresh: <strong>Data → Refresh All</strong> (or set automatic refresh on file open)</li>
+    </ul>
+    <div class="method-limit">⚠ Limitation: The Google Sheet must be published publicly (anyone with the link can view). Not suitable for confidential data.</div>
+  </div>
+
+  <!-- Method 3 -->
+  <div class="method-card">
+    <div class="method-header">
+      <span class="method-badge badge-medium">Intermediate</span>
+      <h3>③ Google Drive Sync + Excel Direct Open</h3>
+    </div>
+    <p>If your team uses Google Drive for Desktop (formerly Backup and Sync), you can open Google Sheets files directly in Excel via the synced local folder — with some limitations.</p>
+    <ul class="method-steps">
+      <li>Install <strong>Google Drive for Desktop</strong> on your Windows PC</li>
+      <li>Your Google Drive files appear as a local folder on your computer</li>
+      <li>Google Sheets files show as <strong>.gsheet</strong> — they are shortcuts, not real files</li>
+      <li>To use in Excel: first download as .xlsx from Google Drive, or use the Publish URL method above</li>
+    </ul>
+    <div class="method-limit">⚠ Limitation: .gsheet files cannot be directly opened in Excel — you still need to export to .xlsx. Best used for managing file organisation, not direct integration.</div>
+  </div>
+
+  <!-- Method 4 -->
+  <div class="method-card">
+    <div class="method-header">
+      <span class="method-badge badge-medium">Intermediate</span>
+      <h3>④ Google Sheets API + Power Query (Authenticated)</h3>
+    </div>
+    <p>The Power Query + Publish URL method works for non-confidential data. For private sheets, you can use the Google Sheets API with an API key to fetch data securely into Excel.</p>
+    <ul class="method-steps">
+      <li>Create a project in <strong>Google Cloud Console</strong> and enable the Sheets API</li>
+      <li>Generate an API key (or use OAuth for full authentication)</li>
+      <li>In Excel Power Query, use <strong>From Web</strong> with the API endpoint URL:<br><code style="font-size:.8rem;background:var(--bg);padding:.2rem .4rem;border-radius:4px">https://sheets.googleapis.com/v4/spreadsheets/{ID}/values/{Range}?key={API_KEY}</code></li>
+      <li>Parse the JSON response in Power Query to extract your data</li>
+    </ul>
+    <div class="method-limit">⚠ Limitation: Requires some technical setup. API keys should be treated as passwords — do not share workbooks containing them publicly.</div>
+  </div>
+
+  <!-- Method 5 -->
+  <div class="method-card">
+    <div class="method-header">
+      <span class="method-badge badge-advanced">Most Automated</span>
+      <h3>⑤ Zapier / Make (Integromat) — No-Code Automation</h3>
+    </div>
+    <p>For teams that want fully automated, scheduled sync between Google Sheets and Excel (OneDrive / SharePoint) without writing any code.</p>
+    <ul class="method-steps">
+      <li>Connect Google Sheets and Microsoft Excel (via OneDrive) in <strong>Zapier</strong> or <strong>Make</strong></li>
+      <li>Set a trigger: new row in Google Sheet, form submission, scheduled time, etc.</li>
+      <li>Set an action: add row to Excel on OneDrive, update a cell, send an email summary</li>
+      <li>The automation runs in the cloud — no computer needs to be on</li>
+    </ul>
+    <div class="method-limit">⚠ Limitation: Zapier and Make have free tiers with task limits. High-volume automations require a paid plan. Excel file must be stored on OneDrive or SharePoint, not on a local drive.</div>
+  </div>
+
+  <div class="tip-box">💡 <strong>For most operations teams:</strong> Method ② (Power Query + Publish URL) gives the best balance of simplicity and automation. Set it up once and your Excel report updates from Google Sheets with one click — no third-party tools or API keys needed.</div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FAQ
+  ════════════════════════════════════════════════════════ -->
+  <h2>FAQ</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">Can I convert my Excel automation to Google Sheets? <span class="arrow">▼</span></div>
+      <div class="faq-a">Formulas transfer well — most Excel formulas work identically in Google Sheets. Power Query does not transfer — you would need to rebuild data connections using Apps Script or Google's native connectors. VBA macros need to be rewritten in Apps Script (JavaScript). For complex Excel automations, switching platforms is a significant project.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is Microsoft Copilot in Excel worth paying for over Google Sheets AI features? <span class="arrow">▼</span></div>
+      <div class="faq-a">In 2026, both platforms have integrated AI assistance for formulas and basic analysis. Microsoft Copilot is more deeply integrated with Excel's features. Google's Gemini integration in Sheets is growing. Neither is so superior that it should drive your platform decision — other factors (data volume, collaboration needs, existing infrastructure) matter more.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Does the Power Query publish URL method update automatically? <span class="arrow">▼</span></div>
+      <div class="faq-a">Yes — whenever you click Refresh in Excel (or open the workbook with auto-refresh enabled), Power Query pulls the latest data from the published Google Sheet URL. It does not push updates in real time, but for daily or on-demand reporting it works reliably. You can also set it to refresh every X minutes under Data → Connections → Properties.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What happens to Google Sheets formulas when I export to Excel? <span class="arrow">▼</span></div>
+      <div class="faq-a">Standard formulas (SUM, IF, VLOOKUP, SUMIFS, etc.) transfer correctly. Google-specific functions like IMPORTRANGE, QUERY, ARRAYFORMULA, GOOGLETRANSLATE, and GOOGLEFINANCE will show as errors in Excel — these need to be replaced with Excel equivalents or Power Query steps.</div>
+    </div>
+  </div>
+
+  <div class="dl-cta">
+    <h3>📊 Get the Free Operations KPI Report Template</h3>
+    <p>Free Excel download — no sign-up required.</p>
+    <a class="btn btn-primary" href="/templates/07_Operations_KPI_Report.xlsx" download>⬇ Download Free Template</a>
+  </div>
+
+  <h2>Related Articles</h2>
+  <div class="related-posts">
+    <a class="related-card" href="/pages/automate-inventory-report-excel.html">
+      <div class="rc-cat">Automation</div>
+      <h4>Automate Your Weekly Inventory Report with a Macro</h4>
+    </a>
+    <a class="related-card" href="/pages/ai-tools-for-excel.html">
+      <div class="rc-cat">AI Excel</div>
+      <h4>AI Tools for Excel — What Actually Works in 2026</h4>
+    </a>
+    <a class="related-card" href="/pages/sql-to-excel-export.html">
+      <div class="rc-cat">SQL + Excel</div>
+      <h4>Export SQL Query Results to Excel in 5 Steps</h4>
+    </a>
+  </div>
+</div>
+
+<div class="cta-band">
+  <h2>Get Free Excel Templates Every Week</h2>
+  <p>Practical Excel content for operations teams. No fluff, unsubscribe anytime.</p>
+  <form class="email-form"
+    action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c&amp;f_id=00e7c2e1f0"
+    method="post" target="_blank">
+    <input type="email" name="EMAIL" placeholder="your@email.com" required>
+    <button type="submit">Subscribe Free →</button>
+  </form>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a class="logo" href="/index.html" style="margin-bottom:.75rem;display:inline-flex"><div class="logo-mark">EO</div> ExcelOps</a>
+        <p>Practical Excel templates and tools for operations teams.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <a href="/pages/reorder.html">Reorder Calculator</a>
+        <a href="/pages/sql.html">SQL to Excel</a>
+        <a href="/pages/templates.html">Templates</a>
+        <a href="/pages/blog.html">Tutorials</a>
+      </div>
+      <div class="footer-col">
+        <h4>Templates</h4>
+        <a href="/templates/01_Inventory_Dashboard.xlsx" download>Inventory Dashboard</a>
+        <a href="/templates/02_Warehouse_KPI_Dashboard.xlsx" download>Warehouse KPI</a>
+        <a href="/templates/03_Purchase_Order_Tracker.xlsx" download>Purchase Order</a>
+        <a href="/templates/06_Reorder_Report.xlsx" download>Reorder Report</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/pages/about.html">About</a>
+        <a href="/pages/blog.html">Blog</a>
+        <a href="/pages/contact.html">Contact</a>
+        <a href="/pages/privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 ExcelOps · GetExcelOps.com · Built for operations teams who get things done.</div>
+  </div>
+</footer>
+<script src="/js/main.js"></script>
+</body>
+</html>
