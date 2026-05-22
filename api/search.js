@@ -122,10 +122,14 @@ Example output: ["freeze","hide-row","split"]`;
 
     const data = await geminiRes.json();
     const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
+    console.log("Gemini raw:", raw);
     const clean = raw.replace(/```json|```/g, "").trim();
+    console.log("Cleaned:", clean);
     const ids = JSON.parse(clean);
+    console.log("IDs:", ids);
     const results = ids.map(id => SHORTCUTS.find(s => s.id === id)).filter(Boolean);
-    return res.status(200).json({ results });
+    console.log("Results:", results);
+    return res.status(200).json({ results, debug: { raw, ids } });
   } catch (err) {
     console.error("Gemini error:", err);
     return res.status(500).json({ error: "Search failed", results: [] });
