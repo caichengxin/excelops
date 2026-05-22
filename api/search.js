@@ -115,10 +115,11 @@ Rules:
 
     const data = await geminiRes.json();
     const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
-    const clean = raw.replace(/```json|```/g, "").trim();
-    const ids = JSON.parse(clean);
+    // Extract JSON array using regex — handles extra text from Gemini
+    const match = raw.match(/\[[\s\S]*?\]/);
+    const ids = match ? JSON.parse(match[0]) : [];
     const results = ids.map(id => SHORTCUTS.find(s => s.id === id)).filter(Boolean);
-    return res.status(200).json({ results, raw });
+    return res.status(200).json({ results });
   } catch (err) {
     console.error("Gemini error:", err);
     return res.status(500).json({ error: "Search failed", results: [], err: err.message });
