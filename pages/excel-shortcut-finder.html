@@ -534,14 +534,9 @@ function catClass(cat) {
   return { Basics:"basics", "Cell Editing":"celledit", Data:"data", Formatting:"formatting", Navigation:"navigation", Formulas:"formulas", View:"view", "Insert & Delete":"insertdel" }[cat] || "data";
 }
 
-function matches(s) {
+function localMatch(s) {
   const catOk = activeF === "all" || s.cat === activeF;
   if (!query) return catOk;
-  // If AI results available, use them
-  if (aiResults !== null) {
-    return catOk && aiResults.includes(s.id);
-  }
-  // Fallback: local fuzzy match
   const q = query.toLowerCase();
   return catOk && (
     s.action.toLowerCase().includes(q) ||
@@ -550,10 +545,21 @@ function matches(s) {
   );
 }
 
+function matches(s) {
+  const catOk = activeF === "all" || s.cat === activeF;
+  if (!query) return catOk;
+  // If AI results available and found matches, use them
+  if (aiResults !== null && aiResults.length > 0) {
+    return catOk && aiResults.includes(s.id);
+  }
+  // Fallback: local fuzzy match
+  return localMatch(s);
+}
+
 function getFilteredSorted() {
   const filtered = SF_DATA.filter(matches);
   // If AI results, preserve AI ranking order
-  if (aiResults !== null && query) {
+  if (aiResults !== null && aiResults.length > 0 && query) {
     return [...filtered].sort((a, b) => {
       return aiResults.indexOf(a.id) - aiResults.indexOf(b.id);
     });
