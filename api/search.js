@@ -121,6 +121,6 @@ Rules:
     return res.status(200).json({ results, raw });
   } catch (err) {
     console.error("Gemini error:", err);
-    return res.status(500).json({ error: "Search failed", results: [] });
+    return res.status(500).json({ error: "Search failed", results: [], err: err.message });
   }
 }
