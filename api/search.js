@@ -112,7 +112,7 @@ Example — query "keep header row visible": ["freeze","split","hide-row"]`;
 
   try {
     const geminiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-001:generateContent?key=${process.env.GEMINI_API_KEY_2}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY_2}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -124,15 +124,13 @@ Example — query "keep header row visible": ["freeze","split","hide-row"]`;
     );
 
     const data = await geminiRes.json();
+    console.log("Full Gemini response:", JSON.stringify(data));
     const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
     console.log("Gemini raw:", raw);
     const clean = raw.replace(/```json|```/g, "").trim();
-    console.log("Cleaned:", clean);
     const ids = JSON.parse(clean);
-    console.log("IDs:", ids);
     const results = ids.map(id => SHORTCUTS.find(s => s.id === id)).filter(Boolean);
-    console.log("Results:", results);
-    return res.status(200).json({ results, debug: { raw, ids } });
+    return res.status(200).json({ results, debug: { raw, ids, fullResponse: data } });
   } catch (err) {
     console.error("Gemini error:", err);
     return res.status(500).json({ error: "Search failed", results: [] });
