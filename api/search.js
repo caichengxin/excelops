@@ -116,7 +116,7 @@ Rules:
     const data = await geminiRes.json();
     const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
     // Extract JSON array using regex — handles extra text from Gemini
-    const match = raw.match(/\[[\s\S]*?\]/);
+    const match = raw.match(/\[[\s\S]*\]/);
     const ids = match ? JSON.parse(match[0]) : [];
     const results = ids.map(id => SHORTCUTS.find(s => s.id === id)).filter(Boolean);
     return res.status(200).json({ results });
