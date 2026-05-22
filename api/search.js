@@ -128,7 +128,7 @@ Example — query "keep header row visible": ["freeze","split","hide-row"]`;
     const clean = raw.replace(/```json|```/g, "").trim();
     const ids = JSON.parse(clean);
     const results = ids.map(id => SHORTCUTS.find(s => s.id === id)).filter(Boolean);
-    return res.status(200).json({ results });
+    return res.status(200).json({ results, raw });
   } catch (err) {
     console.error("Gemini error:", err);
     return res.status(500).json({ error: "Search failed", results: [] });
