@@ -112,7 +112,7 @@ Example — query "keep header row visible": ["freeze","split","hide-row"]`;
 
   try {
     const geminiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY_2}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -124,13 +124,11 @@ Example — query "keep header row visible": ["freeze","split","hide-row"]`;
     );
 
     const data = await geminiRes.json();
-    console.log("Full Gemini response:", JSON.stringify(data));
     const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
-    console.log("Gemini raw:", raw);
     const clean = raw.replace(/```json|```/g, "").trim();
     const ids = JSON.parse(clean);
     const results = ids.map(id => SHORTCUTS.find(s => s.id === id)).filter(Boolean);
-    return res.status(200).json({ results, debug: { raw, ids, fullResponse: data } });
+    return res.status(200).json({ results });
   } catch (err) {
     console.error("Gemini error:", err);
     return res.status(500).json({ error: "Search failed", results: [] });
