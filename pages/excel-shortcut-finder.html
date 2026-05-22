@@ -429,7 +429,7 @@
         <a href="/sitemap.xml">Sitemap</a>
       </div>
     </div>
-    <div class="footer-bottom">© 2025 ExcelOps · <a href="https://getexcelops.com" style="color:#475569">GetExcelOps.com</a> · Built for operations teams who get things done.</div>
+    <div class="footer-bottom">© 2026 ExcelOps · <a href="https://getexcelops.com" style="color:#475569">GetExcelOps.com</a> · Built for operations teams who get things done.</div>
   </div>
 </footer>
 
@@ -537,12 +537,28 @@ function catClass(cat) {
 function matches(s) {
   const catOk = activeF === "all" || s.cat === activeF;
   if (!query) return catOk;
+  // If AI results available, use them
+  if (aiResults !== null) {
+    return catOk && aiResults.includes(s.id);
+  }
+  // Fallback: local fuzzy match
   const q = query.toLowerCase();
   return catOk && (
     s.action.toLowerCase().includes(q) ||
     s.desc.toLowerCase().includes(q) ||
     s.tags.some(t => t.toLowerCase().includes(q))
   );
+}
+
+function getFilteredSorted() {
+  const filtered = SF_DATA.filter(matches);
+  // If AI results, preserve AI ranking order
+  if (aiResults !== null && query) {
+    return [...filtered].sort((a, b) => {
+      return aiResults.indexOf(a.id) - aiResults.indexOf(b.id);
+    });
+  }
+  return filtered;
 }
 
 function copyIcon() {
@@ -556,10 +572,11 @@ function ribbonIcon() {
 }
 
 function render() {
-  const filtered = SF_DATA.filter(matches);
+  const filtered = getFilteredSorted();
   const meta = document.getElementById("sf-meta");
   const list = document.getElementById("sf-list");
-  meta.textContent = `Showing ${filtered.length} shortcut${filtered.length !== 1 ? "s" : ""}`;
+  const aiLabel = aiResults !== null && query ? ' <span style="font-size:11px;background:#eff6ff;color:#3b82f6;border:1px solid #bfdbfe;border-radius:10px;padding:2px 8px;margin-left:6px;">✦ AI</span>' : "";
+  meta.innerHTML = `Showing ${filtered.length} shortcut${filtered.length !== 1 ? "s" : ""}${aiLabel}`;
 
   if (!filtered.length) {
     list.innerHTML = `<div class="sf-empty"><div class="sf-empty-icon">🔍</div>No shortcuts found for "<strong>${query}</strong>".<br>Try different keywords like "filter", "freeze", or "formula".</div>`;
@@ -628,10 +645,40 @@ document.getElementById("sf-list").addEventListener("click", e => {
   }
 });
 
+// ── AI Search (Gemini via /api/search) ──
+let aiResults = null;   // null = not used, [] = no results, [...] = AI results
+let aiTimer = null;
+let lastAiQuery = "";
+
+async function aiSearch(q) {
+  if (q.trim().length < 3) { aiResults = null; return; }
+  if (q === lastAiQuery) return;
+  lastAiQuery = q;
+  try {
+    const res = await fetch("/api/search", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: q })
+    });
+    const data = await res.json();
+    if (data.results && Array.isArray(data.results)) {
+      aiResults = data.results.map(r => r.id);
+      render();
+    }
+  } catch { aiResults = null; }
+}
+
 document.getElementById("sf-input").addEventListener("input", e => {
   query = e.target.value;
   openId = null;
-  render();
+  aiResults = null;  // reset AI results on new input
+  render();          // instant local fuzzy match first
+
+  // debounce AI search: fires 600ms after user stops typing
+  clearTimeout(aiTimer);
+  if (query.trim().length >= 3) {
+    aiTimer = setTimeout(() => aiSearch(query), 600);
+  }
 });
 
 document.querySelectorAll(".sf-pill").forEach(p => p.addEventListener("click", () => {
