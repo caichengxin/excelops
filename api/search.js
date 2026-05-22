@@ -88,27 +88,17 @@ export default async function handler(req, res) {
     { id:"insert-hyperlink", action:"Insert Hyperlink", cat:"Insert & Delete", tags:["hyperlink","link","url","insert link"] },
   ];
 
-  const shortcutList = SHORTCUTS.map(s =>
-    `- ${s.action} (${s.cat}): tags=[${s.tags.join(", ")}], id=${s.id}`
-  ).join("\n");
 
-  const prompt = `You are an Excel shortcut search assistant. A user typed a natural language query. Your job is to find the most relevant Excel shortcuts from the list below.
-
-User query: "${query}"
-
-Available shortcuts (format: "Action (Category): tags=[...], id=ID"):
-${shortcutList}
-
-Instructions:
-- ALWAYS return between 1 and 6 shortcut IDs, never return an empty array
-- Pick the shortcuts whose action or tags are most relevant to the query
-- If the query is vague, pick the most commonly used shortcuts related to the topic
-- Return ONLY a raw JSON array of ID strings, no markdown, no code fences, no explanation
-- Use the exact id values from the list above
-
-Example — query "create new tab": ["new-sheet","insert-sheet","next-sheet"]
-Example — query "copy cells": ["copy","paste","cut","paste-special"]
-Example — query "keep header row visible": ["freeze","split","hide-row"]`;
+  const prompt = `
+Return the most relevant Excel shortcut IDs.
+Query: "${query}"
+Available IDs:
+${SHORTCUTS.map(s => `${s.id}: ${s.action}`).join("\n")}
+Rules:
+- Return 1-5 ids
+- JSON array only
+- Use exact ids
+`;
 
   try {
     const geminiRes = await fetch(
@@ -128,7 +118,7 @@ Example — query "keep header row visible": ["freeze","split","hide-row"]`;
     const clean = raw.replace(/```json|```/g, "").trim();
     const ids = JSON.parse(clean);
     const results = ids.map(id => SHORTCUTS.find(s => s.id === id)).filter(Boolean);
-    return res.status(200).json({ results, raw });
+    return res.status(200).json({ results });
   } catch (err) {
     console.error("Gemini error:", err);
     return res.status(500).json({ error: "Search failed", results: [] });
