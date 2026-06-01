@@ -3,56 +3,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Automate Weekly Inventory Reports in Excel | ExcelOps</title>
-<meta content="Learn how to automate your weekly inventory report in Excel using a simple macro. Refresh data, format the report, and save a dated copy automatically." name="description"/>
-<link href="https://getexcelops.com/pages/automate-inventory-report-excel" rel="canonical"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&amp;family=Sora:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="/css/style.css" rel="stylesheet"/>
-<style>
-    .article-hero{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:3rem 2rem;color:#fff;text-align:center}
-    .article-hero .cat{font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;color:var(--teal2);font-weight:600;margin-bottom:.75rem}
-    .article-hero h1{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;margin-bottom:.75rem;max-width:700px;margin-left:auto;margin-right:auto}
-    .article-hero .meta{font-size:.85rem;color:#94a3b8}
-    .article-body{max-width:740px;margin:0 auto;padding:3rem 2rem}
-    .article-body h2{font-size:1.3rem;font-weight:700;margin:2rem 0 .875rem;color:var(--text)}
-    .article-body h3{font-size:1.05rem;font-weight:600;margin:1.5rem 0 .5rem;color:var(--text)}
-    .article-body p{color:var(--text2);margin-bottom:1rem;line-height:1.8;font-size:.95rem}
-    .article-body ul,.article-body ol{padding-left:1.5rem;margin-bottom:1rem}
-    .article-body li{color:var(--text2);margin-bottom:.5rem;line-height:1.7;font-size:.95rem}
-    .formula-box{background:var(--navy);color:#7dd3fc;padding:1.25rem 1.5rem;border-radius:var(--rad2);font-family:monospace;font-size:.9rem;margin:1.25rem 0;overflow-x:auto}
-    .step-box{background:#fff;border:1px solid var(--border);border-radius:var(--rad);padding:1.25rem 1.5rem;margin:.75rem 0;display:flex;gap:1rem;align-items:flex-start}
-    .step-num{width:32px;height:32px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.875rem;flex-shrink:0;margin-top:.1rem}
-    .step-box h3{font-size:.95rem;font-weight:600;margin-bottom:.35rem}
-    .step-box p{font-size:.875rem;color:var(--text3);margin:0;line-height:1.6}
-    .tip-box{background:rgba(14,165,160,.05);border-left:3px solid var(--teal);border-radius:0 var(--rad2) var(--rad2) 0;padding:.875rem 1rem;font-size:.875rem;color:var(--text2);margin:1.5rem 0}
-    .warn-box{background:rgba(217,119,6,.05);border-left:3px solid #d97706;border-radius:0 var(--rad2) var(--rad2) 0;padding:.875rem 1rem;font-size:.875rem;color:var(--text2);margin:1.5rem 0}
-    .data-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
-    .data-table th{background:var(--navy);color:#fff;padding:.625rem 1rem;text-align:left;font-weight:600}
-    .data-table td{padding:.625rem 1rem;border-bottom:1px solid var(--border);color:var(--text2)}
-    .data-table tr:nth-child(even) td{background:var(--bg)}
-    .dl-cta{background:linear-gradient(135deg,var(--navy),#0f3460);border-radius:var(--rad);padding:2rem;text-align:center;margin:2rem 0;color:#fff}
-    .dl-cta h3{font-size:1.1rem;margin-bottom:.5rem}
-    .dl-cta p{color:#94a3b8;font-size:.875rem;margin-bottom:1.25rem}
-    .related-posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem}
-    .related-card{background:#fff;border:1px solid var(--border);border-radius:var(--rad);padding:1.25rem;text-decoration:none;color:inherit;transition:all .2s}
-    .related-card:hover{box-shadow:0 4px 15px rgba(0,0,0,.08);transform:translateY(-2px)}
-    .related-card .rc-cat{font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;color:var(--teal);font-weight:600;margin-bottom:.4rem}
-    .related-card h4{font-size:.875rem;font-weight:600;line-height:1.4}
-    .faq-list{display:flex;flex-direction:column;gap:.75rem}
-    .faq-item{background:#fff;border:1px solid var(--border);border-radius:var(--rad2);overflow:hidden}
-    .faq-q{padding:1rem 1.25rem;font-weight:600;font-size:.9rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-    .faq-q:hover{color:var(--teal)}
-    .faq-q .arrow{transition:transform .2s;font-size:.75rem}
-    .faq-item.open .faq-q .arrow{transform:rotate(180deg)}
-    .faq-a{display:none;padding:0 1.25rem 1rem;font-size:.875rem;color:var(--text3);line-height:1.6}
-    .faq-item.open .faq-a{display:block}
-    .breadcrumb{font-size:.8rem;color:var(--text3);margin-bottom:1.5rem}
-    .breadcrumb a{color:var(--text3);text-decoration:none}
-    .breadcrumb a:hover{color:var(--teal)}
-    .breadcrumb span{margin:0 6px}
-</style>
-<meta content="Automate Weekly Inventory Reports in Excel | ExcelOps" property="og:title"/><meta content="Learn how to automate your weekly inventory report in Excel using a simple macro. Refresh data, format the report, and save a dated copy automatically." property="og:description"/><meta content="article" property="og:type"/><meta content="https://getexcelops.com/pages/automate-inventory-report-excel" property="og:url"/><meta content="https://getexcelops.com/assets/og-image.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Automate Weekly Inventory Reports in Excel | ExcelOps" name="twitter:title"/><meta content="Learn how to automate your weekly inventory report in Excel using a simple macro. Refresh data, format the report, and save a dated copy automatically." name="twitter:description"/><meta content="https://getexcelops.com/assets/og-image.png" name="twitter:image"/><script data-excelops="true" type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Automate Weekly Inventory Reports in Excel","description":"Learn how to automate your weekly inventory report in Excel using a simple macro. Refresh data, format the report, and save a dated copy automatically.","mainEntityOfPage":"https://getexcelops.com/pages/automate-inventory-report-excel","author":{"@type":"Organization","name":"ExcelOps"},"publisher":{"@type":"Organization","name":"ExcelOps","logo":{"@type":"ImageObject","url":"https://getexcelops.com/assets/og-image.png"}}}</script></head>
+<title>Automate Weekly Inventory Reports in Excel | ExcelOps</title><meta content="Automate weekly inventory reports in Excel with a simple macro. Refresh data, format reports, save dated files, and reduce manual reporting work." name="description"/>
+
+<meta content="Automate weekly inventory reports in Excel with a simple macro. Refresh data, format reports, save dated files, and reduce manual reporting work." property="og:description"/><meta content="Automate weekly inventory reports in Excel with a simple macro. Refresh data, format reports, save dated files, and reduce manual reporting work." name="twitter:description"/></head>
 <body>
 <nav>
 <a class="logo" href="/">
@@ -140,7 +93,7 @@ End Sub</div>
 <div class="faq-item"><div class="faq-q">Do I need to know VBA to use macros? <span class="arrow">▼</span></div><div class="faq-a">Not for basic automation. The Record Macro feature captures your actions without any coding. For more advanced automation like the scheduled report, copying the code above and adjusting the file paths is usually enough.</div></div>
 <div class="faq-item"><div class="faq-q">Can I email the report automatically? <span class="arrow">▼</span></div><div class="faq-a">Yes — add Outlook automation to your VBA macro. It can attach the saved report and send it to a distribution list. Alternatively, Power Automate (free with Microsoft 365) can monitor a folder and email new files automatically.</div></div>
 </div>
-<div class="dl-cta"><h3>⚙️ Get the Inventory Dashboard Template</h3><p>Free download — no sign-up required.</p><a class="btn btn-primary" download href="/templates/01_Inventory_Dashboard.xlsx">⬇ Download Free Template</a></div>
+<div class="dl-cta"><h3>⚙️ Get the Inventory Dashboard Template</h3><p>Free download — no sign-up required.</p><a class="btn btn-primary" download="" href="/templates/01_Inventory_Dashboard.xlsx">⬇ Download Free Template</a></div>
 <h2>Related Articles</h2>
 <div class="related-posts"><a class="related-card" href="/pages/sql-to-excel-export"><div class="rc-cat">SQL</div><h4>Export SQL Query Results to Excel in 5 Steps</h4></a><a class="related-card" href="/pages/low-stock-alert-excel"><div class="rc-cat">Inventory</div><h4>How to Build a Low Stock Alert in Excel</h4></a><a class="related-card" href="/pages/warehouse-kpi-dashboard-excel"><div class="rc-cat">Dashboard</div><h4>Build a Warehouse KPI Dashboard</h4></a></div>
 </div>
@@ -164,10 +117,10 @@ End Sub</div>
 </div>
 <div class="footer-col">
 <h4>Templates</h4>
-<a download href="/templates/01_Inventory_Dashboard.xlsx">Inventory Dashboard</a>
-<a download href="/templates/02_Warehouse_KPI_Dashboard.xlsx">Warehouse KPI</a>
-<a download href="/templates/03_Purchase_Order_Tracker.xlsx">Purchase Order</a>
-<a download href="/templates/09_Landed_Cost_Calculator.xlsx">Landed Cost Calculator</a>
+<a download="" href="/templates/01_Inventory_Dashboard.xlsx">Inventory Dashboard</a>
+<a download="" href="/templates/02_Warehouse_KPI_Dashboard.xlsx">Warehouse KPI</a>
+<a download="" href="/templates/03_Purchase_Order_Tracker.xlsx">Purchase Order</a>
+<a download="" href="/templates/09_Landed_Cost_Calculator.xlsx">Landed Cost Calculator</a>
 </div>
 <div class="footer-col">
 <h4>Company</h4>
@@ -181,5 +134,5 @@ End Sub</div>
 <div class="footer-bottom">© 2026 ExcelOps · <a href="https://getexcelops.com" style="color:#475569">GetExcelOps.com</a> · Built for operations teams who get things done.</div>
 </div>
 </footer>
-<script defer src="/js/main.js"></script>
+<script defer="" src="/js/main.js"></script>
 </body></html>
