@@ -1180,6 +1180,69 @@ function extractIds(rawText) {
   return [];
 }
 
+function buildGeminiPayload(query, useJsonMode = true) {
+  const payload = {
+    contents: [{
+      role: "user",
+      parts: [{ text: buildPrompt(query) }]
+    }]
+  };
+
+  // JSON mode is helpful, but some API versions / key setups may reject it.
+  // The caller retries without it so the feature does not fall back unnecessarily.
+  if (useJsonMode) {
+    payload.generationConfig = {
+      temperature: 0,
+      maxOutputTokens: 160,
+      responseMimeType: "application/json"
+    };
+  }
+
+  return payload;
+}
+
+function getGeminiText(data) {
+  return data?.candidates?.[0]?.content?.parts?.map(p => p.text || "").join("\n") || "";
+}
+
+async function postToGemini(endpoint, apiKey, payload) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+  try {
+    const geminiRes = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-key": apiKey
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+
+    let data = null;
+    try { data = await geminiRes.json(); } catch { data = null; }
+
+    if (!geminiRes.ok) {
+      return {
+        ok: false,
+        status: geminiRes.status,
+        message: data?.error?.message || "Gemini request failed"
+      };
+    }
+
+    return { ok: true, raw: getGeminiText(data), data };
+  } catch (err) {
+    return {
+      ok: false,
+      status: 0,
+      message: err?.name === "AbortError" ? "Gemini request timed out" : (err?.message || "Gemini request failed")
+    };
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
 async function callGemini(query) {
   const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
   if (!apiKey) {
@@ -1187,72 +1250,62 @@ async function callGemini(query) {
   }
 
   const model = process.env.GEMINI_MODEL || "gemini-3.1-flash-lite";
-  const apiVersion = process.env.GEMINI_API_VERSION || "v1";
-  const endpoint = `https://generativelanguage.googleapis.com/${apiVersion}/models/${model}:generateContent`;
+  const configuredVersion = process.env.GEMINI_API_VERSION || "v1beta";
 
-  const geminiRes = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-goog-api-key": apiKey
-    },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: buildPrompt(query) }] }],
-      generationConfig: {
-        temperature: 0,
-        maxOutputTokens: 160,
-        responseMimeType: "application/json"
+  // Google GenAI SDKs default to v1beta. Keep the configured version first,
+  // but retry v1beta if v1 or another version rejects the request.
+  const versions = [...new Set([configuredVersion, "v1beta", "v1"])];
+  const attempts = [];
+  const validIds = new Set(SHORTCUTS.map(s => s.id));
+
+  for (const apiVersion of versions) {
+    const endpoint = `https://generativelanguage.googleapis.com/${apiVersion}/models/${model}:generateContent`;
+    for (const useJsonMode of [true, false]) {
+      const label = `${apiVersion}/${useJsonMode ? "json" : "plain"}`;
+      const result = await postToGemini(endpoint, apiKey, buildGeminiPayload(query, useJsonMode));
+
+      if (!result.ok) {
+        attempts.push({ label, status: result.status, message: result.message });
+
+        // These usually mean the key or quota is the problem, not the API version.
+        if ([401, 403, 429].includes(result.status)) {
+          return {
+            ok: false,
+            reason: "gemini_http_error",
+            status: result.status,
+            message: result.message,
+            attempts
+          };
+        }
+        continue;
       }
-    })
-  });
 
-  let data = null;
-  try { data = await geminiRes.json(); } catch { data = null; }
+      const ids = extractIds(result.raw).filter(id => validIds.has(id)).slice(0, 5);
+      if (!ids.length) {
+        attempts.push({ label, status: 200, message: "Gemini responded, but no valid shortcut ids were returned." });
+        continue;
+      }
 
-  if (!geminiRes.ok) {
-    return {
-      ok: false,
-      reason: "gemini_http_error",
-      status: geminiRes.status,
-      message: data?.error?.message || "Gemini request failed"
-    };
+      const results = ids
+        .map(id => SHORTCUTS.find(s => s.id === id))
+        .filter(Boolean)
+        .map(s => ({ id: s.id, action: s.action, cat: s.cat }));
+
+      return { ok: true, results, model, apiVersion, mode: useJsonMode ? "json" : "plain" };
+    }
   }
 
-  const raw = data?.candidates?.[0]?.content?.parts?.map(p => p.text || "").join("\n") || "";
-  const validIds = new Set(SHORTCUTS.map(s => s.id));
-  const ids = extractIds(raw).filter(id => validIds.has(id)).slice(0, 5);
-
-  if (!ids.length) return { ok: false, reason: "no_valid_ids" };
-
-  const results = ids
-    .map(id => SHORTCUTS.find(s => s.id === id))
-    .filter(Boolean)
-    .map(s => ({ id: s.id, action: s.action, cat: s.cat }));
-
-  return { ok: true, results, model };
+  const last = attempts[attempts.length - 1] || {};
+  return {
+    ok: false,
+    reason: last.status === 200 ? "no_valid_ids" : "gemini_http_error",
+    status: last.status,
+    message: last.message || "Gemini did not return a usable response.",
+    attempts
+  };
 }
 
-export default async function handler(req, res) {
-  setCors(res);
-
-  if (req.method === "OPTIONS") return res.status(200).end();
-
-  if (req.method === "GET") {
-    return sendJson(res, 200, {
-      ok: true,
-      endpoint: "/api/search",
-      accepts: "POST",
-      geminiConfigured: Boolean(process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY),
-      model: process.env.GEMINI_MODEL || "gemini-3.1-flash-lite",
-      apiVersion: process.env.GEMINI_API_VERSION || "v1"
-    });
-  }
-
-  if (req.method !== "POST") {
-    return sendJson(res, 405, { error: "Method not allowed" });
-  }
-
-  const { query, debug } = getBody(req);
+async function handleSearchRequest(req, res, query, debug) {
   if (!query || String(query).trim().length < 2) {
     return sendJson(res, 400, { error: "Query too short", results: [] });
   }
@@ -1262,7 +1315,14 @@ export default async function handler(req, res) {
   try {
     const ai = await callGemini(cleanQuery);
     if (ai.ok) {
-      return sendJson(res, 200, { ok: true, source: "gemini", model: ai.model, results: ai.results });
+      return sendJson(res, 200, {
+        ok: true,
+        source: "gemini",
+        model: ai.model,
+        apiVersion: ai.apiVersion,
+        mode: ai.mode,
+        results: ai.results
+      });
     }
 
     const fallback = localFallback(cleanQuery);
@@ -1271,7 +1331,7 @@ export default async function handler(req, res) {
       source: "fallback",
       reason: ai.reason,
       results: fallback,
-      ...(debug ? { debug: { status: ai.status, message: ai.message } } : {})
+      ...(debug ? { debug: { status: ai.status, message: ai.message, attempts: ai.attempts } } : {})
     });
   } catch (err) {
     const fallback = localFallback(cleanQuery);
@@ -1283,4 +1343,38 @@ export default async function handler(req, res) {
       ...(debug ? { debug: { message: err.message } } : {})
     });
   }
+}
+
+export default async function handler(req, res) {
+  setCors(res);
+
+  if (req.method === "OPTIONS") return res.status(200).end();
+
+  if (req.method === "GET") {
+    const url = new URL(req.url || "/api/search", `https://${req.headers.host || "getexcelops.com"}`);
+    const query = req.query?.query || req.query?.q || url.searchParams.get("query") || url.searchParams.get("q");
+    const debug = req.query?.debug || url.searchParams.get("debug");
+
+    // Browser-friendly test URL:
+    // /api/search?query=freeze%20top%20row&debug=1
+    if (query) {
+      return handleSearchRequest(req, res, query, debug);
+    }
+
+    return sendJson(res, 200, {
+      ok: true,
+      endpoint: "/api/search",
+      accepts: "POST, or GET with ?query=... for testing",
+      geminiConfigured: Boolean(process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY),
+      model: process.env.GEMINI_MODEL || "gemini-3.1-flash-lite",
+      apiVersion: process.env.GEMINI_API_VERSION || "v1beta"
+    });
+  }
+
+  if (req.method !== "POST") {
+    return sendJson(res, 405, { error: "Method not allowed" });
+  }
+
+  const { query, debug } = getBody(req);
+  return handleSearchRequest(req, res, query, debug);
 };

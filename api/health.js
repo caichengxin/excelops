@@ -7,6 +7,6 @@ export default async function handler(req, res) {
     functions: true,
     geminiConfigured: Boolean(process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY),
     model: process.env.GEMINI_MODEL || "gemini-3.1-flash-lite",
-    apiVersion: process.env.GEMINI_API_VERSION || "v1"
+    apiVersion: process.env.GEMINI_API_VERSION || "v1beta"
   });
 }
