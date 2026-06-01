@@ -93,6 +93,21 @@
       padding: 3px 8px;
       pointer-events: none;
     }
+    .sf-ai-status {
+      max-width: 580px;
+      margin: -0.85rem auto 1.35rem;
+      min-height: 20px;
+      font-size: 12px;
+      color: #94a3b8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+    }
+    .sf-ai-status strong { color: #bfdbfe; font-weight: 600; }
+    .sf-ai-status.error { color: #fca5a5; }
+    .sf-ai-status.ok { color: #93c5fd; }
+    .sf-ai-status.fallback { color: #c4b5fd; }
     .sf-stats {
       display: flex;
       justify-content: center;
@@ -354,6 +369,7 @@
 <input autocomplete="off" id="sf-input" placeholder="e.g. freeze panes, filter data, insert date…" type="text"/>
 <span class="sf-kbd">Ctrl K</span>
 </div>
+<div class="sf-ai-status" id="sf-ai-status">Type 3+ characters for AI-assisted shortcut matching.</div>
 <div class="sf-stats">
 <div><div class="sf-stat-num">100+</div><div class="sf-stat-lbl">Excel Shortcuts</div></div>
 <div><div class="sf-stat-num">5</div><div class="sf-stat-lbl">Categories</div></div>
@@ -575,7 +591,7 @@ function render() {
   const filtered = getFilteredSorted();
   const meta = document.getElementById("sf-meta");
   const list = document.getElementById("sf-list");
-  const aiLabel = aiResults !== null && query ? ' <span style="font-size:11px;background:#eff6ff;color:#3b82f6;border:1px solid #bfdbfe;border-radius:10px;padding:2px 8px;margin-left:6px;">✦ AI</span>' : "";
+  const aiLabel = aiResults !== null && query ? ` <span style="font-size:11px;background:#eff6ff;color:#3b82f6;border:1px solid #bfdbfe;border-radius:10px;padding:2px 8px;margin-left:6px;">✦ ${aiSource === "gemini" ? "AI" : "Smart"}</span>` : "";
   meta.innerHTML = `Showing ${filtered.length} shortcut${filtered.length !== 1 ? "s" : ""}${aiLabel}`;
 
   if (!filtered.length) {
@@ -630,11 +646,7 @@ document.getElementById("sf-list").addEventListener("click", e => {
   // related tag
   const rtag = e.target.closest(".sf-rtag");
   if (rtag) {
-    document.getElementById("sf-input").value = rtag.dataset.rel;
-    query = rtag.dataset.rel;
-    openId = null;
-    render();
-    document.getElementById("sf-input").focus();
+    updateShortcutQuery(rtag.dataset.rel, true);
     return;
   }
   // card toggle
@@ -645,40 +657,107 @@ document.getElementById("sf-list").addEventListener("click", e => {
   }
 });
 
-// ── AI Search (Gemini via /api/search) ──
-let aiResults = null;   // null = not used, [] = no results, [...] = AI results
+// -- AI Search via /api/search --
+let aiResults = null;   // null = not used, [] = no results, [...] = API ranked result IDs
 let aiTimer = null;
-let lastAiQuery = "";
+let aiRequestSeq = 0;
+let aiSource = "";
+
+function setAIStatus(message, state = "") {
+  const el = document.getElementById("sf-ai-status");
+  if (!el) return;
+  el.className = `sf-ai-status ${state}`.trim();
+  el.textContent = message;
+}
 
 async function aiSearch(q) {
-  if (q.trim().length < 3) { aiResults = null; return; }
-  if (q === lastAiQuery) return;
-  lastAiQuery = q;
+  const clean = q.trim();
+  if (clean.length < 3) {
+    aiResults = null;
+    aiSource = "";
+    setAIStatus("Type 3+ characters for AI-assisted shortcut matching.");
+    return;
+  }
+
+  const requestId = ++aiRequestSeq;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000);
+  setAIStatus("Checking AI-assisted shortcut matches...", "ok");
+
   try {
     const res = await fetch("/api/search", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: q })
+      body: JSON.stringify({ query: clean }),
+      signal: controller.signal
     });
-    const data = await res.json();
-    if (data.results && Array.isArray(data.results)) {
-      aiResults = data.results.map(r => r.id);
+    clearTimeout(timeoutId);
+
+    // Ignore stale responses if the user typed something else while the API was working.
+    if (requestId !== aiRequestSeq || clean !== query.trim()) return;
+
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !Array.isArray(data.results)) {
+      console.warn("Shortcut API error", data);
+      aiResults = null;
+      aiSource = "";
+      setAIStatus("AI search is unavailable, but local shortcut search is still working.", "error");
       render();
+      return;
     }
-  } catch { aiResults = null; }
+
+    aiResults = data.results.map(r => r.id).filter(Boolean);
+    aiSource = data.source || "api";
+
+    if (aiResults.length) {
+      if (aiSource === "gemini") {
+        setAIStatus(`Using AI matching for “${clean}”.`, "ok");
+      } else if (data.reason === "missing_api_key") {
+        setAIStatus("Server API is working, but GEMINI_API_KEY is missing; using smart local fallback.", "fallback");
+      } else {
+        setAIStatus("Gemini did not respond successfully; using smart local fallback.", "fallback");
+      }
+    } else {
+      setAIStatus("No AI match found. Try words like filter, freeze, duplicate, pivot, or formula.", "fallback");
+    }
+    render();
+  } catch (error) {
+    clearTimeout(timeoutId);
+    if (requestId !== aiRequestSeq || clean !== query.trim()) return;
+    console.warn("Shortcut API request failed", error);
+    aiResults = null;
+    aiSource = "";
+    setAIStatus("AI search could not be reached. Check that /api/search is deployed on Vercel, not only GitHub Pages.", "error");
+    render();
+  }
+}
+
+function scheduleAiSearch() {
+  clearTimeout(aiTimer);
+  aiRequestSeq += 1; // invalidate any in-flight request
+  if (query.trim().length >= 3) {
+    aiTimer = setTimeout(() => aiSearch(query), 600);
+  } else {
+    aiSource = "";
+    aiResults = null;
+    setAIStatus("Type 3+ characters for AI-assisted shortcut matching.");
+  }
+}
+
+function updateShortcutQuery(value, focusInput = false) {
+  const input = document.getElementById("sf-input");
+  query = value;
+  if (input && input.value !== value) input.value = value;
+  if (focusInput && input) input.focus();
+  openId = null;
+  aiResults = null;
+  aiSource = "";
+  render();          // instant local fuzzy match first
+  scheduleAiSearch();
 }
 
 document.getElementById("sf-input").addEventListener("input", e => {
-  query = e.target.value;
-  openId = null;
-  aiResults = null;  // reset AI results on new input
-  render();          // instant local fuzzy match first
-
-  // debounce AI search: fires 600ms after user stops typing
-  clearTimeout(aiTimer);
-  if (query.trim().length >= 3) {
-    aiTimer = setTimeout(() => aiSearch(query), 600);
-  }
+  updateShortcutQuery(e.target.value);
 });
 
 document.querySelectorAll(".sf-pill").forEach(p => p.addEventListener("click", () => {
