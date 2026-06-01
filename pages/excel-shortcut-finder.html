@@ -688,7 +688,7 @@ async function aiSearch(q) {
     const res = await fetch("/api/search", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: clean }),
+      body: JSON.stringify({ query: clean, debug: true }),
       signal: controller.signal
     });
     clearTimeout(timeoutId);
@@ -715,7 +715,9 @@ async function aiSearch(q) {
       } else if (data.reason === "missing_api_key") {
         setAIStatus("Server API is working, but GEMINI_API_KEY is missing; using smart local fallback.", "fallback");
       } else {
-        setAIStatus("Gemini did not respond successfully; using smart local fallback.", "fallback");
+        const detail = data.debug?.status ? ` (${data.reason || "fallback"}: ${data.debug.status})` : "";
+        setAIStatus(`Gemini did not respond successfully${detail}; using smart local fallback.`, "fallback");
+        if (data.debug) console.warn("Gemini fallback details", data.debug);
       }
     } else {
       setAIStatus("No AI match found. Try words like filter, freeze, duplicate, pivot, or formula.", "fallback");
