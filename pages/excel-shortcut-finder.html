@@ -346,17 +346,21 @@
       .sf-chips {
         order: 3;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         width: 100%;
         gap: 8px;
-        margin-left: 21px;
-        padding-right: 4px;
+        margin-left: 0;
+        padding-left: 21px;
+        padding-right: 0;
+        box-sizing: border-box;
       }
       .sf-chip {
         white-space: normal;
         line-height: 1.35;
-        padding: 7px 9px;
+        padding: 7px 10px;
         min-width: 0;
+        width: 100%;
+        box-sizing: border-box;
         overflow-wrap: anywhere;
       }
       .sf-chip-os {
