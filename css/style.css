@@ -237,3 +237,13 @@ footer{background:var(--navy);color:#94a3b8;padding:3.5rem 2rem 1.5rem}
   .footer-grid{grid-template-columns:1fr}
   .hero-btns .btn{width:100%;justify-content:center}
 }
+
+
+.card-link {
+  display: inline-block;
+  margin-right: .75rem;
+  font-weight: 600;
+  color: var(--teal);
+  text-decoration: none;
+}
+.card-link:hover { text-decoration: underline; }
