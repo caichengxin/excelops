@@ -328,8 +328,41 @@
     }
 
     @media (max-width: 600px) {
-      .sf-chips { display: none; }
       .sf-stats { gap: 1.5rem; }
+      .sf-card-head {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 1rem;
+      }
+      .sf-card-left {
+        flex: 1 1 calc(100% - 34px);
+        min-width: 0;
+      }
+      .sf-chevron {
+        order: 2;
+        margin-top: 4px;
+      }
+      .sf-chips {
+        order: 3;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        gap: 8px;
+        margin-left: 21px;
+        padding-right: 4px;
+      }
+      .sf-chip {
+        white-space: normal;
+        line-height: 1.35;
+        padding: 7px 9px;
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      .sf-chip-os {
+        font-size: 10px;
+        margin-bottom: 3px;
+      }
     }
   </style>
 <meta content="https://getexcelops.com/assets/og-image.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Excel Shortcut Finder — Windows &amp; Mac Shortcuts | ExcelOps" name="twitter:title"/><meta content="Search 100+ Excel keyboard shortcuts by action. Get Windows shortcut, Mac shortcut, and Ribbon path instantly. Free Excel shortcut finder tool." name="twitter:description"/><meta content="https://getexcelops.com/assets/og-image.png" name="twitter:image"/><script data-excelops="true" type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Excel Shortcut Finder — Windows & Mac Shortcuts | ExcelOps","url":"https://getexcelops.com/pages/excel-shortcut-finder","description":"Search 100+ Excel keyboard shortcuts by action. Get Windows shortcut, Mac shortcut, and Ribbon path instantly. Free Excel shortcut finder tool."}</script></head>
