@@ -1,17 +1,18 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to Build a Low Stock Alert in Excel | ExcelOps</title>
-  <meta name="description" content="Step-by-step guide to building a low stock alert in Excel using IF formulas and conditional formatting. Flag items below reorder point automatically.">
-  <link rel="canonical" href="https://getexcelops.com/pages/low-stock-alert-excel">
-  <meta property="og:title" content="How to Build a Low Stock Alert in Excel | ExcelOps">
-  <meta property="og:description" content="Step-by-step guide to building a low stock alert in Excel using IF formulas and conditional formatting. Flag items below reorder point automatically.">
-  <meta property="og:type" content="article">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <style>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How to Build a Low Stock Alert in Excel | ExcelOps</title>
+<meta content="Step-by-step guide to building a low stock alert in Excel using IF formulas and conditional formatting. Flag items below reorder point automatically." name="description"/>
+<link href="https://getexcelops.com/pages/low-stock-alert-excel" rel="canonical"/>
+<meta content="How to Build a Low Stock Alert in Excel | ExcelOps" property="og:title"/>
+<meta content="Step-by-step guide to building a low stock alert in Excel using IF formulas and conditional formatting. Flag items below reorder point automatically." property="og:description"/>
+<meta content="article" property="og:type"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&amp;family=Sora:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/css/style.css" rel="stylesheet"/>
+<style>
     .article-hero{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:3rem 2rem;color:#fff;text-align:center}
     .article-hero .cat{font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;color:var(--teal2);font-weight:600;margin-bottom:.75rem}
     .article-hero h1{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;margin-bottom:.75rem;max-width:700px;margin-left:auto;margin-right:auto}
@@ -54,154 +55,152 @@
     .breadcrumb a:hover{color:var(--teal)}
     .breadcrumb span{margin:0 6px}
   </style>
-</head>
+<meta content="https://getexcelops.com/pages/low-stock-alert-excel" property="og:url"/><meta content="https://getexcelops.com/assets/og-image.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="How to Build a Low Stock Alert in Excel | ExcelOps" name="twitter:title"/><meta content="Step-by-step guide to building a low stock alert in Excel using IF formulas and conditional formatting. Flag items below reorder point automatically." name="twitter:description"/><meta content="https://getexcelops.com/assets/og-image.png" name="twitter:image"/><script data-excelops="true" type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Build a Low Stock Alert in Excel","description":"Step-by-step guide to building a low stock alert in Excel using IF formulas and conditional formatting. Flag items below reorder point automatically.","mainEntityOfPage":"https://getexcelops.com/pages/low-stock-alert-excel","author":{"@type":"Organization","name":"ExcelOps"},"publisher":{"@type":"Organization","name":"ExcelOps","logo":{"@type":"ImageObject","url":"https://getexcelops.com/assets/og-image.png"}}}</script></head>
 <body><nav>
-  <a class="logo" href="/index.html"><div class="logo-mark">EO</div>ExcelOps</a>
-  <div class="nav-links">
-    <a href="/pages/templates.html">Templates</a>
-    <a href="/pages/sql.html">SQL Reports</a>
-    <a href="/pages/blog.html">Blog</a>
-    <a href="/pages/about.html">About</a>
-    <a href="/pages/contact.html">Contact</a>
-  </div>
-  <a class="nav-cta" href="/pages/templates.html">Free Templates ↗</a>
-  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<a class="logo" href="/">
+<div class="logo-mark">EO</div>
+    ExcelOps
+  </a>
+<div class="nav-links">
+<a href="/pages/templates">Templates</a>
+<a href="/pages/sql">SQL Reports</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/about">About</a>
+<a href="/pages/contact">Contact</a>
+</div>
+<a class="nav-cta" href="/pages/templates">Free Templates ↗</a>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="/pages/templates.html">Templates</a>
-  <a href="/pages/sql.html">SQL Reports</a>
-  <a href="/pages/blog.html">Blog</a>
-  <a href="/pages/about.html">About</a>
-  <a href="/pages/contact.html">Contact</a>
+<a href="/pages/templates">Templates</a>
+<a href="/pages/sql">SQL Reports</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/about">About</a>
+<a href="/pages/contact">Contact</a>
 </div>
 <div class="article-hero">
-  <div class="cat">Inventory</div>
-  <h1>How to Build a Low Stock Alert in Excel</h1>
-  <div class="meta">⏱ 8 min read &nbsp;·&nbsp; Inventory &nbsp;·&nbsp; Conditional Formatting &nbsp;·&nbsp; IF Formula</div>
+<div class="cat">Inventory</div>
+<h1>How to Build a Low Stock Alert in Excel</h1>
+<div class="meta">⏱ 8 min read  ·  Inventory  ·  Conditional Formatting  ·  IF Formula</div>
 </div>
 <div class="article-body">
-  <div class="breadcrumb"><a href="/index.html">Home</a><span>›</span><a href="/pages/blog.html">Blog</a><span>›</span> Low Stock Alert Excel</div>
-
-  <p>One of the most common problems in inventory management is finding out you've run out of stock <em>after</em> a customer orders it. A low stock alert in Excel solves this by automatically flagging items that are approaching their reorder point — before you run out.</p>
-  <p>In this guide you'll build a low stock alert system using Excel's IF formula and conditional formatting. No VBA, no macros — just formulas that work in Excel 2016 and later.</p>
-
-  <h2>What You'll Need</h2>
-  <p>Your spreadsheet needs these columns to make this work:</p>
-  <table class="data-table">
-    <tr><th>Column</th><th>What It Contains</th><th>Example</th></tr>
-    <tr><td>SKU</td><td>Item identifier</td><td>SKU-001</td></tr>
-    <tr><td>Item Name</td><td>Product description</td><td>Widget A</td></tr>
-    <tr><td>Qty on Hand</td><td>Current stock level</td><td>18</td></tr>
-    <tr><td>Reorder Point</td><td>Minimum stock level before ordering</td><td>30</td></tr>
-    <tr><td>Status</td><td>Alert column (formula goes here)</td><td>Low Stock</td></tr>
-  </table>
-
-  <h2>Step 1 — Build the Status Formula</h2>
-  <p>In your Status column (let's say column E, row 2), enter this formula:</p>
-  <div class="formula-box">=IF(C2=0,"Out of Stock",IF(C2&lt;D2,"Low Stock","OK"))</div>
-  <p>This formula does three things:</p>
-  <ul>
-    <li>If Qty on Hand is <strong>0</strong> → shows "Out of Stock"</li>
-    <li>If Qty on Hand is <strong>less than Reorder Point</strong> → shows "Low Stock"</li>
-    <li>If Qty on Hand is <strong>at or above Reorder Point</strong> → shows "OK"</li>
-  </ul>
-  <p>Drag this formula down to cover all your items.</p>
-
-  <div class="tip-box">💡 <strong>Using Excel Tables?</strong> If your data is formatted as a Table (Insert → Table), the formula will look like this: <code>=IF([@Qty]=0,"Out of Stock",IF([@Qty]&lt;[@ReorderPoint],"Low Stock","OK"))</code> — and it will automatically apply to new rows.</div>
-
-  <h2>Step 2 — Add Conditional Formatting</h2>
-  <p>Now make the Status column color-coded so you can see alerts at a glance.</p>
-
-  <div class="step-box"><div class="step-num">1</div><div><h3>Select your Status column</h3><p>Highlight all cells in the Status column that contain your formula (e.g. E2:E100).</p></div></div>
-  <div class="step-box"><div class="step-num">2</div><div><h3>Open Conditional Formatting</h3><p>Go to Home → Conditional Formatting → New Rule → "Format cells that contain".</p></div></div>
-  <div class="step-box"><div class="step-num">3</div><div><h3>Set up the Out of Stock rule</h3><p>Cell value → equal to → "Out of Stock". Set fill color to red, font color to dark red. Click OK.</p></div></div>
-  <div class="step-box"><div class="step-num">4</div><div><h3>Set up the Low Stock rule</h3><p>Add another rule: Cell value → equal to → "Low Stock". Set fill to amber/yellow, font to dark orange. Click OK.</p></div></div>
-  <div class="step-box"><div class="step-num">5</div><div><h3>Set up the OK rule</h3><p>Add a third rule: Cell value → equal to → "OK". Set fill to light green, font to dark green.</p></div></div>
-
-  <h2>Step 3 — Add a Days of Stock Column (Optional but Useful)</h2>
-  <p>This tells you how many days before you run out, so you can prioritize which items to order first.</p>
-  <div class="formula-box">=IF(F2=0,"N/A",ROUND(C2/F2,0))</div>
-  <p>Where F2 is your Average Daily Sales column. This gives you a number like "6 days" — meaning you have 6 days of stock left at current sales pace.</p>
-
-  <h2>Step 4 — Filter to See Only Problem Items</h2>
-  <p>Once your alerts are set up, use Excel's filter to see only the items that need attention:</p>
-  <ul>
-    <li>Click any cell in your data → Data → Filter</li>
-    <li>Click the dropdown arrow on the Status column</li>
-    <li>Uncheck "OK", leave only "Low Stock" and "Out of Stock" checked</li>
-    <li>Now you see only the items that need to be ordered</li>
-  </ul>
-
-  <div class="dl-cta">
-    <h3>📦 Get the Pre-Built Inventory Dashboard Template</h3>
-    <p>All formulas and conditional formatting already set up. Download free.</p>
-    <a class="btn btn-primary" href="/templates/01_Inventory_Dashboard.xlsx" download>⬇ Download Free Template</a>
-  </div>
-
-  <h2>Common Mistakes to Avoid</h2>
-  <div class="warn-box">⚠️ <strong>Wrong reorder point:</strong> Your reorder point should account for lead time. If your supplier takes 14 days and you sell 10 units/day, your reorder point should be at least 140 units — not an arbitrary number like 20.</div>
-  <div class="warn-box">⚠️ <strong>Not updating Qty on Hand:</strong> The alert only works if your quantity column reflects actual current stock. Set a regular process (daily or weekly) to update it from your receiving and sales records.</div>
-  <div class="warn-box">⚠️ <strong>Ignoring seasonal demand:</strong> If you sell more in certain months, your reorder point should go up. Review and adjust reorder points quarterly.</div>
-
-  <h2>How to Turn This Into a Dashboard</h2>
-  <p>Once your low stock alerts are working, you can build a summary dashboard on a separate sheet:</p>
-  <ul>
-    <li>Count of low stock items: <code>=COUNTIF(Sheet1!E:E,"Low Stock")</code></li>
-    <li>Count of out of stock items: <code>=COUNTIF(Sheet1!E:E,"Out of Stock")</code></li>
-    <li>Total items OK: <code>=COUNTIF(Sheet1!E:E,"OK")</code></li>
-  </ul>
-  <p>Display these as KPI cards at the top of your dashboard for an instant overview every morning.</p>
-
-  <h2>Frequently Asked Questions</h2>
-  <div class="faq-list">
-    <div class="faq-item"><div class="faq-q">Can I use this with Google Sheets? <span class="arrow">▼</span></div><div class="faq-a">Yes — the IF formula works identically in Google Sheets. The conditional formatting setup is slightly different but follows the same logic: Format → Conditional formatting → Custom formula.</div></div>
-    <div class="faq-item"><div class="faq-q">How do I calculate the right reorder point? <span class="arrow">▼</span></div><div class="faq-a">Use our free Reorder Point Calculator: Reorder Point = (Average Daily Sales × Lead Time) + Safety Stock. For example, if you sell 10 units/day and your supplier takes 14 days, your base reorder point is 140 units before adding safety stock.</div></div>
-    <div class="faq-item"><div class="faq-q">Can I add email alerts when stock is low? <span class="arrow">▼</span></div><div class="faq-a">Yes, but it requires VBA or Power Automate. The simplest approach is to check your spreadsheet daily and filter by Status. For automated email alerts, Power Automate can monitor an Excel file and send an email when a cell value changes.</div></div>
-  </div>
-
-  <h2>Related Articles</h2>
-  <div class="related-posts">
-    <a class="related-card" href="/pages/reorder-point-excel.html"><div class="rc-cat">Inventory</div><h4>How to Calculate Reorder Points for Every SKU</h4></a>
-    <a class="related-card" href="/pages/warehouse-kpi-dashboard-excel.html"><div class="rc-cat">Dashboard</div><h4>Build a Warehouse KPI Dashboard from Scratch</h4></a>
-    <a class="related-card" href="/pages/inventory-kpi-excel.html"><div class="rc-cat">KPI</div><h4>The 7 Inventory KPIs Every Manager Should Track</h4></a>
-  </div>
+<div class="breadcrumb"><a href="/">Home</a><span>›</span><a href="/pages/blog">Blog</a><span>›</span> Low Stock Alert Excel</div>
+<p>One of the most common problems in inventory management is finding out you've run out of stock <em>after</em> a customer orders it. A low stock alert in Excel solves this by automatically flagging items that are approaching their reorder point — before you run out.</p>
+<p>In this guide you'll build a low stock alert system using Excel's IF formula and conditional formatting. No VBA, no macros — just formulas that work in Excel 2016 and later.</p>
+<h2>What You'll Need</h2>
+<p>Your spreadsheet needs these columns to make this work:</p>
+<table class="data-table">
+<tr><th>Column</th><th>What It Contains</th><th>Example</th></tr>
+<tr><td>SKU</td><td>Item identifier</td><td>SKU-001</td></tr>
+<tr><td>Item Name</td><td>Product description</td><td>Widget A</td></tr>
+<tr><td>Qty on Hand</td><td>Current stock level</td><td>18</td></tr>
+<tr><td>Reorder Point</td><td>Minimum stock level before ordering</td><td>30</td></tr>
+<tr><td>Status</td><td>Alert column (formula goes here)</td><td>Low Stock</td></tr>
+</table>
+<h2>Step 1 — Build the Status Formula</h2>
+<p>In your Status column (let's say column E, row 2), enter this formula:</p>
+<div class="formula-box">=IF(C2=0,"Out of Stock",IF(C2&lt;D2,"Low Stock","OK"))</div>
+<p>This formula does three things:</p>
+<ul>
+<li>If Qty on Hand is <strong>0</strong> → shows "Out of Stock"</li>
+<li>If Qty on Hand is <strong>less than Reorder Point</strong> → shows "Low Stock"</li>
+<li>If Qty on Hand is <strong>at or above Reorder Point</strong> → shows "OK"</li>
+</ul>
+<p>Drag this formula down to cover all your items.</p>
+<div class="tip-box">💡 <strong>Using Excel Tables?</strong> If your data is formatted as a Table (Insert → Table), the formula will look like this: <code>=IF([@Qty]=0,"Out of Stock",IF([@Qty]&lt;[@ReorderPoint],"Low Stock","OK"))</code> — and it will automatically apply to new rows.</div>
+<h2>Step 2 — Add Conditional Formatting</h2>
+<p>Now make the Status column color-coded so you can see alerts at a glance.</p>
+<div class="step-box"><div class="step-num">1</div><div><h3>Select your Status column</h3><p>Highlight all cells in the Status column that contain your formula (e.g. E2:E100).</p></div></div>
+<div class="step-box"><div class="step-num">2</div><div><h3>Open Conditional Formatting</h3><p>Go to Home → Conditional Formatting → New Rule → "Format cells that contain".</p></div></div>
+<div class="step-box"><div class="step-num">3</div><div><h3>Set up the Out of Stock rule</h3><p>Cell value → equal to → "Out of Stock". Set fill color to red, font color to dark red. Click OK.</p></div></div>
+<div class="step-box"><div class="step-num">4</div><div><h3>Set up the Low Stock rule</h3><p>Add another rule: Cell value → equal to → "Low Stock". Set fill to amber/yellow, font to dark orange. Click OK.</p></div></div>
+<div class="step-box"><div class="step-num">5</div><div><h3>Set up the OK rule</h3><p>Add a third rule: Cell value → equal to → "OK". Set fill to light green, font to dark green.</p></div></div>
+<h2>Step 3 — Add a Days of Stock Column (Optional but Useful)</h2>
+<p>This tells you how many days before you run out, so you can prioritize which items to order first.</p>
+<div class="formula-box">=IF(F2=0,"N/A",ROUND(C2/F2,0))</div>
+<p>Where F2 is your Average Daily Sales column. This gives you a number like "6 days" — meaning you have 6 days of stock left at current sales pace.</p>
+<h2>Step 4 — Filter to See Only Problem Items</h2>
+<p>Once your alerts are set up, use Excel's filter to see only the items that need attention:</p>
+<ul>
+<li>Click any cell in your data → Data → Filter</li>
+<li>Click the dropdown arrow on the Status column</li>
+<li>Uncheck "OK", leave only "Low Stock" and "Out of Stock" checked</li>
+<li>Now you see only the items that need to be ordered</li>
+</ul>
+<div class="dl-cta">
+<h3>📦 Get the Pre-Built Inventory Dashboard Template</h3>
+<p>All formulas and conditional formatting already set up. Download free.</p>
+<a class="btn btn-primary" download href="/templates/01_Inventory_Dashboard.xlsx">⬇ Download Free Template</a>
+</div>
+<h2>Common Mistakes to Avoid</h2>
+<div class="warn-box">⚠️ <strong>Wrong reorder point:</strong> Your reorder point should account for lead time. If your supplier takes 14 days and you sell 10 units/day, your reorder point should be at least 140 units — not an arbitrary number like 20.</div>
+<div class="warn-box">⚠️ <strong>Not updating Qty on Hand:</strong> The alert only works if your quantity column reflects actual current stock. Set a regular process (daily or weekly) to update it from your receiving and sales records.</div>
+<div class="warn-box">⚠️ <strong>Ignoring seasonal demand:</strong> If you sell more in certain months, your reorder point should go up. Review and adjust reorder points quarterly.</div>
+<h2>How to Turn This Into a Dashboard</h2>
+<p>Once your low stock alerts are working, you can build a summary dashboard on a separate sheet:</p>
+<ul>
+<li>Count of low stock items: <code>=COUNTIF(Sheet1!E:E,"Low Stock")</code></li>
+<li>Count of out of stock items: <code>=COUNTIF(Sheet1!E:E,"Out of Stock")</code></li>
+<li>Total items OK: <code>=COUNTIF(Sheet1!E:E,"OK")</code></li>
+</ul>
+<p>Display these as KPI cards at the top of your dashboard for an instant overview every morning.</p>
+<h2>Frequently Asked Questions</h2>
+<div class="faq-list">
+<div class="faq-item"><div class="faq-q">Can I use this with Google Sheets? <span class="arrow">▼</span></div><div class="faq-a">Yes — the IF formula works identically in Google Sheets. The conditional formatting setup is slightly different but follows the same logic: Format → Conditional formatting → Custom formula.</div></div>
+<div class="faq-item"><div class="faq-q">How do I calculate the right reorder point? <span class="arrow">▼</span></div><div class="faq-a">Use our free Reorder Point Calculator: Reorder Point = (Average Daily Sales × Lead Time) + Safety Stock. For example, if you sell 10 units/day and your supplier takes 14 days, your base reorder point is 140 units before adding safety stock.</div></div>
+<div class="faq-item"><div class="faq-q">Can I add email alerts when stock is low? <span class="arrow">▼</span></div><div class="faq-a">Yes, but it requires VBA or Power Automate. The simplest approach is to check your spreadsheet daily and filter by Status. For automated email alerts, Power Automate can monitor an Excel file and send an email when a cell value changes.</div></div>
+</div>
+<h2>Related Articles</h2>
+<div class="related-posts">
+<a class="related-card" href="/pages/reorder-point-excel"><div class="rc-cat">Inventory</div><h4>How to Calculate Reorder Points for Every SKU</h4></a>
+<a class="related-card" href="/pages/warehouse-kpi-dashboard-excel"><div class="rc-cat">Dashboard</div><h4>Build a Warehouse KPI Dashboard from Scratch</h4></a>
+<a class="related-card" href="/pages/inventory-kpi-excel"><div class="rc-cat">KPI</div><h4>The 7 Inventory KPIs Every Manager Should Track</h4></a>
+</div>
 </div>
 <div class="cta-band">
-  <h2>Get Free Excel Templates Every Week</h2>
-  <p>Join operations managers getting templates, formulas, and tutorials straight to their inbox.</p>
-  <form class="email-form" action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c" method="post" target="_blank">
-    <input type="email" name="EMAIL" placeholder="your@email.com" required>
-    <button type="submit">Get Free Templates →</button>
-  </form>
+<h2>Get Free Excel Templates Every Week</h2>
+<p>Join operations managers getting templates, formulas, and tutorials straight to their inbox.</p>
+<form action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c" class="email-form" method="post" target="_blank">
+<input name="EMAIL" placeholder="your@email.com" required="" type="email"/>
+<button type="submit">Get Free Templates →</button>
+</form>
 </div><footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <a class="logo" href="/index.html" style="margin-bottom:.75rem;display:inline-flex"><div class="logo-mark">EO</div> ExcelOps</a>
-        <p>Practical Excel templates and tools for inventory, warehouse, and business operations.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Tools</h4>
-        <a href="/pages/reorder.html">Reorder Calculator</a>
-        <a href="/pages/sql.html">SQL to Excel</a>
-        <a href="/pages/templates.html">Templates</a>
-      </div>
-      <div class="footer-col">
-        <h4>Templates</h4>
-        <a href="/templates/01_Inventory_Dashboard.xlsx" download>Inventory Dashboard</a>
-        <a href="/templates/02_Warehouse_KPI_Dashboard.xlsx" download>Warehouse KPI</a>
-        <a href="/templates/06_Reorder_Report.xlsx" download>Reorder Report</a>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="/pages/about.html">About</a>
-        <a href="/pages/blog.html">Blog</a>
-        <a href="/pages/contact.html">Contact</a>
-        <a href="/pages/privacy.html">Privacy Policy</a>
-      </div>
-    </div>
-    <div class="footer-bottom">© 2025 ExcelOps · GetExcelOps.com</div>
-  </div>
-</footer><script src="/js/main.js"></script>
+<div class="footer-inner">
+<div class="footer-grid">
+<div class="footer-col">
+<a class="logo" href="/" style="margin-bottom:.75rem;display:inline-flex">
+<div class="logo-mark">EO</div> ExcelOps
+        </a>
+<p>Practical Excel templates and tools for inventory, warehouse, and business operations teams.</p>
+</div>
+<div class="footer-col">
+<h4>Tools</h4>
+<a href="/pages/reorder">Reorder Calculator</a>
+<a href="/pages/sql">SQL to Excel Guide</a>
+<a href="/pages/excel-shortcut-finder">Shortcut Finder</a>
+<a href="/pages/templates">Template Library</a>
+<a href="/pages/blog">Formula Tutorials</a>
+</div>
+<div class="footer-col">
+<h4>Templates</h4>
+<a download href="/templates/01_Inventory_Dashboard.xlsx">Inventory Dashboard</a>
+<a download href="/templates/02_Warehouse_KPI_Dashboard.xlsx">Warehouse KPI</a>
+<a download href="/templates/03_Purchase_Order_Tracker.xlsx">Purchase Order</a>
+<a download href="/templates/09_Landed_Cost_Calculator.xlsx">Landed Cost Calculator</a>
+</div>
+<div class="footer-col">
+<h4>Company</h4>
+<a href="/pages/about">About</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/contact">Contact</a>
+<a href="/pages/privacy">Privacy Policy</a>
+<a href="/sitemap.xml">Sitemap</a>
+</div>
+</div>
+<div class="footer-bottom">© 2026 ExcelOps · <a href="https://getexcelops.com" style="color:#475569">GetExcelOps.com</a> · Built for operations teams who get things done.</div>
+</div>
+</footer><script defer src="/js/main.js"></script>
 </body>
 </html>

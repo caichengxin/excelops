@@ -1,14 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to Calculate Reorder Points for Every SKU in Excel | ExcelOps</title>
-  <meta name="description" content="Complete guide to calculating reorder points in Excel for every SKU. Includes the formula, safety stock calculation, and how to automate alerts.">
-  <link rel="canonical" href="https://getexcelops.com/pages/reorder-point-excel">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <style>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How to Calculate Reorder Points for Every SKU in Excel | ExcelOps</title>
+<meta content="Complete guide to calculating reorder points in Excel for every SKU. Includes the formula, safety stock calculation, and how to automate alerts." name="description"/>
+<link href="https://getexcelops.com/pages/reorder-point-excel" rel="canonical"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&amp;family=Sora:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/css/style.css" rel="stylesheet"/>
+<style>
     .article-hero{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:3rem 2rem;color:#fff;text-align:center}
     .article-hero .cat{font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;color:var(--teal2);font-weight:600;margin-bottom:.75rem}
     .article-hero h1{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;margin-bottom:.75rem;max-width:700px;margin-left:auto;margin-right:auto}
@@ -51,61 +52,61 @@
     .breadcrumb a:hover{color:var(--teal)}
     .breadcrumb span{margin:0 6px}
 </style>
-</head>
+<meta content="How to Calculate Reorder Points for Every SKU in Excel | ExcelOps" property="og:title"/><meta content="Complete guide to calculating reorder points in Excel for every SKU. Includes the formula, safety stock calculation, and how to automate alerts." property="og:description"/><meta content="article" property="og:type"/><meta content="https://getexcelops.com/pages/reorder-point-excel" property="og:url"/><meta content="https://getexcelops.com/assets/og-image.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="How to Calculate Reorder Points for Every SKU in Excel | ExcelOps" name="twitter:title"/><meta content="Complete guide to calculating reorder points in Excel for every SKU. Includes the formula, safety stock calculation, and how to automate alerts." name="twitter:description"/><meta content="https://getexcelops.com/assets/og-image.png" name="twitter:image"/><script data-excelops="true" type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Calculate Reorder Points for Every SKU in Excel","description":"Complete guide to calculating reorder points in Excel for every SKU. Includes the formula, safety stock calculation, and how to automate alerts.","mainEntityOfPage":"https://getexcelops.com/pages/reorder-point-excel","author":{"@type":"Organization","name":"ExcelOps"},"publisher":{"@type":"Organization","name":"ExcelOps","logo":{"@type":"ImageObject","url":"https://getexcelops.com/assets/og-image.png"}}}</script></head>
 <body>
 <nav>
-  <a class="logo" href="/index.html"><div class="logo-mark">EO</div>ExcelOps</a>
-  <div class="nav-links">
-    <a href="/pages/templates.html">Templates</a>
-    <a href="/pages/sql.html">SQL Reports</a>
-    <a href="/pages/blog.html">Blog</a>
-    <a href="/pages/about.html">About</a>
-    <a href="/pages/contact.html">Contact</a>
-  </div>
-  <a class="nav-cta" href="/pages/templates.html">Free Templates ↗</a>
-  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<a class="logo" href="/">
+<div class="logo-mark">EO</div>
+    ExcelOps
+  </a>
+<div class="nav-links">
+<a href="/pages/templates">Templates</a>
+<a href="/pages/sql">SQL Reports</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/about">About</a>
+<a href="/pages/contact">Contact</a>
+</div>
+<a class="nav-cta" href="/pages/templates">Free Templates ↗</a>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="/pages/templates.html">Templates</a>
-  <a href="/pages/sql.html">SQL Reports</a>
-  <a href="/pages/blog.html">Blog</a>
-  <a href="/pages/about.html">About</a>
-  <a href="/pages/contact.html">Contact</a>
+<a href="/pages/templates">Templates</a>
+<a href="/pages/sql">SQL Reports</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/about">About</a>
+<a href="/pages/contact">Contact</a>
 </div>
 <div class="article-hero">
-  <div class="cat">Inventory</div>
-  <h1>How to Calculate Reorder Points for Every SKU in Excel</h1>
-  <div class="meta">⏱ 11 min read · Inventory · Reorder Point · Formula</div>
+<div class="cat">Inventory</div>
+<h1>How to Calculate Reorder Points for Every SKU in Excel</h1>
+<div class="meta">⏱ 11 min read · Inventory · Reorder Point · Formula</div>
 </div>
 <div class="article-body">
-  <div class="breadcrumb"><a href="/index.html">Home</a><span>›</span><a href="/pages/blog.html">Blog</a><span>›</span> How to Calculate Reorder Points for Every SKU in Excel</div>
-  <p>Reorder point calculation is one of the most important things you can automate in Excel. Get it right and you never run out of stock. Get it wrong — or don't do it at all — and you're always scrambling to place rush orders at premium prices.</p>
+<div class="breadcrumb"><a href="/">Home</a><span>›</span><a href="/pages/blog">Blog</a><span>›</span> How to Calculate Reorder Points for Every SKU in Excel</div>
+<p>Reorder point calculation is one of the most important things you can automate in Excel. Get it right and you never run out of stock. Get it wrong — or don't do it at all — and you're always scrambling to place rush orders at premium prices.</p>
 <h2>The Reorder Point Formula</h2>
 <div class="formula-box">Reorder Point = (Average Daily Sales × Lead Time) + Safety Stock</div>
 <p>In Excel, with your data in columns:</p>
 <div class="formula-box">=( AvgDailySales * LeadTimeDays ) + SafetyStock
 =(C2 * D2) + E2</div>
-
 <h2>Understanding Each Component</h2>
 <h3>Average Daily Sales</h3>
 <p>The average number of units sold per day, typically calculated over the last 30-90 days. Calculate it from your sales data:</p>
-<div class="formula-box">=SUMIF(SalesDate,">="&(TODAY()-90),SalesQty) / 90</div>
-
+<div class="formula-box">=SUMIF(SalesDate,"&gt;="&amp;(TODAY()-90),SalesQty) / 90</div>
 <h3>Lead Time</h3>
 <p>The number of days between placing an order and receiving it. Include supplier processing time AND shipping time. If your supplier says "5 business days," that's 7 calendar days. Add a buffer of 1-2 days for reliability.</p>
-
 <h3>Safety Stock</h3>
 <p>A buffer to protect against demand spikes and supplier delays. The simplest formula:</p>
 <div class="formula-box">Safety Stock = (Max Daily Sales - Avg Daily Sales) × Lead Time
 =(F2 - C2) * D2</div>
-
 <h2>Building a Reorder Report for All SKUs</h2>
 <div class="step-box"><div class="step-num">1</div><div><h3>Set up your Item Master sheet</h3><p>One row per SKU with columns: SKU, Item Name, Avg Daily Sales, Lead Time, Max Daily Sales, Safety Stock, Reorder Point.</p></div></div>
 <div class="step-box"><div class="step-num">2</div><div><h3>Calculate Reorder Point for each SKU</h3><p>In the Reorder Point column: =(C2*D2)+E2. Drag down for all SKUs.</p></div></div>
 <div class="step-box"><div class="step-num">3</div><div><h3>Add a Status column</h3><p>=IF(QtyOnHand=0,"Out of Stock",IF(QtyOnHand&lt;ReorderPoint,"Reorder Now","OK"))</p></div></div>
 <div class="step-box"><div class="step-num">4</div><div><h3>Add a Priority column</h3><p>=IF(QtyOnHand=0,"🔴 URGENT",IF(QtyOnHand/ReorderPoint&lt;0.5,"🟡 HIGH","🟢 NORMAL"))</p></div></div>
 <div class="step-box"><div class="step-num">5</div><div><h3>Filter to see what needs ordering</h3><p>Filter the Status column to show only "Reorder Now" and "Out of Stock". This is your daily purchase list.</p></div></div>
-
 <h2>Adjusting for Seasonal Demand</h2>
 <p>If your sales vary by season, use a seasonal average rather than a 90-day average. For a product that sells 3x more in December:</p>
 <ul>
@@ -113,29 +114,52 @@
 <li>Use the upcoming month's average, not the trailing average</li>
 <li>Review and update reorder points monthly during peak season</li>
 </ul>
-
-<div class="tip-box">💡 Use our <a href="/pages/reorder.html" style="color:var(--teal)">free Reorder Point Calculator</a> to quickly calculate the right number for any SKU.</div>
-
+<div class="tip-box">💡 Use our <a href="/pages/reorder" style="color:var(--teal)">free Reorder Point Calculator</a> to quickly calculate the right number for any SKU.</div>
 <h2>FAQ</h2>
 <div class="faq-list">
 <div class="faq-item"><div class="faq-q">Should I set the same reorder point for all sizes of the same product? <span class="arrow">▼</span></div><div class="faq-a">No — each SKU (size/color/variant) needs its own reorder point based on its own sales velocity and lead time. A size Small might sell 3x faster than size XL and need a much higher reorder point.</div></div>
 <div class="faq-item"><div class="faq-q">How often should I update reorder points? <span class="arrow">▼</span></div><div class="faq-a">Review quarterly at minimum. Update immediately if a supplier changes their lead time, or if you notice a significant shift in sales velocity. High-volume items may need monthly review.</div></div>
 </div>
-  <div class="dl-cta"><h3>🔁 Get the Pre-Built Reorder Report Template</h3><p>Free download — no sign-up required.</p><a class="btn btn-primary" href="/templates/06_Reorder_Report.xlsx" download>⬇ Download Free Template</a></div>
-  <h2>Related Articles</h2>
-  <div class="related-posts"><a class="related-card" href="/pages/low-stock-alert-excel.html"><div class="rc-cat">Inventory</div><h4>How to Build a Low Stock Alert in Excel</h4></a><a class="related-card" href="/pages/inventory-kpi-excel.html"><div class="rc-cat">KPI</div><h4>The 7 Inventory KPIs Every Manager Should Track</h4></a><a class="related-card" href="/pages/purchase-order-tracker-excel.html"><div class="rc-cat">Purchasing</div><h4>Track Purchase Orders in Excel Like a Pro</h4></a></div>
+<div class="dl-cta"><h3>🔁 Get the Pre-Built Reorder Report Template</h3><p>Free download — no sign-up required.</p><a class="btn btn-primary" download href="/templates/06_Reorder_Report.xlsx">⬇ Download Free Template</a></div>
+<h2>Related Articles</h2>
+<div class="related-posts"><a class="related-card" href="/pages/low-stock-alert-excel"><div class="rc-cat">Inventory</div><h4>How to Build a Low Stock Alert in Excel</h4></a><a class="related-card" href="/pages/inventory-kpi-excel"><div class="rc-cat">KPI</div><h4>The 7 Inventory KPIs Every Manager Should Track</h4></a><a class="related-card" href="/pages/purchase-order-tracker-excel"><div class="rc-cat">Purchasing</div><h4>Track Purchase Orders in Excel Like a Pro</h4></a></div>
 </div>
-<div class="cta-band"><h2>Get Free Excel Templates Every Week</h2><p>Join operations managers getting templates, formulas, and tutorials straight to their inbox.</p><form class="email-form" action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c" method="post" target="_blank"><input type="email" name="EMAIL" placeholder="your@email.com" required><button type="submit">Get Free Templates →</button></form></div>
+<div class="cta-band"><h2>Get Free Excel Templates Every Week</h2><p>Join operations managers getting templates, formulas, and tutorials straight to their inbox.</p><form action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c" class="email-form" method="post" target="_blank"><input name="EMAIL" placeholder="your@email.com" required="" type="email"/><button type="submit">Get Free Templates →</button></form></div>
 <footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-col"><a class="logo" href="/index.html" style="margin-bottom:.75rem;display:inline-flex"><div class="logo-mark">EO</div> ExcelOps</a><p>Practical Excel templates and tools for operations teams.</p></div>
-      <div class="footer-col"><h4>Tools</h4><a href="/pages/reorder.html">Reorder Calculator</a><a href="/pages/sql.html">SQL to Excel</a><a href="/pages/templates.html">Templates</a></div>
-      <div class="footer-col"><h4>Templates</h4><a href="/templates/01_Inventory_Dashboard.xlsx" download>Inventory Dashboard</a><a href="/templates/02_Warehouse_KPI_Dashboard.xlsx" download>Warehouse KPI</a><a href="/templates/06_Reorder_Report.xlsx" download>Reorder Report</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="/pages/about.html">About</a><a href="/pages/blog.html">Blog</a><a href="/pages/contact.html">Contact</a><a href="/pages/privacy.html">Privacy Policy</a></div>
-    </div>
-    <div class="footer-bottom">© 2025 ExcelOps · GetExcelOps.com</div>
-  </div>
+<div class="footer-inner">
+<div class="footer-grid">
+<div class="footer-col">
+<a class="logo" href="/" style="margin-bottom:.75rem;display:inline-flex">
+<div class="logo-mark">EO</div> ExcelOps
+        </a>
+<p>Practical Excel templates and tools for inventory, warehouse, and business operations teams.</p>
+</div>
+<div class="footer-col">
+<h4>Tools</h4>
+<a href="/pages/reorder">Reorder Calculator</a>
+<a href="/pages/sql">SQL to Excel Guide</a>
+<a href="/pages/excel-shortcut-finder">Shortcut Finder</a>
+<a href="/pages/templates">Template Library</a>
+<a href="/pages/blog">Formula Tutorials</a>
+</div>
+<div class="footer-col">
+<h4>Templates</h4>
+<a download href="/templates/01_Inventory_Dashboard.xlsx">Inventory Dashboard</a>
+<a download href="/templates/02_Warehouse_KPI_Dashboard.xlsx">Warehouse KPI</a>
+<a download href="/templates/03_Purchase_Order_Tracker.xlsx">Purchase Order</a>
+<a download href="/templates/09_Landed_Cost_Calculator.xlsx">Landed Cost Calculator</a>
+</div>
+<div class="footer-col">
+<h4>Company</h4>
+<a href="/pages/about">About</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/contact">Contact</a>
+<a href="/pages/privacy">Privacy Policy</a>
+<a href="/sitemap.xml">Sitemap</a>
+</div>
+</div>
+<div class="footer-bottom">© 2026 ExcelOps · <a href="https://getexcelops.com" style="color:#475569">GetExcelOps.com</a> · Built for operations teams who get things done.</div>
+</div>
 </footer>
-<script src="/js/main.js"></script>
+<script defer src="/js/main.js"></script>
 </body></html>

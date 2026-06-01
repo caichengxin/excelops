@@ -1,14 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to Calculate Landed Cost for US Imports in Excel | ExcelOps</title>
-  <meta name="description" content="Step-by-step guide to calculating landed cost for US imports in Excel — customs duty, Section 301 tariffs, MPF, HMF, freight, and broker fees. Free calculator template included.">
-  <link rel="canonical" href="https://getexcelops.com/pages/landed-cost-calculator-excel">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <style>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Calculate Landed Cost for US Imports in Excel | ExcelOps</title>
+<meta content="Learn how to calculate landed cost in Excel, including purchase price, freight, duties, brokerage, and allocation by item or shipment." name="description"/>
+<link href="https://getexcelops.com/pages/landed-cost-calculator-excel" rel="canonical"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&amp;family=Sora:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/css/style.css" rel="stylesheet"/>
+<style>
 .article-hero{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:3rem 2rem;color:#fff;text-align:center}
 .article-hero .cat{font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;color:var(--teal2);font-weight:600;margin-bottom:.75rem}
 .article-hero h1{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;margin-bottom:.75rem;max-width:720px;margin-left:auto;margin-right:auto}
@@ -51,127 +52,108 @@
 .breadcrumb a:hover{color:var(--teal)}
 .breadcrumb span{margin:0 6px}
   </style>
-</head>
+<meta content="Calculate Landed Cost for US Imports in Excel | ExcelOps" property="og:title"/><meta content="Learn how to calculate landed cost in Excel, including purchase price, freight, duties, brokerage, and allocation by item or shipment." property="og:description"/><meta content="article" property="og:type"/><meta content="https://getexcelops.com/pages/landed-cost-calculator-excel" property="og:url"/><meta content="https://getexcelops.com/assets/og-image.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Calculate Landed Cost for US Imports in Excel | ExcelOps" name="twitter:title"/><meta content="Learn how to calculate landed cost in Excel, including purchase price, freight, duties, brokerage, and allocation by item or shipment." name="twitter:description"/><meta content="https://getexcelops.com/assets/og-image.png" name="twitter:image"/><script data-excelops="true" type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Calculate Landed Cost for US Imports in Excel","description":"Learn how to calculate landed cost in Excel, including purchase price, freight, duties, brokerage, and allocation by item or shipment.","mainEntityOfPage":"https://getexcelops.com/pages/landed-cost-calculator-excel","author":{"@type":"Organization","name":"ExcelOps"},"publisher":{"@type":"Organization","name":"ExcelOps","logo":{"@type":"ImageObject","url":"https://getexcelops.com/assets/og-image.png"}}}</script></head>
 <body>
 <nav>
-  <a class="logo" href="/index.html"><div class="logo-mark">EO</div>ExcelOps</a>
-  <div class="nav-links">
-    <a href="/pages/templates.html">Templates</a>
-    <a href="/pages/sql.html">SQL Reports</a>
-    <a href="/pages/blog.html">Blog</a>
-    <a href="/pages/about.html">About</a>
-    <a href="/pages/contact.html">Contact</a>
-  </div>
-  <a class="nav-cta" href="/pages/templates.html">Free Templates ↗</a>
-  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<a class="logo" href="/">
+<div class="logo-mark">EO</div>
+    ExcelOps
+  </a>
+<div class="nav-links">
+<a href="/pages/templates">Templates</a>
+<a href="/pages/sql">SQL Reports</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/about">About</a>
+<a href="/pages/contact">Contact</a>
+</div>
+<a class="nav-cta" href="/pages/templates">Free Templates ↗</a>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="/pages/templates.html">Templates</a>
-  <a href="/pages/sql.html">SQL Reports</a>
-  <a href="/pages/blog.html">Blog</a>
-  <a href="/pages/about.html">About</a>
-  <a href="/pages/contact.html">Contact</a>
+<a href="/pages/templates">Templates</a>
+<a href="/pages/sql">SQL Reports</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/about">About</a>
+<a href="/pages/contact">Contact</a>
 </div>
-
 <div class="article-hero">
-  <div class="cat">Import &amp; Trade</div>
-  <h1>How to Calculate Landed Cost for US Imports in Excel</h1>
-  <div class="meta">⏱ 10 min read · Import &amp; Trade</div>
+<div class="cat">Import &amp; Trade</div>
+<h1>How to Calculate Landed Cost for US Imports in Excel</h1>
+<div class="meta">⏱ 10 min read · Import &amp; Trade</div>
 </div>
-
 <div class="article-body">
-  <div class="breadcrumb">
-    <a href="/index.html">Home</a><span>›</span>
-    <a href="/pages/blog.html">Blog</a><span>›</span>
+<div class="breadcrumb">
+<a href="/">Home</a><span>›</span>
+<a href="/pages/blog">Blog</a><span>›</span>
     How to Calculate Landed Cost for US Imports in Excel
   </div>
-
-  <p>Most importers quote their products based on the supplier's unit price and a rough freight estimate. Then the shipment arrives and the real bill — customs duties, Section 301 tariffs, MPF, HMF, ISF filing, broker fees, and drayage — is 30–50% higher than expected. That gap is why landed cost calculations matter.</p>
-
-  <p>This guide walks through every cost component you need to include, the exact Excel formulas to calculate them, and a free template you can download and use today.</p>
-
-  <h2>What Is Landed Cost?</h2>
-  <p>Landed cost is the total cost to get an imported product to your US warehouse, fully cleared through customs. It includes every cost from the supplier's door to yours — not just the product price and freight.</p>
-
-  <table class="data-table">
-    <tr><th>Cost Category</th><th>What It Includes</th><th>Typical Range</th></tr>
-    <tr><td>Supplier Cost</td><td>Unit price × quantity</td><td>Varies</td></tr>
-    <tr><td>Freight</td><td>Ocean or air freight charges</td><td>$500 – $5,000+ per container</td></tr>
-    <tr><td>Origin Charges</td><td>Export trucking, port fees, origin docs</td><td>$150 – $400</td></tr>
-    <tr><td>Insurance</td><td>Cargo insurance (~0.3% of value)</td><td>$30 – $500</td></tr>
-    <tr><td>US Customs Duty</td><td>Based on HTS code duty rate × CIF value</td><td>0% – 25%+</td></tr>
-    <tr><td>Section 301 Tariff</td><td>Additional China tariff (if applicable)</td><td>0%, 7.5%, 25%</td></tr>
-    <tr><td>MPF</td><td>Merchandise Processing Fee (0.3464%)</td><td>$31.67 – $614.35</td></tr>
-    <tr><td>HMF</td><td>Harbor Maintenance Fee (0.125%, ocean only)</td><td>Varies</td></tr>
-    <tr><td>ISF Filing</td><td>Importer Security Filing</td><td>$35 – $50</td></tr>
-    <tr><td>Customs Broker</td><td>Broker fee for customs clearance</td><td>$100 – $300</td></tr>
-    <tr><td>Drayage</td><td>Port to your warehouse delivery</td><td>$200 – $800</td></tr>
-  </table>
-
-  <h2>Step 1 — Find Your HTS Code and Duty Rate</h2>
-  <p>Every product imported into the US has a 10-digit HTS (Harmonized Tariff Schedule) code. The code determines your base customs duty rate. Look yours up at <strong>hts.usitc.gov</strong> — search by product description.</p>
-
-  <div class="tip-box">💡 <strong>HTS codes matter more than you think.</strong> The difference between two similar HTS codes can mean 0% vs 12% duty. If you are importing frequently, ask your customs broker to confirm the correct classification for your product.</div>
-
-  <h2>Step 2 — Check Your Section 301 Tariff Rate</h2>
-  <p>If you are importing from China, you may owe an additional Section 301 tariff on top of the base duty. Current rates are 0%, 7.5%, or 25% depending on the product category. Check the current list at <strong>ustr.gov</strong> — rates and exclusions change, so verify before you quote.</p>
-
-  <div class="warn-box">⚠️ <strong>Section 301 rates are applied to the CIF value</strong> (Cost + Insurance + Freight), same as base customs duty. Not to the FOB price alone. This is a common calculation mistake.</div>
-
-  <h2>Step 3 — Calculate the CIF Value</h2>
-  <p>CIF (Cost, Insurance, Freight) is the basis US Customs uses to calculate duties. If your incoterm is FOB, you need to add freight and insurance to get CIF.</p>
-
-  <div class="formula-box">=  (Unit Price × Quantity)  +  Freight  +  Insurance
+<p>Most importers quote their products based on the supplier's unit price and a rough freight estimate. Then the shipment arrives and the real bill — customs duties, Section 301 tariffs, MPF, HMF, ISF filing, broker fees, and drayage — is 30–50% higher than expected. That gap is why landed cost calculations matter.</p>
+<p>This guide walks through every cost component you need to include, the exact Excel formulas to calculate them, and a free template you can download and use today.</p>
+<h2>What Is Landed Cost?</h2>
+<p>Landed cost is the total cost to get an imported product to your US warehouse, fully cleared through customs. It includes every cost from the supplier's door to yours — not just the product price and freight.</p>
+<table class="data-table">
+<tr><th>Cost Category</th><th>What It Includes</th><th>Typical Range</th></tr>
+<tr><td>Supplier Cost</td><td>Unit price × quantity</td><td>Varies</td></tr>
+<tr><td>Freight</td><td>Ocean or air freight charges</td><td>$500 – $5,000+ per container</td></tr>
+<tr><td>Origin Charges</td><td>Export trucking, port fees, origin docs</td><td>$150 – $400</td></tr>
+<tr><td>Insurance</td><td>Cargo insurance (~0.3% of value)</td><td>$30 – $500</td></tr>
+<tr><td>US Customs Duty</td><td>Based on HTS code duty rate × CIF value</td><td>0% – 25%+</td></tr>
+<tr><td>Section 301 Tariff</td><td>Additional China tariff (if applicable)</td><td>0%, 7.5%, 25%</td></tr>
+<tr><td>MPF</td><td>Merchandise Processing Fee (0.3464%)</td><td>$31.67 – $614.35</td></tr>
+<tr><td>HMF</td><td>Harbor Maintenance Fee (0.125%, ocean only)</td><td>Varies</td></tr>
+<tr><td>ISF Filing</td><td>Importer Security Filing</td><td>$35 – $50</td></tr>
+<tr><td>Customs Broker</td><td>Broker fee for customs clearance</td><td>$100 – $300</td></tr>
+<tr><td>Drayage</td><td>Port to your warehouse delivery</td><td>$200 – $800</td></tr>
+</table>
+<h2>Step 1 — Find Your HTS Code and Duty Rate</h2>
+<p>Every product imported into the US has a 10-digit HTS (Harmonized Tariff Schedule) code. The code determines your base customs duty rate. Look yours up at <strong>hts.usitc.gov</strong> — search by product description.</p>
+<div class="tip-box">💡 <strong>HTS codes matter more than you think.</strong> The difference between two similar HTS codes can mean 0% vs 12% duty. If you are importing frequently, ask your customs broker to confirm the correct classification for your product.</div>
+<h2>Step 2 — Check Your Section 301 Tariff Rate</h2>
+<p>If you are importing from China, you may owe an additional Section 301 tariff on top of the base duty. Current rates are 0%, 7.5%, or 25% depending on the product category. Check the current list at <strong>ustr.gov</strong> — rates and exclusions change, so verify before you quote.</p>
+<div class="warn-box">⚠️ <strong>Section 301 rates are applied to the CIF value</strong> (Cost + Insurance + Freight), same as base customs duty. Not to the FOB price alone. This is a common calculation mistake.</div>
+<h2>Step 3 — Calculate the CIF Value</h2>
+<p>CIF (Cost, Insurance, Freight) is the basis US Customs uses to calculate duties. If your incoterm is FOB, you need to add freight and insurance to get CIF.</p>
+<div class="formula-box">=  (Unit Price × Quantity)  +  Freight  +  Insurance
 
 Example:
 Unit Price: $12.50 × 500 units = $6,250
 Ocean Freight: $850
 Insurance: $45
 CIF Value = $6,250 + $850 + $45 = $7,145</div>
-
-  <h2>Step 4 — Calculate US Customs Duty</h2>
-
-  <div class="formula-box">Customs Duty = CIF Value × Duty Rate
+<h2>Step 4 — Calculate US Customs Duty</h2>
+<div class="formula-box">Customs Duty = CIF Value × Duty Rate
 
 Example: $7,145 × 7.5% = $536</div>
-
-  <h2>Step 5 — Calculate Section 301 Tariff (China imports)</h2>
-
-  <div class="formula-box">Section 301 = CIF Value × Section 301 Rate
+<h2>Step 5 — Calculate Section 301 Tariff (China imports)</h2>
+<div class="formula-box">Section 301 = CIF Value × Section 301 Rate
 
 Example: $7,145 × 25% = $1,786</div>
-
-  <h2>Step 6 — Calculate MPF (Merchandise Processing Fee)</h2>
-  <p>MPF is charged by US Customs on most commercial imports. The rate is 0.3464% of CIF value, with a minimum of $31.67 and a maximum of $614.35 per entry.</p>
-
-  <div class="formula-box">Excel formula:
+<h2>Step 6 — Calculate MPF (Merchandise Processing Fee)</h2>
+<p>MPF is charged by US Customs on most commercial imports. The rate is 0.3464% of CIF value, with a minimum of $31.67 and a maximum of $614.35 per entry.</p>
+<div class="formula-box">Excel formula:
 =MAX(MIN(CIF_Value * 0.003464, 614.35), 31.67)
 
 Example: MAX(MIN($7,145 × 0.3464%, $614.35), $31.67)
 = MAX(MIN($24.75, $614.35), $31.67)
 = $31.67  ← minimum applies here</div>
-
-  <div class="tip-box">💡 <strong>MPF hits the minimum on small shipments.</strong> If your CIF value is under ~$9,145, you will pay the minimum $31.67 regardless. This matters when comparing air vs ocean for small orders.</div>
-
-  <h2>Step 7 — Calculate HMF (Harbor Maintenance Fee)</h2>
-  <p>HMF applies to ocean freight shipments only. The rate is 0.125% of CIF value — no minimum or maximum.</p>
-
-  <div class="formula-box">HMF = CIF Value × 0.00125
+<div class="tip-box">💡 <strong>MPF hits the minimum on small shipments.</strong> If your CIF value is under ~$9,145, you will pay the minimum $31.67 regardless. This matters when comparing air vs ocean for small orders.</div>
+<h2>Step 7 — Calculate HMF (Harbor Maintenance Fee)</h2>
+<p>HMF applies to ocean freight shipments only. The rate is 0.125% of CIF value — no minimum or maximum.</p>
+<div class="formula-box">HMF = CIF Value × 0.00125
 
 Example: $7,145 × 0.125% = $8.93</div>
-
-  <h2>Step 8 — Add Fixed Fees</h2>
-  <p>These are negotiated or fixed costs you collect from your broker and freight forwarder:</p>
-  <ul>
-    <li><strong>ISF Filing Fee:</strong> ~$35–$50 (required for ocean shipments, filed 24h before vessel departure)</li>
-    <li><strong>Customs Broker Fee:</strong> typically $150–$300 per entry</li>
-    <li><strong>Drayage / Inland Delivery:</strong> port to your warehouse, get a quote from your trucker</li>
-  </ul>
-
-  <h2>Step 9 — Build the Summary in Excel</h2>
-  <p>Once you have all the components, sum them for total landed cost and divide by quantity for per-unit cost:</p>
-
-  <div class="formula-box">Total Landed Cost =
+<h2>Step 8 — Add Fixed Fees</h2>
+<p>These are negotiated or fixed costs you collect from your broker and freight forwarder:</p>
+<ul>
+<li><strong>ISF Filing Fee:</strong> ~$35–$50 (required for ocean shipments, filed 24h before vessel departure)</li>
+<li><strong>Customs Broker Fee:</strong> typically $150–$300 per entry</li>
+<li><strong>Drayage / Inland Delivery:</strong> port to your warehouse, get a quote from your trucker</li>
+</ul>
+<h2>Step 9 — Build the Summary in Excel</h2>
+<p>Once you have all the components, sum them for total landed cost and divide by quantity for per-unit cost:</p>
+<div class="formula-box">Total Landed Cost =
   Supplier Cost
 + Freight + Origin Charges + Insurance
 + Customs Duty + Section 301 Tariff
@@ -181,136 +163,145 @@ Example: $7,145 × 0.125% = $8.93</div>
 Landed Cost Per Unit = Total Landed Cost / Order Quantity
 
 Suggested Selling Price = Landed Cost Per Unit / (1 - Target Margin %)</div>
-
-  <div class="step-box">
-    <div class="step-num">✓</div>
-    <div>
-      <h3>Full Example — 500 units imported from China</h3>
-      <p>Unit price $12.50 · HTS duty 7.5% · Section 301 25% · Ocean freight $850 · Fixed fees $530</p>
-    </div>
-  </div>
-
-  <table class="data-table">
-    <tr><th>Cost Item</th><th>Amount</th></tr>
-    <tr><td>Supplier Cost (500 × $12.50)</td><td>$6,250.00</td></tr>
-    <tr><td>Ocean Freight</td><td>$850.00</td></tr>
-    <tr><td>Origin Charges</td><td>$220.00</td></tr>
-    <tr><td>Insurance</td><td>$45.00</td></tr>
-    <tr><td>CIF Value</td><td>$7,145.00</td></tr>
-    <tr><td>Customs Duty (7.5%)</td><td>$535.88</td></tr>
-    <tr><td>Section 301 Tariff (25%)</td><td>$1,786.25</td></tr>
-    <tr><td>MPF (min $31.67)</td><td>$31.67</td></tr>
-    <tr><td>HMF (0.125%)</td><td>$8.93</td></tr>
-    <tr><td>ISF + Broker + Drayage</td><td>$530.00</td></tr>
-    <tr><td><strong>Total Landed Cost</strong></td><td><strong>$10,257.73</strong></td></tr>
-    <tr><td><strong>Landed Cost Per Unit</strong></td><td><strong>$20.52</strong></td></tr>
-    <tr><td>Suggested Price (40% margin)</td><td>$34.19</td></tr>
-  </table>
-
-  <p>The supplier quoted $12.50 per unit. The actual landed cost is <strong>$20.52</strong> — 64% higher. Without this calculation, any price below ~$21 would lose money.</p>
-
-  <h2>How to Build This in Excel</h2>
-
-  <div class="step-box">
-    <div class="step-num">1</div>
-    <div>
-      <h3>Set up an inputs section</h3>
-      <p>List every input in its own cell — unit price, quantity, freight, duty rate, etc. Color these blue so anyone using the file knows which cells to edit.</p>
-    </div>
-  </div>
-
-  <div class="step-box">
-    <div class="step-num">2</div>
-    <div>
-      <h3>Calculate CIF value</h3>
-      <p>Reference your input cells: <code>=(UnitPrice*Qty)+Freight+Insurance</code>. All subsequent duty calculations reference this cell.</p>
-    </div>
-  </div>
-
-  <div class="step-box">
-    <div class="step-num">3</div>
-    <div>
-      <h3>Use MAX/MIN for MPF</h3>
-      <p>MPF has a floor and ceiling: <code>=MAX(MIN(CIF*0.003464, 614.35), 31.67)</code>. Hardcoding the rate and bounds prevents errors when values change.</p>
-    </div>
-  </div>
-
-  <div class="step-box">
-    <div class="step-num">4</div>
-    <div>
-      <h3>Add a comparison sheet</h3>
-      <p>Duplicate your formula structure across 3 columns — one per supplier. Use conditional formatting to highlight the lowest per-unit landed cost automatically.</p>
-    </div>
-  </div>
-
-  <div class="tip-box">💡 <strong>Build your template once, use it forever.</strong> Once your landed cost model is set up correctly in Excel, updating it for a new shipment takes 2 minutes — just change the blue input cells.</div>
-
-  <h2>FAQ</h2>
-  <div class="faq-list">
-    <div class="faq-item">
-      <div class="faq-q">What is the difference between FOB and CIF for duty calculation? <span class="arrow">▼</span></div>
-      <div class="faq-a">FOB (Free On Board) is the price of goods at the port of export — it does not include freight or insurance. CIF (Cost, Insurance, Freight) adds those to get the value at the US port of entry. US Customs calculates duties on the CIF value. If your supplier quotes FOB, you must add freight and insurance before applying the duty rate. Using FOB as the duty base underestimates your duty bill.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Do I pay Section 301 tariffs on every shipment from China? <span class="arrow">▼</span></div>
-      <div class="faq-a">Not necessarily. Section 301 tariffs apply to specific product categories (Lists 1–4B), and many products have received exclusions. Check the USTR exclusion list at ustr.gov before assuming you owe 25%. Some categories are 7.5% rather than 25%. Your customs broker can confirm the correct rate for your HTS code.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Does MPF apply to every shipment? <span class="arrow">▼</span></div>
-      <div class="faq-a">MPF applies to most commercial imports, but there are exceptions. Goods qualifying under USMCA (from Canada or Mexico) are generally MPF-exempt. Some other free trade agreement goods are also exempt. Check with your broker if you think your goods might qualify for an exemption.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">How do I find the right HTS code for my product? <span class="arrow">▼</span></div>
-      <div class="faq-a">Go to hts.usitc.gov and search by product description. Start broad (e.g., "cotton shirt") and narrow down using the chapter notes. If you are unsure, ask your customs broker — misclassification can result in penalties or unexpected duty bills. For high-volume imports, consider requesting a Binding Ruling from US Customs (CBP) to get official confirmation of your HTS code.</div>
-    </div>
-  </div>
-
-  <div class="dl-cta">
-    <h3>Free Download: US Import Landed Cost Calculator (.xlsx)</h3>
-    <p>The exact template used in this guide — enter your shipment details and get total landed cost, per-unit cost, and suggested selling price instantly.</p>
-    <p style="color:#94a3b8;font-size:.8rem;margin-bottom:1.25rem">Includes: Calculator · 3-Supplier Comparison · HTS Duty Rate Reference · No sign-up required</p>
-    <a class="btn btn-primary" href="/templates/09_Landed_Cost_Calculator.xlsx" download>⬇ Download Landed Cost Calculator — Free</a>
-  </div>
-
-  <h2>Related Articles</h2>
-  <div class="related-posts">
-    <a class="related-card" href="/pages/vendor-scorecard-excel.html">
-      <div class="rc-cat">Vendor Management</div>
-      <h4>How to Build a Vendor Scorecard in Excel</h4>
-    </a>
-    <a class="related-card" href="/pages/purchase-order-tracker-excel.html">
-      <div class="rc-cat">Operations</div>
-      <h4>How to Build a Purchase Order Tracker in Excel</h4>
-    </a>
-    <a class="related-card" href="/pages/inventory-value-cogs-excel.html">
-      <div class="rc-cat">Inventory</div>
-      <h4>How to Calculate Inventory Value and COGS in Excel</h4>
-    </a>
-  </div>
+<div class="step-box">
+<div class="step-num">✓</div>
+<div>
+<h3>Full Example — 500 units imported from China</h3>
+<p>Unit price $12.50 · HTS duty 7.5% · Section 301 25% · Ocean freight $850 · Fixed fees $530</p>
 </div>
-
+</div>
+<table class="data-table">
+<tr><th>Cost Item</th><th>Amount</th></tr>
+<tr><td>Supplier Cost (500 × $12.50)</td><td>$6,250.00</td></tr>
+<tr><td>Ocean Freight</td><td>$850.00</td></tr>
+<tr><td>Origin Charges</td><td>$220.00</td></tr>
+<tr><td>Insurance</td><td>$45.00</td></tr>
+<tr><td>CIF Value</td><td>$7,145.00</td></tr>
+<tr><td>Customs Duty (7.5%)</td><td>$535.88</td></tr>
+<tr><td>Section 301 Tariff (25%)</td><td>$1,786.25</td></tr>
+<tr><td>MPF (min $31.67)</td><td>$31.67</td></tr>
+<tr><td>HMF (0.125%)</td><td>$8.93</td></tr>
+<tr><td>ISF + Broker + Drayage</td><td>$530.00</td></tr>
+<tr><td><strong>Total Landed Cost</strong></td><td><strong>$10,257.73</strong></td></tr>
+<tr><td><strong>Landed Cost Per Unit</strong></td><td><strong>$20.52</strong></td></tr>
+<tr><td>Suggested Price (40% margin)</td><td>$34.19</td></tr>
+</table>
+<p>The supplier quoted $12.50 per unit. The actual landed cost is <strong>$20.52</strong> — 64% higher. Without this calculation, any price below ~$21 would lose money.</p>
+<h2>How to Build This in Excel</h2>
+<div class="step-box">
+<div class="step-num">1</div>
+<div>
+<h3>Set up an inputs section</h3>
+<p>List every input in its own cell — unit price, quantity, freight, duty rate, etc. Color these blue so anyone using the file knows which cells to edit.</p>
+</div>
+</div>
+<div class="step-box">
+<div class="step-num">2</div>
+<div>
+<h3>Calculate CIF value</h3>
+<p>Reference your input cells: <code>=(UnitPrice*Qty)+Freight+Insurance</code>. All subsequent duty calculations reference this cell.</p>
+</div>
+</div>
+<div class="step-box">
+<div class="step-num">3</div>
+<div>
+<h3>Use MAX/MIN for MPF</h3>
+<p>MPF has a floor and ceiling: <code>=MAX(MIN(CIF*0.003464, 614.35), 31.67)</code>. Hardcoding the rate and bounds prevents errors when values change.</p>
+</div>
+</div>
+<div class="step-box">
+<div class="step-num">4</div>
+<div>
+<h3>Add a comparison sheet</h3>
+<p>Duplicate your formula structure across 3 columns — one per supplier. Use conditional formatting to highlight the lowest per-unit landed cost automatically.</p>
+</div>
+</div>
+<div class="tip-box">💡 <strong>Build your template once, use it forever.</strong> Once your landed cost model is set up correctly in Excel, updating it for a new shipment takes 2 minutes — just change the blue input cells.</div>
+<h2>FAQ</h2>
+<div class="faq-list">
+<div class="faq-item">
+<div class="faq-q">What is the difference between FOB and CIF for duty calculation? <span class="arrow">▼</span></div>
+<div class="faq-a">FOB (Free On Board) is the price of goods at the port of export — it does not include freight or insurance. CIF (Cost, Insurance, Freight) adds those to get the value at the US port of entry. US Customs calculates duties on the CIF value. If your supplier quotes FOB, you must add freight and insurance before applying the duty rate. Using FOB as the duty base underestimates your duty bill.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q">Do I pay Section 301 tariffs on every shipment from China? <span class="arrow">▼</span></div>
+<div class="faq-a">Not necessarily. Section 301 tariffs apply to specific product categories (Lists 1–4B), and many products have received exclusions. Check the USTR exclusion list at ustr.gov before assuming you owe 25%. Some categories are 7.5% rather than 25%. Your customs broker can confirm the correct rate for your HTS code.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q">Does MPF apply to every shipment? <span class="arrow">▼</span></div>
+<div class="faq-a">MPF applies to most commercial imports, but there are exceptions. Goods qualifying under USMCA (from Canada or Mexico) are generally MPF-exempt. Some other free trade agreement goods are also exempt. Check with your broker if you think your goods might qualify for an exemption.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q">How do I find the right HTS code for my product? <span class="arrow">▼</span></div>
+<div class="faq-a">Go to hts.usitc.gov and search by product description. Start broad (e.g., "cotton shirt") and narrow down using the chapter notes. If you are unsure, ask your customs broker — misclassification can result in penalties or unexpected duty bills. For high-volume imports, consider requesting a Binding Ruling from US Customs (CBP) to get official confirmation of your HTS code.</div>
+</div>
+</div>
+<div class="dl-cta">
+<h3>Free Download: US Import Landed Cost Calculator (.xlsx)</h3>
+<p>The exact template used in this guide — enter your shipment details and get total landed cost, per-unit cost, and suggested selling price instantly.</p>
+<p style="color:#94a3b8;font-size:.8rem;margin-bottom:1.25rem">Includes: Calculator · 3-Supplier Comparison · HTS Duty Rate Reference · No sign-up required</p>
+<a class="btn btn-primary" download href="/templates/09_Landed_Cost_Calculator.xlsx">⬇ Download Landed Cost Calculator — Free</a>
+</div>
+<h2>Related Articles</h2>
+<div class="related-posts">
+<a class="related-card" href="/pages/vendor-scorecard-excel">
+<div class="rc-cat">Vendor Management</div>
+<h4>How to Build a Vendor Scorecard in Excel</h4>
+</a>
+<a class="related-card" href="/pages/purchase-order-tracker-excel">
+<div class="rc-cat">Operations</div>
+<h4>How to Build a Purchase Order Tracker in Excel</h4>
+</a>
+<a class="related-card" href="/pages/inventory-value-cogs-excel">
+<div class="rc-cat">Inventory</div>
+<h4>How to Calculate Inventory Value and COGS in Excel</h4>
+</a>
+</div>
+</div>
 <div class="cta-band">
-  <h2>Get Free Excel Templates Every Week</h2>
-  <p>Practical Excel content for operations teams. No fluff, unsubscribe anytime.</p>
-  <form class="email-form"
-    action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c&amp;f_id=00e7c2e1f0"
-    method="post" target="_blank">
-    <input type="email" name="EMAIL" placeholder="your@email.com" required>
-    <button type="submit">Subscribe Free →</button>
-  </form>
+<h2>Get Free Excel Templates Every Week</h2>
+<p>Practical Excel content for operations teams. No fluff, unsubscribe anytime.</p>
+<form action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c&amp;f_id=00e7c2e1f0" class="email-form" method="post" target="_blank">
+<input name="EMAIL" placeholder="your@email.com" required="" type="email"/>
+<button type="submit">Subscribe Free →</button>
+</form>
 </div>
-
 <footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-col"><a class="logo" href="/index.html" style="margin-bottom:.75rem;display:inline-flex"><div class="logo-mark">EO</div> ExcelOps</a><p>Practical Excel templates and tools for inventory, warehouse, and business operations.</p></div>
-      <div class="footer-col"><h4>Tools</h4><a href="/pages/reorder.html">Reorder Calculator</a><a href="/pages/sql.html">SQL to Excel</a><a href="/pages/templates.html">Templates</a><a href="/pages/blog.html">Tutorials</a></div>
-      <div class="footer-col"><h4>Templates</h4><a href="/templates/01_Inventory_Dashboard.xlsx" download>Inventory Dashboard</a><a href="/templates/02_Warehouse_KPI_Dashboard.xlsx" download>Warehouse KPI</a><a href="/templates/03_Purchase_Order_Tracker.xlsx" download>Purchase Order</a><a href="/templates/06_Reorder_Report.xlsx" download>Reorder Report</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="/pages/about.html">About</a><a href="/pages/blog.html">Blog</a><a href="/pages/contact.html">Contact</a><a href="/pages/privacy.html">Privacy Policy</a></div>
-    </div>
-    <div class="footer-bottom">© 2025 ExcelOps · GetExcelOps.com · Built for operations teams who get things done.</div>
-  </div>
+<div class="footer-inner">
+<div class="footer-grid">
+<div class="footer-col">
+<a class="logo" href="/" style="margin-bottom:.75rem;display:inline-flex">
+<div class="logo-mark">EO</div> ExcelOps
+        </a>
+<p>Practical Excel templates and tools for inventory, warehouse, and business operations teams.</p>
+</div>
+<div class="footer-col">
+<h4>Tools</h4>
+<a href="/pages/reorder">Reorder Calculator</a>
+<a href="/pages/sql">SQL to Excel Guide</a>
+<a href="/pages/excel-shortcut-finder">Shortcut Finder</a>
+<a href="/pages/templates">Template Library</a>
+<a href="/pages/blog">Formula Tutorials</a>
+</div>
+<div class="footer-col">
+<h4>Templates</h4>
+<a download href="/templates/01_Inventory_Dashboard.xlsx">Inventory Dashboard</a>
+<a download href="/templates/02_Warehouse_KPI_Dashboard.xlsx">Warehouse KPI</a>
+<a download href="/templates/03_Purchase_Order_Tracker.xlsx">Purchase Order</a>
+<a download href="/templates/09_Landed_Cost_Calculator.xlsx">Landed Cost Calculator</a>
+</div>
+<div class="footer-col">
+<h4>Company</h4>
+<a href="/pages/about">About</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/contact">Contact</a>
+<a href="/pages/privacy">Privacy Policy</a>
+<a href="/sitemap.xml">Sitemap</a>
+</div>
+</div>
+<div class="footer-bottom">© 2026 ExcelOps · <a href="https://getexcelops.com" style="color:#475569">GetExcelOps.com</a> · Built for operations teams who get things done.</div>
+</div>
 </footer>
-<script src="/js/main.js"></script>
+<script defer src="/js/main.js"></script>
 </body>
 </html>

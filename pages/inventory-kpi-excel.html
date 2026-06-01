@@ -1,14 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The 7 Inventory KPIs Every Manager Should Track in Excel | ExcelOps</title>
-  <meta name="description" content="Learn the 7 most important inventory KPIs and get the Excel formulas to calculate each one from your data.">
-  <link rel="canonical" href="https://getexcelops.com/pages/inventory-kpi-excel">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <style>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>7 Inventory KPIs to Track in Excel | ExcelOps</title>
+<meta content="Learn the 7 most important inventory KPIs and get the Excel formulas to calculate each one from your data." name="description"/>
+<link href="https://getexcelops.com/pages/inventory-kpi-excel" rel="canonical"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&amp;family=Sora:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/css/style.css" rel="stylesheet"/>
+<style>
     .article-hero{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:3rem 2rem;color:#fff;text-align:center}
     .article-hero .cat{font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;color:var(--teal2);font-weight:600;margin-bottom:.75rem}
     .article-hero h1{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;margin-bottom:.75rem;max-width:700px;margin-left:auto;margin-right:auto}
@@ -51,97 +52,119 @@
     .breadcrumb a:hover{color:var(--teal)}
     .breadcrumb span{margin:0 6px}
 </style>
-</head>
+<meta content="7 Inventory KPIs to Track in Excel | ExcelOps" property="og:title"/><meta content="Learn the 7 most important inventory KPIs and get the Excel formulas to calculate each one from your data." property="og:description"/><meta content="article" property="og:type"/><meta content="https://getexcelops.com/pages/inventory-kpi-excel" property="og:url"/><meta content="https://getexcelops.com/assets/og-image.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="7 Inventory KPIs to Track in Excel | ExcelOps" name="twitter:title"/><meta content="Learn the 7 most important inventory KPIs and get the Excel formulas to calculate each one from your data." name="twitter:description"/><meta content="https://getexcelops.com/assets/og-image.png" name="twitter:image"/><script data-excelops="true" type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"7 Inventory KPIs to Track in Excel","description":"Learn the 7 most important inventory KPIs and get the Excel formulas to calculate each one from your data.","mainEntityOfPage":"https://getexcelops.com/pages/inventory-kpi-excel","author":{"@type":"Organization","name":"ExcelOps"},"publisher":{"@type":"Organization","name":"ExcelOps","logo":{"@type":"ImageObject","url":"https://getexcelops.com/assets/og-image.png"}}}</script></head>
 <body>
 <nav>
-  <a class="logo" href="/index.html"><div class="logo-mark">EO</div>ExcelOps</a>
-  <div class="nav-links">
-    <a href="/pages/templates.html">Templates</a>
-    <a href="/pages/sql.html">SQL Reports</a>
-    <a href="/pages/blog.html">Blog</a>
-    <a href="/pages/about.html">About</a>
-    <a href="/pages/contact.html">Contact</a>
-  </div>
-  <a class="nav-cta" href="/pages/templates.html">Free Templates ↗</a>
-  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<a class="logo" href="/">
+<div class="logo-mark">EO</div>
+    ExcelOps
+  </a>
+<div class="nav-links">
+<a href="/pages/templates">Templates</a>
+<a href="/pages/sql">SQL Reports</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/about">About</a>
+<a href="/pages/contact">Contact</a>
+</div>
+<a class="nav-cta" href="/pages/templates">Free Templates ↗</a>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="/pages/templates.html">Templates</a>
-  <a href="/pages/sql.html">SQL Reports</a>
-  <a href="/pages/blog.html">Blog</a>
-  <a href="/pages/about.html">About</a>
-  <a href="/pages/contact.html">Contact</a>
+<a href="/pages/templates">Templates</a>
+<a href="/pages/sql">SQL Reports</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/about">About</a>
+<a href="/pages/contact">Contact</a>
 </div>
 <div class="article-hero">
-  <div class="cat">KPI</div>
-  <h1>The 7 Inventory KPIs Every Manager Should Track in Excel</h1>
-  <div class="meta">⏱ 6 min read · KPI · Inventory · Formulas</div>
+<div class="cat">KPI</div>
+<h1>The 7 Inventory KPIs Every Manager Should Track in Excel</h1>
+<div class="meta">⏱ 6 min read · KPI · Inventory · Formulas</div>
 </div>
 <div class="article-body">
-  <div class="breadcrumb"><a href="/index.html">Home</a><span>›</span><a href="/pages/blog.html">Blog</a><span>›</span> The 7 Inventory KPIs Every Manager Should Track in Excel</div>
-  <p>Most inventory teams track quantity on hand and not much else. But the managers who prevent stockouts, reduce carrying costs, and keep operations running smoothly track a handful of calculated metrics that tell a much richer story. Here are the 7 that matter most — and the Excel formulas to calculate them.</p>
+<div class="breadcrumb"><a href="/">Home</a><span>›</span><a href="/pages/blog">Blog</a><span>›</span> The 7 Inventory KPIs Every Manager Should Track in Excel</div>
+<p>Most inventory teams track quantity on hand and not much else. But the managers who prevent stockouts, reduce carrying costs, and keep operations running smoothly track a handful of calculated metrics that tell a much richer story. Here are the 7 that matter most — and the Excel formulas to calculate them.</p>
 <h2>1. Inventory Turnover Ratio</h2>
 <p><strong>What it tells you:</strong> How many times you sell through your entire inventory per year. Higher is generally better — it means your capital isn't sitting idle on shelves.</p>
 <div class="formula-box">=COGS / Average Inventory Value
 =SUM(AnnualCOGS) / AVERAGE(BeginningInventory, EndingInventory)</div>
 <p><strong>Target:</strong> Depends heavily on industry. Grocery = 12–15x. Manufacturing = 4–6x. Specialty retail = 2–4x.</p>
-
 <h2>2. Days of Inventory Outstanding (DIO)</h2>
 <p><strong>What it tells you:</strong> How many days of sales your current stock can cover. Essential for planning orders and avoiding stockouts.</p>
 <div class="formula-box">=(Qty on Hand / Average Daily Sales)
 =C2 / (AnnualSales/365)</div>
 <p><strong>Target:</strong> Enough to cover your lead time plus safety stock. Typically 30–60 days for most businesses.</p>
-
 <h2>3. Stockout Rate</h2>
 <p><strong>What it tells you:</strong> The percentage of time items are out of stock. Every stockout is a lost sale and a damaged customer relationship.</p>
 <div class="formula-box">=(Stockout Incidents / Total Order Lines) * 100
 =COUNTIF(StatusCol,"Out of Stock") / COUNTA(SKUCol) * 100</div>
 <p><strong>Target:</strong> Below 2% for most operations.</p>
-
 <h2>4. Carrying Cost of Inventory</h2>
 <p><strong>What it tells you:</strong> The true cost of holding inventory — warehousing, insurance, obsolescence, and capital cost. Usually 20–30% of inventory value per year.</p>
 <div class="formula-box">= Inventory Value * Carrying Cost Rate
 = SUMPRODUCT(QtyCol, UnitCostCol) * 0.25</div>
 <p><strong>Target:</strong> Minimize by reducing slow-moving stock and optimizing reorder quantities.</p>
-
 <h2>5. Fill Rate</h2>
 <p><strong>What it tells you:</strong> The percentage of orders you can fulfill immediately from available stock.</p>
 <div class="formula-box">=(Orders Fulfilled from Stock / Total Orders) * 100
 =(TotalOrders - Backorders) / TotalOrders * 100</div>
 <p><strong>Target:</strong> 95%+ for most operations. High-service businesses target 98%+.</p>
-
 <h2>6. Inventory Accuracy</h2>
 <p><strong>What it tells you:</strong> How closely your system inventory matches your physical inventory. Low accuracy leads to phantom stockouts and ordering mistakes.</p>
 <div class="formula-box">=(Items with Correct Count / Total Items Counted) * 100</div>
 <p><strong>Target:</strong> 95%+ after cycle counts. World-class operations achieve 99%+.</p>
-
 <h2>7. Slow-Moving Inventory %</h2>
 <p><strong>What it tells you:</strong> The percentage of your inventory that hasn't moved in 90+ days. Slow-moving stock ties up cash and warehouse space.</p>
 <div class="formula-box">=COUNTIF(AgingBucket,"90+ Days") / COUNTA(SKUCol) * 100</div>
 <p><strong>Target:</strong> Below 10% of total SKUs. Review and act on slow movers quarterly.</p>
-
 <div class="tip-box">💡 <strong>Don't track all 7 at once if you're starting out.</strong> Pick the 2-3 that address your biggest current pain point and build from there.</div>
-
 <h2>FAQ</h2>
 <div class="faq-list">
 <div class="faq-item"><div class="faq-q">How often should I calculate these KPIs? <span class="arrow">▼</span></div><div class="faq-a">Days of inventory and stockout rate should be checked daily or weekly. Turnover ratio and carrying cost are typically reviewed monthly. Inventory accuracy is measured after each cycle count.</div></div>
 <div class="faq-item"><div class="faq-q">Where do I get the data for these formulas? <span class="arrow">▼</span></div><div class="faq-a">Most of the inputs come from three sources: your inventory system (quantities), your accounting system (COGS, costs), and your order management system (orders, backorders). If you don't have a system, a well-maintained Excel tracker is your starting point.</div></div>
 </div>
-  <div class="dl-cta"><h3>📊 Get the Operations KPI Report Template</h3><p>Free download — no sign-up required.</p><a class="btn btn-primary" href="/templates/07_Operations_KPI_Report.xlsx" download>⬇ Download Free Template</a></div>
-  <h2>Related Articles</h2>
-  <div class="related-posts"><a class="related-card" href="/pages/warehouse-kpi-dashboard-excel.html"><div class="rc-cat">Dashboard</div><h4>Build a Warehouse KPI Dashboard from Scratch</h4></a><a class="related-card" href="/pages/low-stock-alert-excel.html"><div class="rc-cat">Inventory</div><h4>How to Build a Low Stock Alert in Excel</h4></a><a class="related-card" href="/pages/reorder-point-excel.html"><div class="rc-cat">Inventory</div><h4>How to Calculate Reorder Points for Every SKU</h4></a></div>
+<div class="dl-cta"><h3>📊 Get the Operations KPI Report Template</h3><p>Free download — no sign-up required.</p><a class="btn btn-primary" download href="/templates/07_Operations_KPI_Report.xlsx">⬇ Download Free Template</a></div>
+<h2>Related Articles</h2>
+<div class="related-posts"><a class="related-card" href="/pages/warehouse-kpi-dashboard-excel"><div class="rc-cat">Dashboard</div><h4>Build a Warehouse KPI Dashboard from Scratch</h4></a><a class="related-card" href="/pages/low-stock-alert-excel"><div class="rc-cat">Inventory</div><h4>How to Build a Low Stock Alert in Excel</h4></a><a class="related-card" href="/pages/reorder-point-excel"><div class="rc-cat">Inventory</div><h4>How to Calculate Reorder Points for Every SKU</h4></a></div>
 </div>
-<div class="cta-band"><h2>Get Free Excel Templates Every Week</h2><p>Join operations managers getting templates, formulas, and tutorials straight to their inbox.</p><form class="email-form" action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c" method="post" target="_blank"><input type="email" name="EMAIL" placeholder="your@email.com" required><button type="submit">Get Free Templates →</button></form></div>
+<div class="cta-band"><h2>Get Free Excel Templates Every Week</h2><p>Join operations managers getting templates, formulas, and tutorials straight to their inbox.</p><form action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c" class="email-form" method="post" target="_blank"><input name="EMAIL" placeholder="your@email.com" required="" type="email"/><button type="submit">Get Free Templates →</button></form></div>
 <footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-col"><a class="logo" href="/index.html" style="margin-bottom:.75rem;display:inline-flex"><div class="logo-mark">EO</div> ExcelOps</a><p>Practical Excel templates and tools for operations teams.</p></div>
-      <div class="footer-col"><h4>Tools</h4><a href="/pages/reorder.html">Reorder Calculator</a><a href="/pages/sql.html">SQL to Excel</a><a href="/pages/templates.html">Templates</a></div>
-      <div class="footer-col"><h4>Templates</h4><a href="/templates/01_Inventory_Dashboard.xlsx" download>Inventory Dashboard</a><a href="/templates/02_Warehouse_KPI_Dashboard.xlsx" download>Warehouse KPI</a><a href="/templates/06_Reorder_Report.xlsx" download>Reorder Report</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="/pages/about.html">About</a><a href="/pages/blog.html">Blog</a><a href="/pages/contact.html">Contact</a><a href="/pages/privacy.html">Privacy Policy</a></div>
-    </div>
-    <div class="footer-bottom">© 2025 ExcelOps · GetExcelOps.com</div>
-  </div>
+<div class="footer-inner">
+<div class="footer-grid">
+<div class="footer-col">
+<a class="logo" href="/" style="margin-bottom:.75rem;display:inline-flex">
+<div class="logo-mark">EO</div> ExcelOps
+        </a>
+<p>Practical Excel templates and tools for inventory, warehouse, and business operations teams.</p>
+</div>
+<div class="footer-col">
+<h4>Tools</h4>
+<a href="/pages/reorder">Reorder Calculator</a>
+<a href="/pages/sql">SQL to Excel Guide</a>
+<a href="/pages/excel-shortcut-finder">Shortcut Finder</a>
+<a href="/pages/templates">Template Library</a>
+<a href="/pages/blog">Formula Tutorials</a>
+</div>
+<div class="footer-col">
+<h4>Templates</h4>
+<a download href="/templates/01_Inventory_Dashboard.xlsx">Inventory Dashboard</a>
+<a download href="/templates/02_Warehouse_KPI_Dashboard.xlsx">Warehouse KPI</a>
+<a download href="/templates/03_Purchase_Order_Tracker.xlsx">Purchase Order</a>
+<a download href="/templates/09_Landed_Cost_Calculator.xlsx">Landed Cost Calculator</a>
+</div>
+<div class="footer-col">
+<h4>Company</h4>
+<a href="/pages/about">About</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/contact">Contact</a>
+<a href="/pages/privacy">Privacy Policy</a>
+<a href="/sitemap.xml">Sitemap</a>
+</div>
+</div>
+<div class="footer-bottom">© 2026 ExcelOps · <a href="https://getexcelops.com" style="color:#475569">GetExcelOps.com</a> · Built for operations teams who get things done.</div>
+</div>
 </footer>
-<script src="/js/main.js"></script>
+<script defer src="/js/main.js"></script>
 </body></html>

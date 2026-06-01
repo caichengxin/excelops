@@ -1,14 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Track Purchase Orders in Excel Like a Pro | ExcelOps</title>
-  <meta name="description" content="Build a purchase order tracker in Excel with vendor lookup, delivery status, and outstanding payment calculation. Free template included.">
-  <link rel="canonical" href="https://getexcelops.com/pages/purchase-order-tracker-excel">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <style>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Track Purchase Orders in Excel Like a Pro | ExcelOps</title>
+<meta content="Build a purchase order tracker in Excel with vendor lookup, delivery status, and outstanding payment calculation. Free template included." name="description"/>
+<link href="https://getexcelops.com/pages/purchase-order-tracker-excel" rel="canonical"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&amp;family=Sora:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/css/style.css" rel="stylesheet"/>
+<style>
     .article-hero{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:3rem 2rem;color:#fff;text-align:center}
     .article-hero .cat{font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;color:var(--teal2);font-weight:600;margin-bottom:.75rem}
     .article-hero h1{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;margin-bottom:.75rem;max-width:700px;margin-left:auto;margin-right:auto}
@@ -51,35 +52,40 @@
     .breadcrumb a:hover{color:var(--teal)}
     .breadcrumb span{margin:0 6px}
 </style>
-</head>
+<meta content="Track Purchase Orders in Excel Like a Pro | ExcelOps" property="og:title"/><meta content="Build a purchase order tracker in Excel with vendor lookup, delivery status, and outstanding payment calculation. Free template included." property="og:description"/><meta content="article" property="og:type"/><meta content="https://getexcelops.com/pages/purchase-order-tracker-excel" property="og:url"/><meta content="https://getexcelops.com/assets/og-image.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Track Purchase Orders in Excel Like a Pro | ExcelOps" name="twitter:title"/><meta content="Build a purchase order tracker in Excel with vendor lookup, delivery status, and outstanding payment calculation. Free template included." name="twitter:description"/><meta content="https://getexcelops.com/assets/og-image.png" name="twitter:image"/><script data-excelops="true" type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Track Purchase Orders in Excel Like a Pro","description":"Build a purchase order tracker in Excel with vendor lookup, delivery status, and outstanding payment calculation. Free template included.","mainEntityOfPage":"https://getexcelops.com/pages/purchase-order-tracker-excel","author":{"@type":"Organization","name":"ExcelOps"},"publisher":{"@type":"Organization","name":"ExcelOps","logo":{"@type":"ImageObject","url":"https://getexcelops.com/assets/og-image.png"}}}</script></head>
 <body>
 <nav>
-  <a class="logo" href="/index.html"><div class="logo-mark">EO</div>ExcelOps</a>
-  <div class="nav-links">
-    <a href="/pages/templates.html">Templates</a>
-    <a href="/pages/sql.html">SQL Reports</a>
-    <a href="/pages/blog.html">Blog</a>
-    <a href="/pages/about.html">About</a>
-    <a href="/pages/contact.html">Contact</a>
-  </div>
-  <a class="nav-cta" href="/pages/templates.html">Free Templates ↗</a>
-  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<a class="logo" href="/">
+<div class="logo-mark">EO</div>
+    ExcelOps
+  </a>
+<div class="nav-links">
+<a href="/pages/templates">Templates</a>
+<a href="/pages/sql">SQL Reports</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/about">About</a>
+<a href="/pages/contact">Contact</a>
+</div>
+<a class="nav-cta" href="/pages/templates">Free Templates ↗</a>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="/pages/templates.html">Templates</a>
-  <a href="/pages/sql.html">SQL Reports</a>
-  <a href="/pages/blog.html">Blog</a>
-  <a href="/pages/about.html">About</a>
-  <a href="/pages/contact.html">Contact</a>
+<a href="/pages/templates">Templates</a>
+<a href="/pages/sql">SQL Reports</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/about">About</a>
+<a href="/pages/contact">Contact</a>
 </div>
 <div class="article-hero">
-  <div class="cat">Purchasing</div>
-  <h1>Track Purchase Orders in Excel Like a Pro</h1>
-  <div class="meta">⏱ 10 min read · Purchasing · VLOOKUP · Status Tracking</div>
+<div class="cat">Purchasing</div>
+<h1>Track Purchase Orders in Excel Like a Pro</h1>
+<div class="meta">⏱ 10 min read · Purchasing · VLOOKUP · Status Tracking</div>
 </div>
 <div class="article-body">
-  <div class="breadcrumb"><a href="/index.html">Home</a><span>›</span><a href="/pages/blog.html">Blog</a><span>›</span> Track Purchase Orders in Excel Like a Pro</div>
-  <p>Managing purchase orders in spreadsheets sounds simple — until you have 50 open POs across 10 vendors and you can't remember which ones have arrived, which are overdue, and how much is still outstanding. A proper PO tracker in Excel solves all of this.</p>
+<div class="breadcrumb"><a href="/">Home</a><span>›</span><a href="/pages/blog">Blog</a><span>›</span> Track Purchase Orders in Excel Like a Pro</div>
+<p>Managing purchase orders in spreadsheets sounds simple — until you have 50 open POs across 10 vendors and you can't remember which ones have arrived, which are overdue, and how much is still outstanding. A proper PO tracker in Excel solves all of this.</p>
 <h2>What Your PO Tracker Needs</h2>
 <table class="data-table">
 <tr><th>Column</th><th>Purpose</th></tr>
@@ -102,7 +108,7 @@
 <h3>Outstanding Amount</h3>
 <div class="formula-box">=IF(L2="Received",0,IF(L2="Partial",(F2-K2)*G2,F2*G2))</div>
 <h3>Days Overdue</h3>
-<div class="formula-box">=IF(L2="Received","",IF(TODAY()>I2,TODAY()-I2,"On Time"))</div>
+<div class="formula-box">=IF(L2="Received","",IF(TODAY()&gt;I2,TODAY()-I2,"On Time"))</div>
 <h3>Vendor Lookup (from Vendors sheet)</h3>
 <div class="formula-box">=VLOOKUP(C2,Vendors!A:D,2,FALSE)</div>
 <div class="step-box"><div class="step-num">1</div><div><h3>Set up your PO Log sheet</h3><p>Create columns for all the fields above. Format as an Excel Table (Insert → Table) so formulas auto-fill when you add new rows.</p></div></div>
@@ -119,21 +125,46 @@
 <div class="faq-item"><div class="faq-q">How do I handle multiple items per PO? <span class="arrow">▼</span></div><div class="faq-a">Use one row per line item. If PO-001 has 3 items, it gets 3 rows all with PO number "PO-001". You can then use SUMIF to calculate the total value of PO-001 across all rows.</div></div>
 <div class="faq-item"><div class="faq-q">Can I track payments in the same sheet? <span class="arrow">▼</span></div><div class="faq-a">Yes — add columns for Invoice Date, Invoice Number, Payment Due Date, and Payment Date. The gap between Payment Due Date and today tells you what's coming up.</div></div>
 </div>
-  <div class="dl-cta"><h3>🛒 Get the Pre-Built Purchase Order Tracker</h3><p>Free download — no sign-up required.</p><a class="btn btn-primary" href="/templates/03_Purchase_Order_Tracker.xlsx" download>⬇ Download Free Template</a></div>
-  <h2>Related Articles</h2>
-  <div class="related-posts"><a class="related-card" href="/pages/low-stock-alert-excel.html"><div class="rc-cat">Inventory</div><h4>How to Build a Low Stock Alert in Excel</h4></a><a class="related-card" href="/pages/vendor-scorecard-excel.html"><div class="rc-cat">Purchasing</div><h4>Score and Compare Vendors Using Excel</h4></a><a class="related-card" href="/pages/warehouse-kpi-dashboard-excel.html"><div class="rc-cat">Dashboard</div><h4>Build a Warehouse KPI Dashboard</h4></a></div>
+<div class="dl-cta"><h3>🛒 Get the Pre-Built Purchase Order Tracker</h3><p>Free download — no sign-up required.</p><a class="btn btn-primary" download href="/templates/03_Purchase_Order_Tracker.xlsx">⬇ Download Free Template</a></div>
+<h2>Related Articles</h2>
+<div class="related-posts"><a class="related-card" href="/pages/low-stock-alert-excel"><div class="rc-cat">Inventory</div><h4>How to Build a Low Stock Alert in Excel</h4></a><a class="related-card" href="/pages/vendor-scorecard-excel"><div class="rc-cat">Purchasing</div><h4>Score and Compare Vendors Using Excel</h4></a><a class="related-card" href="/pages/warehouse-kpi-dashboard-excel"><div class="rc-cat">Dashboard</div><h4>Build a Warehouse KPI Dashboard</h4></a></div>
 </div>
-<div class="cta-band"><h2>Get Free Excel Templates Every Week</h2><p>Join operations managers getting templates, formulas, and tutorials straight to their inbox.</p><form class="email-form" action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c" method="post" target="_blank"><input type="email" name="EMAIL" placeholder="your@email.com" required><button type="submit">Get Free Templates →</button></form></div>
+<div class="cta-band"><h2>Get Free Excel Templates Every Week</h2><p>Join operations managers getting templates, formulas, and tutorials straight to their inbox.</p><form action="https://getexcelops.us15.list-manage.com/subscribe/post?u=ce24cc9ede2fba874cc3b0ddc&amp;id=4c89af330c" class="email-form" method="post" target="_blank"><input name="EMAIL" placeholder="your@email.com" required="" type="email"/><button type="submit">Get Free Templates →</button></form></div>
 <footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-col"><a class="logo" href="/index.html" style="margin-bottom:.75rem;display:inline-flex"><div class="logo-mark">EO</div> ExcelOps</a><p>Practical Excel templates and tools for operations teams.</p></div>
-      <div class="footer-col"><h4>Tools</h4><a href="/pages/reorder.html">Reorder Calculator</a><a href="/pages/sql.html">SQL to Excel</a><a href="/pages/templates.html">Templates</a></div>
-      <div class="footer-col"><h4>Templates</h4><a href="/templates/01_Inventory_Dashboard.xlsx" download>Inventory Dashboard</a><a href="/templates/02_Warehouse_KPI_Dashboard.xlsx" download>Warehouse KPI</a><a href="/templates/06_Reorder_Report.xlsx" download>Reorder Report</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="/pages/about.html">About</a><a href="/pages/blog.html">Blog</a><a href="/pages/contact.html">Contact</a><a href="/pages/privacy.html">Privacy Policy</a></div>
-    </div>
-    <div class="footer-bottom">© 2025 ExcelOps · GetExcelOps.com</div>
-  </div>
+<div class="footer-inner">
+<div class="footer-grid">
+<div class="footer-col">
+<a class="logo" href="/" style="margin-bottom:.75rem;display:inline-flex">
+<div class="logo-mark">EO</div> ExcelOps
+        </a>
+<p>Practical Excel templates and tools for inventory, warehouse, and business operations teams.</p>
+</div>
+<div class="footer-col">
+<h4>Tools</h4>
+<a href="/pages/reorder">Reorder Calculator</a>
+<a href="/pages/sql">SQL to Excel Guide</a>
+<a href="/pages/excel-shortcut-finder">Shortcut Finder</a>
+<a href="/pages/templates">Template Library</a>
+<a href="/pages/blog">Formula Tutorials</a>
+</div>
+<div class="footer-col">
+<h4>Templates</h4>
+<a download href="/templates/01_Inventory_Dashboard.xlsx">Inventory Dashboard</a>
+<a download href="/templates/02_Warehouse_KPI_Dashboard.xlsx">Warehouse KPI</a>
+<a download href="/templates/03_Purchase_Order_Tracker.xlsx">Purchase Order</a>
+<a download href="/templates/09_Landed_Cost_Calculator.xlsx">Landed Cost Calculator</a>
+</div>
+<div class="footer-col">
+<h4>Company</h4>
+<a href="/pages/about">About</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/contact">Contact</a>
+<a href="/pages/privacy">Privacy Policy</a>
+<a href="/sitemap.xml">Sitemap</a>
+</div>
+</div>
+<div class="footer-bottom">© 2026 ExcelOps · <a href="https://getexcelops.com" style="color:#475569">GetExcelOps.com</a> · Built for operations teams who get things done.</div>
+</div>
 </footer>
-<script src="/js/main.js"></script>
+<script defer src="/js/main.js"></script>
 </body></html>
