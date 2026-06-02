@@ -39,4 +39,83 @@
   <!-- Articles — Spreadsheet Automation -->
   <url><loc>https://getexcelops.com/pages/google-sheets-vs-excel-automation</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 
+
+  <!-- Shortcut landing pages -->
+  <url><loc>https://getexcelops.com/shortcuts</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/copy</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/cut</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/paste</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/undo</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/redo</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/save</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/save-as</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/new-wb</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/open</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/close-wb</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/print</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/select-all-basics</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/find</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/spell-check</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/edit-cell</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/delete-content</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/clear-all</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/fill-down</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/fill-right</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/fill-series</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/line-break</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/ctrl-enter</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/repeat-action</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/add-comment</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/filter</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/date</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/time</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/dupe</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/pivot</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/find-replace</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/flash</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/sort-az</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/text-to-col</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/paste-val</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/bold</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/italic</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/underline</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/paste-special</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/format-cells</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/wrap-text</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/merge</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/currency</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/percent</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/conditional</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/col</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/row</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/select-all</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/go-to</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/end-arrow</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/next-sheet</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/prev-sheet</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/new-sheet</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/lock</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/autosum</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/evaluate</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/show-formulas</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/trace</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/calc-now</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/freeze</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/split</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/zoom-in</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/zoom-out</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/hide-row</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/hide-col</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/group-rows</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/insert-row</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/delete-row</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/insert-col</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/delete-col</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/insert-cell</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/delete-cell</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/insert-sheet</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/delete-sheet</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/rename-sheet</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://getexcelops.com/shortcuts/insert-hyperlink</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
 </urlset>
