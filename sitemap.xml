@@ -11,6 +11,16 @@
   <url><loc>https://getexcelops.com/pages/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://getexcelops.com/pages/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 
+
+  <!-- Services -->
+  <url><loc>https://getexcelops.com/pages/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://getexcelops.com/pages/excel-automation-service</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://getexcelops.com/pages/csv-cleanup-service</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://getexcelops.com/pages/vba-macro-help</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://getexcelops.com/pages/excel-api</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://getexcelops.com/pages/spreadsheet-data-cleaning</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://getexcelops.com/pages/product-data-classification</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+
   <!-- Tools -->
   <url><loc>https://getexcelops.com/pages/excel-shortcut-finder</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 
