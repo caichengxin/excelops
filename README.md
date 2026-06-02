@@ -10,7 +10,9 @@ Static ExcelOps website with Vercel Functions for the Excel Shortcut Finder AI s
    - `GEMINI_API_KEY` = your Google AI Studio Gemini API key
    - `GOOGLE_API_KEY` is also accepted as a fallback name, but `GEMINI_API_KEY` is preferred
    - Optional: `GEMINI_MODEL` = `gemini-3.1-flash-lite`
-   - Optional: `GEMINI_API_VERSION` = `v1`
+   - Optional: `GEMINI_API_VERSION` = `v1beta`
+   - Optional: `SEARCH_RATE_LIMIT_PER_MINUTE` = `20` to protect Gemini quota
+   - Optional: `SEARCH_RATE_LIMIT_WINDOW_MS` = `60000`
 4. Redeploy the project after adding the environment variable.
 
 > Important: GitHub Pages can host the static HTML/CSS/JS, but it cannot run `/api/search`. The AI shortcut feature requires Vercel or another host that supports serverless functions.

@@ -3,6 +3,63 @@
 // If GEMINI_API_KEY is missing or Gemini fails, this returns a local smart-search fallback
 // so the Shortcut Finder still works instead of silently failing.
 
+
+// Best-effort in-memory rate limit for Vercel serverless instances.
+// This protects Gemini quota from refresh loops and casual abuse. It is not a
+// global distributed firewall, but it is enough for a lightweight public tool.
+const RATE_LIMIT_WINDOW_MS = Number(process.env.SEARCH_RATE_LIMIT_WINDOW_MS || 60000);
+const RATE_LIMIT_MAX = Number(process.env.SEARCH_RATE_LIMIT_PER_MINUTE || 20);
+const RATE_LIMIT_BUCKETS = globalThis.__excelopsSearchRateLimitBuckets || new Map();
+globalThis.__excelopsSearchRateLimitBuckets = RATE_LIMIT_BUCKETS;
+
+function getClientIp(req) {
+  const forwarded = req.headers["x-forwarded-for"] || req.headers["X-Forwarded-For"];
+  if (forwarded && typeof forwarded === "string") return forwarded.split(",")[0].trim();
+  return req.headers["x-real-ip"] || req.socket?.remoteAddress || "unknown";
+}
+
+function checkRateLimit(req) {
+  if (!RATE_LIMIT_MAX || RATE_LIMIT_MAX <= 0) {
+    return { allowed: true, limit: RATE_LIMIT_MAX, remaining: 9999, resetMs: Date.now() + RATE_LIMIT_WINDOW_MS };
+  }
+
+  const now = Date.now();
+  const ip = getClientIp(req);
+  const key = String(ip || "unknown").slice(0, 80);
+  let bucket = RATE_LIMIT_BUCKETS.get(key);
+
+  if (!bucket || now >= bucket.resetMs) {
+    bucket = { count: 0, resetMs: now + RATE_LIMIT_WINDOW_MS };
+    RATE_LIMIT_BUCKETS.set(key, bucket);
+  }
+
+  bucket.count += 1;
+
+  // Opportunistic cleanup to keep the map small on warm serverless instances.
+  if (RATE_LIMIT_BUCKETS.size > 500) {
+    for (const [bucketKey, value] of RATE_LIMIT_BUCKETS.entries()) {
+      if (now >= value.resetMs) RATE_LIMIT_BUCKETS.delete(bucketKey);
+    }
+  }
+
+  const remaining = Math.max(0, RATE_LIMIT_MAX - bucket.count);
+  return {
+    allowed: bucket.count <= RATE_LIMIT_MAX,
+    limit: RATE_LIMIT_MAX,
+    remaining,
+    resetMs: bucket.resetMs,
+    retryAfter: Math.max(1, Math.ceil((bucket.resetMs - now) / 1000))
+  };
+}
+
+function setRateLimitHeaders(res, rate) {
+  if (!rate) return;
+  res.setHeader("X-RateLimit-Limit", String(rate.limit));
+  res.setHeader("X-RateLimit-Remaining", String(rate.remaining));
+  res.setHeader("X-RateLimit-Reset", String(Math.ceil(rate.resetMs / 1000)));
+  if (!rate.allowed) res.setHeader("Retry-After", String(rate.retryAfter));
+}
+
 const SHORTCUTS = [
   {
     "id": "copy",
@@ -1311,6 +1368,20 @@ async function handleSearchRequest(req, res, query, debug) {
   }
 
   const cleanQuery = String(query).trim().slice(0, 120);
+  const rate = checkRateLimit(req);
+  setRateLimitHeaders(res, rate);
+
+  if (!rate.allowed) {
+    const fallback = localFallback(cleanQuery);
+    return sendJson(res, 200, {
+      ok: true,
+      source: "fallback",
+      reason: "rate_limited",
+      retryAfter: rate.retryAfter,
+      results: fallback,
+      ...(debug ? { debug: { message: "Search rate limit reached. Gemini call skipped to protect quota.", limit: rate.limit, retryAfter: rate.retryAfter } } : {})
+    });
+  }
 
   try {
     const ai = await callGemini(cleanQuery);

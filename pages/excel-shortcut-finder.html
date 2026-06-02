@@ -443,29 +443,6 @@
 <button type="submit">Subscribe Free →</button>
 </form>
 </div>
-
-<section class="sf-faq" style="margin-top:2rem">
-  <div class="section-header">
-    <div>
-      <div class="section-title">Explore Excel shortcut guides</div>
-      <div class="section-sub">Individual SEO pages with Windows keys, Mac keys, Ribbon paths, and FAQs.</div>
-    </div>
-    <a class="see-all" href="/shortcuts">View all shortcut guides →</a>
-  </div>
-  <div class="shortcut-guide-grid">
-    <a class="shortcut-guide-card" href="/shortcuts/filter"><span>Data</span><strong>Toggle AutoFilter</strong><small>Win: Ctrl + Shift + L</small></a><a class="shortcut-guide-card" href="/shortcuts/dupe"><span>Data</span><strong>Remove duplicates</strong><small>Win: Alt → A → M</small></a><a class="shortcut-guide-card" href="/shortcuts/pivot"><span>Data</span><strong>Create pivot table</strong><small>Win: Alt → N → V → T</small></a><a class="shortcut-guide-card" href="/shortcuts/freeze"><span>View</span><strong>Freeze panes</strong><small>Win: Alt → W → F → F</small></a><a class="shortcut-guide-card" href="/shortcuts/insert-sheet"><span>Insert &amp; Delete</span><strong>Insert new sheet</strong><small>Win: Shift + F11</small></a><a class="shortcut-guide-card" href="/shortcuts/paste-val"><span>Data</span><strong>Paste values only</strong><small>Win: Ctrl + Alt + V → V → Enter</small></a><a class="shortcut-guide-card" href="/shortcuts/format-cells"><span>Formatting</span><strong>Format cells dialog</strong><small>Win: Ctrl + 1</small></a><a class="shortcut-guide-card" href="/shortcuts/autosum"><span>Formulas</span><strong>AutoSum selected range</strong><small>Win: Alt + =</small></a><a class="shortcut-guide-card" href="/shortcuts/find"><span>Basics</span><strong>Find</strong><small>Win: Ctrl + F</small></a><a class="shortcut-guide-card" href="/shortcuts/go-to"><span>Navigation</span><strong>Go To Special</strong><small>Win: Ctrl + G → Alt + S</small></a><a class="shortcut-guide-card" href="/shortcuts/hide-col"><span>View</span><strong>Hide column</strong><small>Win: Ctrl + 0</small></a><a class="shortcut-guide-card" href="/shortcuts/insert-row"><span>Insert &amp; Delete</span><strong>Insert row</strong><small>Win: Ctrl + Shift + +</small></a>
-  </div>
-</section>
-<style>
-.shortcut-guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
-.shortcut-guide-card{display:block;border:1px solid #e2e8f0;border-radius:18px;padding:1rem;text-decoration:none;background:#fff;color:#0f172a;box-shadow:0 8px 22px rgba(15,23,42,.04)}
-.shortcut-guide-card:hover{border-color:#14b8a6;transform:translateY(-2px)}
-.shortcut-guide-card span{display:block;color:#64748b;font-size:.8rem;font-weight:700;margin-bottom:.35rem}
-.shortcut-guide-card strong{display:block;margin-bottom:.35rem}
-.shortcut-guide-card small{color:#475569}
-@media(max-width:760px){.shortcut-guide-grid{grid-template-columns:1fr}}
-</style>
-
 <!-- FOOTER -->
 <footer>
 <div class="footer-inner">
@@ -722,6 +699,9 @@ let aiResults = null;   // null = not used, [] = no results, [...] = API ranked 
 let aiTimer = null;
 let aiRequestSeq = 0;
 let aiSource = "";
+let activeAiController = null;
+const aiCache = new Map();
+const AI_CACHE_LIMIT = 80;
 
 function setAIStatus(message, state = "") {
   const el = document.getElementById("sf-ai-status");
@@ -740,7 +720,20 @@ async function aiSearch(q) {
   }
 
   const requestId = ++aiRequestSeq;
+  const cacheKey = clean.toLowerCase();
+  const cached = aiCache.get(cacheKey);
+
+  if (cached) {
+    aiResults = cached.results.map(r => r.id).filter(Boolean);
+    aiSource = cached.source || "api";
+    setAIStatus(cached.source === "gemini" ? `Using AI matching for “${clean}”.` : `Using smart local matching for “${clean}”.`, cached.source === "gemini" ? "ok" : "fallback");
+    render();
+    return;
+  }
+
+  if (activeAiController) activeAiController.abort();
   const controller = new AbortController();
+  activeAiController = controller;
   const timeoutId = setTimeout(() => controller.abort(), 8000);
   setAIStatus("Checking AI-assisted shortcut matches...", "ok");
 
@@ -748,15 +741,16 @@ async function aiSearch(q) {
     const res = await fetch("/api/search", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: clean, debug: true }),
+      body: JSON.stringify({ query: clean }),
       signal: controller.signal
     });
     clearTimeout(timeoutId);
 
+    const data = await res.json().catch(() => ({}));
+    if (activeAiController === controller) activeAiController = null;
+
     // Ignore stale responses if the user typed something else while the API was working.
     if (requestId !== aiRequestSeq || clean !== query.trim()) return;
-
-    const data = await res.json().catch(() => ({}));
     if (!res.ok || !Array.isArray(data.results)) {
       console.warn("Shortcut API error", data);
       aiResults = null;
@@ -766,12 +760,19 @@ async function aiSearch(q) {
       return;
     }
 
+    if (data.source === "gemini" || data.reason === "rate_limited") {
+      aiCache.set(cacheKey, data);
+      if (aiCache.size > AI_CACHE_LIMIT) aiCache.delete(aiCache.keys().next().value);
+    }
+
     aiResults = data.results.map(r => r.id).filter(Boolean);
     aiSource = data.source || "api";
 
     if (aiResults.length) {
       if (aiSource === "gemini") {
         setAIStatus(`Using AI matching for “${clean}”.`, "ok");
+      } else if (data.reason === "rate_limited") {
+        setAIStatus(`High traffic detected; using smart local fallback for a moment. Try again in ${data.retryAfter || 60}s.`, "fallback");
       } else if (data.reason === "missing_api_key") {
         setAIStatus("Server API is working, but GEMINI_API_KEY is missing; using smart local fallback.", "fallback");
       } else {
@@ -785,6 +786,7 @@ async function aiSearch(q) {
     render();
   } catch (error) {
     clearTimeout(timeoutId);
+    if (activeAiController === controller) activeAiController = null;
     if (requestId !== aiRequestSeq || clean !== query.trim()) return;
     console.warn("Shortcut API request failed", error);
     aiResults = null;
@@ -798,7 +800,7 @@ function scheduleAiSearch() {
   clearTimeout(aiTimer);
   aiRequestSeq += 1; // invalidate any in-flight request
   if (query.trim().length >= 3) {
-    aiTimer = setTimeout(() => aiSearch(query), 600);
+    aiTimer = setTimeout(() => aiSearch(query), 800);
   } else {
     aiSource = "";
     aiResults = null;
