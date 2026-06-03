@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excel Formula Finder — Search Common Excel Formulas | ExcelOps</title>
+<meta content="Search common Excel formulas by task, then use AI to customize formulas for your workbook columns, examples, and spreadsheet scenario." name="description"/>
+<meta content="excel formula finder, excel formulas, excel formula examples, xlookup formula, sumifs formula, if formula, excel inventory formulas" name="keywords"/>
+<meta content="Excel Formula Finder — Search Common Excel Formulas | ExcelOps" property="og:title"/>
+<meta content="Search common Excel formulas by task, then use AI to customize formulas for your workbook columns, examples, and spreadsheet scenario." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://getexcelops.com/pages/formula-finder" property="og:url"/>
+<meta content="https://getexcelops.com/assets/og-image.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Excel Formula Finder — Search Common Excel Formulas | ExcelOps" name="twitter:title"/>
+<meta content="Search common Excel formulas and customize them with AI for your workbook." name="twitter:description"/>
+<meta content="https://getexcelops.com/assets/og-image.png" name="twitter:image"/>
+<link href="https://getexcelops.com/pages/formula-finder" rel="canonical"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&amp;family=Sora:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/css/style.css" rel="stylesheet"/>
+<style>
+    .ff-hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 4rem 2rem 3rem; text-align: center; }
+    .ff-badge { display:inline-block; background:rgba(14,165,160,.15); color:#67e8f9; font-size:12px; font-weight:600; padding:5px 14px; border-radius:20px; border:1px solid rgba(14,165,160,.3); margin-bottom:1.25rem; }
+    .ff-hero h1 { color:#fff; font-size:clamp(24px,4vw,36px); font-weight:700; margin-bottom:.75rem; line-height:1.25; }
+    .ff-hero h1 span { color:#0dd4ce; }
+    .ff-hero p { color:#94a3b8; font-size:15px; margin:0 auto 2rem; max-width:560px; }
+    .ff-search-wrap { max-width:620px; margin:0 auto 1.35rem; position:relative; }
+    .ff-search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); font-size:20px; color:#64748b; pointer-events:none; }
+    .ff-search-wrap input { width:100%; padding:15px 105px 15px 48px; font-size:15px; border:1.5px solid rgba(255,255,255,.12); border-radius:12px; background:rgba(255,255,255,.07); color:#fff; outline:none; font-family:'DM Sans',sans-serif; transition:border-color .2s,background .2s; }
+    .ff-search-wrap input::placeholder { color:#64748b; }
+    .ff-search-wrap input:focus { border-color:#0ea5a0; background:rgba(255,255,255,.1); }
+    .ff-kbd { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:11px; color:#64748b; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:5px; padding:3px 8px; pointer-events:none; }
+    .ff-note { max-width:620px; margin:-.75rem auto 1.35rem; min-height:20px; font-size:12px; color:#94a3b8; }
+    .ff-stats { display:flex; justify-content:center; gap:2.5rem; margin-top:1.5rem; }
+    .ff-stat-num { color:#fff; font-size:20px; font-weight:600; }
+    .ff-stat-lbl { color:#64748b; font-size:11px; margin-top:2px; }
+    .ff-intro { max-width:900px; margin:0 auto; padding:2rem 1.5rem 0; }
+    .ff-intro h2 { font-size:18px; font-weight:600; color:#1e293b; margin-bottom:.5rem; }
+    .ff-intro p { font-size:14px; color:#64748b; line-height:1.7; }
+    .ff-main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 3rem; }
+    .ff-filter-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:1.25rem; }
+    .ff-pill { font-size:12px; font-weight:500; padding:6px 16px; border-radius:20px; border:1px solid #e2e8f0; background:#fff; color:#64748b; cursor:pointer; transition:all .15s; font-family:'DM Sans',sans-serif; }
+    .ff-pill:hover { border-color:#0ea5a0; color:#0ea5a0; }
+    .ff-pill.active { background:#0f172a; color:#fff; border-color:#0f172a; }
+    .ff-meta { font-size:12px; color:#94a3b8; margin-bottom:1rem; }
+    .ff-card { background:#fff; border:1px solid #e8ecf0; border-radius:12px; margin-bottom:10px; overflow:hidden; transition:border-color .15s; }
+    .ff-card:hover { border-color:#cbd5e1; }
+    .ff-card.open { border-color:#0ea5a0; }
+    .ff-card-head { padding:1rem 1.25rem; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .ff-card.open .ff-card-head { border-bottom:1px solid #f1f5f9; }
+    .ff-card-left { display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
+    .ff-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+    .ff-dot.lookup { background:#3b82f6; } .ff-dot.text { background:#8b5cf6; } .ff-dot.cleaning { background:#06b6d4; } .ff-dot.reporting { background:#10b981; } .ff-dot.logic { background:#f97316; } .ff-dot.dates { background:#f59e0b; } .ff-dot.math { background:#ef4444; } .ff-dot.business { background:#0ea5a0; }
+    .ff-title { font-size:14px; font-weight:700; color:#1e293b; }
+    .ff-cat-lbl { font-size:11px; color:#94a3b8; margin-top:1px; }
+    .ff-chip { font-family:'DM Sans',monospace; font-size:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:5px 9px; color:#334155; white-space:nowrap; max-width:360px; overflow:hidden; text-overflow:ellipsis; }
+    .ff-chevron { color:#cbd5e1; font-size:14px; transition:transform .2s; flex-shrink:0; }
+    .ff-card.open .ff-chevron { transform:rotate(180deg); }
+    .ff-card-body { display:none; padding:1.25rem; }
+    .ff-card.open .ff-card-body { display:block; }
+    .ff-formula-box { background:#0f172a; color:#e2e8f0; border-radius:10px; padding:14px 16px; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:13px; overflow-x:auto; margin-bottom:1rem; }
+    .ff-body-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+    .ff-info { background:#f8fafc; border:1px solid #e2e8f0; border-radius:9px; padding:12px 14px; }
+    .ff-info h4 { font-size:12px; color:#334155; margin-bottom:5px; }
+    .ff-info p { font-size:13px; color:#64748b; line-height:1.65; }
+    .ff-copy-row { display:flex; gap:8px; flex-wrap:wrap; }
+    .ff-copy-btn { font-size:11px; font-weight:600; padding:7px 12px; border-radius:6px; border:1px solid #e2e8f0; color:#64748b; cursor:pointer; background:#fff; display:flex; align-items:center; gap:5px; font-family:'DM Sans',sans-serif; transition:all .12s; }
+    .ff-copy-btn:hover { background:#f8fafc; border-color:#cbd5e1; }
+    .ff-copy-btn.copied { color:#10b981; border-color:#10b981; }
+    .ff-empty { text-align:center; padding:3rem 1rem; color:#94a3b8; font-size:14px; }
+    .ff-empty-icon { font-size:32px; margin-bottom:.75rem; }
+    .ff-seo-grid { max-width:900px; margin:0 auto; padding:0 1.5rem 3rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; }
+    .ff-seo-card { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:1.25rem; }
+    .ff-seo-card h3 { font-size:15px; margin-bottom:.45rem; }
+    .ff-seo-card p { color:#64748b; font-size:13px; line-height:1.65; }
+
+    .ff-ai-panel { max-width:900px; margin:1.5rem auto 0; padding:0 1.5rem; }
+    .ff-ai-card { background:#fff; border:1px solid #dbeafe; border-radius:16px; padding:1.25rem; box-shadow:0 12px 32px rgba(15,23,42,.06); }
+    .ff-ai-top { display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; margin-bottom:1rem; }
+    .ff-ai-kicker { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; color:#0891b2; background:#ecfeff; border:1px solid #cffafe; border-radius:999px; padding:5px 10px; margin-bottom:.5rem; }
+    .ff-ai-card h2 { font-size:18px; color:#1e293b; margin:0 0 .35rem; }
+    .ff-ai-card p { color:#64748b; font-size:13px; line-height:1.6; margin:0; }
+    .ff-ai-grid { display:grid; grid-template-columns:1.1fr .9fr; gap:.85rem; }
+    .ff-ai-field label { display:block; font-size:12px; font-weight:700; color:#334155; margin-bottom:.4rem; }
+    .ff-ai-field textarea, .ff-ai-field input { width:100%; border:1px solid #e2e8f0; border-radius:10px; padding:11px 12px; font-family:'DM Sans',sans-serif; font-size:13px; color:#1e293b; outline:none; resize:vertical; background:#fff; }
+    .ff-ai-field textarea:focus, .ff-ai-field input:focus { border-color:#0ea5a0; box-shadow:0 0 0 3px rgba(14,165,160,.1); }
+    .ff-ai-actions { display:flex; align-items:center; gap:.65rem; margin-top:.9rem; flex-wrap:wrap; }
+    .ff-ai-btn { border:0; border-radius:9px; padding:10px 15px; background:#0f172a; color:#fff; font-size:12px; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; transition:transform .12s, opacity .12s; }
+    .ff-ai-btn:hover { transform:translateY(-1px); }
+    .ff-ai-btn:disabled { opacity:.55; cursor:not-allowed; transform:none; }
+    .ff-ai-clear { border:1px solid #e2e8f0; background:#fff; color:#64748b; border-radius:9px; padding:9px 13px; font-size:12px; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; }
+    .ff-ai-status { color:#94a3b8; font-size:12px; }
+    .ff-ai-result { display:none; margin-top:1rem; border:1px solid #e2e8f0; background:#f8fafc; border-radius:12px; overflow:hidden; }
+    .ff-ai-result.show { display:block; }
+    .ff-ai-result-head { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:.85rem 1rem; border-bottom:1px solid #e2e8f0; background:#fff; }
+    .ff-ai-result-title { font-size:13px; font-weight:800; color:#1e293b; }
+    .ff-ai-source { font-size:11px; color:#64748b; }
+    .ff-ai-formula { background:#0f172a; color:#e2e8f0; padding:14px 16px; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:13px; overflow-x:auto; }
+    .ff-ai-detail { padding:1rem; display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+    .ff-ai-detail-box { background:#fff; border:1px solid #e2e8f0; border-radius:9px; padding:.85rem; }
+    .ff-ai-detail-box h4 { font-size:12px; color:#334155; margin-bottom:.35rem; }
+    .ff-ai-detail-box p, .ff-ai-detail-box li { font-size:13px; color:#64748b; line-height:1.6; }
+    .ff-ai-detail-box ul { padding-left:1.1rem; margin:.2rem 0 0; }
+    .ff-ai-card .ff-copy-btn.ai-copy { margin:0; }
+
+    @media (max-width:700px) { .ff-stats { gap:1.2rem; } .ff-body-grid { grid-template-columns:1fr; } .ff-ai-grid, .ff-ai-detail { grid-template-columns:1fr; } .ff-ai-top { flex-direction:column; } .ff-card-head { align-items:flex-start; flex-wrap:wrap; padding:1rem; } .ff-chip { width:100%; max-width:100%; white-space:normal; } }
+  </style>
+<script data-excelops="true" type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Excel Formula Finder","url":"https://getexcelops.com/pages/formula-finder","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Search common Excel formulas by task and get copy-ready formulas with simple examples."}</script>
+</head>
+<body>
+<nav>
+<a class="logo" href="/"><div class="logo-mark">EO</div> ExcelOps</a>
+<div class="nav-links">
+<a href="/pages/templates">Templates</a>
+<a href="/pages/services">Services</a>
+<a href="/pages/sql">SQL Reports</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
+<a class="active" href="/pages/formula-finder">Formula Finder</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/about">About</a>
+<a href="/pages/contact">Contact</a>
+</div>
+<a class="nav-cta" href="/pages/contact">Start a Project ↗</a>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="/pages/templates">Templates</a>
+<a href="/pages/services">Services</a>
+<a href="/pages/sql">SQL Reports</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
+<a href="/pages/formula-finder">Formula Finder</a>
+<a href="/pages/blog">Blog</a>
+<a href="/pages/about">About</a>
+<a href="/pages/contact">Contact</a>
+</div>
+<div class="ff-hero">
+<div class="ff-badge">ƒx Excel Formula Finder</div>
+<h1>Find the right <span>Excel formula</span> fast</h1>
+<p>Search by task first, then ask AI to customize the formula for your real workbook columns and spreadsheet scenario.</p>
+<div class="ff-search-wrap">
+<svg class="ff-search-icon" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+<input autocomplete="off" id="ff-input" placeholder="e.g. find price by SKU, remove spaces, low stock alert…" type="text"/>
+<span class="ff-kbd">Ctrl K</span>
+</div>
+<div class="ff-note">Local formula library first. AI customization uses your server-side Gemini API only when you ask.</div>
+<div class="ff-stats">
+<div><div class="ff-stat-num">45+</div><div class="ff-stat-lbl">Common formulas</div></div>
+<div><div class="ff-stat-num">8</div><div class="ff-stat-lbl">Categories</div></div>
+<div><div class="ff-stat-num">AI</div><div class="ff-stat-lbl">Custom formulas</div></div>
+</div>
+</div>
+<div class="ff-intro">
+<h2>Common Excel formulas with simple explanations and examples</h2>
+<p>Use this free Excel formula finder to search practical spreadsheet formulas by what you are trying to do. Each result includes a copy-ready formula, a plain-English explanation, and a business example. When the built-in example is close but not exact, use the AI customizer to adapt it to your columns.</p>
+
+</div>
+<div class="ff-ai-panel" id="formula-ai">
+<div class="ff-ai-card">
+<div class="ff-ai-top">
+<div>
+<div class="ff-ai-kicker">✨ Gemini-powered helper</div>
+<h2>Customize a formula with AI</h2>
+<p>Describe what your spreadsheet needs. ExcelOps will call Gemini from the server and return a copy-ready formula without exposing your API key.</p>
+</div>
+<a class="ff-copy-btn" href="/pages/contact">Need file help?</a>
+</div>
+<div class="ff-ai-grid">
+<div class="ff-ai-field">
+<label for="ff-ai-task">What formula do you need?</label>
+<textarea id="ff-ai-task" rows="4" placeholder="Example: If product name in A2 contains shoe, return Footwear. If it contains hat, return Accessories. Otherwise return Other."></textarea>
+</div>
+<div class="ff-ai-field">
+<label for="ff-ai-context">Optional column context</label>
+<textarea id="ff-ai-context" rows="4" placeholder="Example: A = product name, B = category, C = price, D = stock quantity"></textarea>
+</div>
+</div>
+<input id="ff-ai-base" type="hidden"/>
+<div class="ff-ai-actions">
+<button class="ff-ai-btn" id="ff-ai-submit" type="button">Ask AI for formula</button>
+<button class="ff-ai-clear" id="ff-ai-clear" type="button">Clear</button>
+<span class="ff-ai-status" id="ff-ai-status">Uses /api/formula-ai with the same Gemini API key setup.</span>
+</div>
+<div class="ff-ai-result" id="ff-ai-result"></div>
+</div>
+</div>
+
+<div class="ff-main">
+<div class="ff-filter-row">
+<button class="ff-pill active" data-f="all">All</button>
+<button class="ff-pill" data-f="Lookup">Lookup</button>
+<button class="ff-pill" data-f="Reporting">Reporting</button>
+<button class="ff-pill" data-f="Logic">Logic</button>
+<button class="ff-pill" data-f="Text">Text</button>
+<button class="ff-pill" data-f="Cleaning">Cleaning</button>
+<button class="ff-pill" data-f="Dates">Dates</button>
+<button class="ff-pill" data-f="Math">Math</button>
+<button class="ff-pill" data-f="Business">Business</button>
+</div>
+<div class="ff-meta" id="ff-meta">Showing all formulas</div>
+<div id="ff-list"></div>
+</div>
+<div class="ff-seo-grid">
+<div class="ff-seo-card"><h3>Use formulas before automation</h3><p>Many spreadsheet problems can be solved with a simple formula first. When your workflow becomes repetitive, ExcelOps can help turn it into a cleaner automated process.</p></div>
+<div class="ff-seo-card"><h3>Good for messy business data</h3><p>Search formulas for product SKUs, vendor files, CSV cleanup, reporting dashboards, inventory reorder logic, and category checks.</p></div>
+<div class="ff-seo-card"><h3>Need a custom formula?</h3><p>If your workbook has many sheets, changing columns, or fragile formulas, send the file and we can help build a more reliable setup.</p></div>
+</div>
+<div class="cta-band">
+<h2>Need a formula built for your real workbook?</h2>
+<p>ExcelOps can help clean the file, repair formulas, automate reports, or turn the workflow into a reusable tool.</p>
+<div class="hero-btns" style="justify-content:center"><a class="btn btn-primary" href="/pages/contact">Start a Project</a><a class="btn btn-secondary" href="/pages/vba-macro-help">Get VBA Help</a></div>
+</div>
+<footer>
+<div class="footer-inner">
+<div class="footer-grid">
+<div class="footer-col"><a class="logo" href="/" style="margin-bottom:.75rem;display:inline-flex"><div class="logo-mark">EO</div> ExcelOps</a><p>Practical Excel templates and tools for inventory, warehouse, and business operations teams.</p></div>
+<div class="footer-col"><h4>Tools</h4><a href="/pages/services">Services</a><a href="/pages/reorder">Reorder Calculator</a><a href="/pages/sql">SQL to Excel Guide</a><a href="/pages/excel-shortcut-finder">Shortcut Finder</a><a href="/pages/formula-finder">Formula Finder</a><a href="/pages/templates">Template Library</a><a href="/pages/blog">Formula Tutorials</a></div>
+<div class="footer-col"><h4>Services</h4><a href="/pages/excel-automation-service">Excel Automation</a><a href="/pages/csv-cleanup-service">CSV Cleanup</a><a href="/pages/vba-macro-help">VBA Macro Help</a><a href="/pages/product-data-classification">Product Classification</a></div>
+<div class="footer-col"><h4>Company</h4><a href="/pages/about">About</a><a href="/pages/blog">Blog</a><a href="/pages/contact">Contact</a><a href="/pages/privacy">Privacy Policy</a><a href="/sitemap.xml">Sitemap</a></div>
+</div>
+<div class="footer-bottom">© 2026 ExcelOps · <a href="https://getexcelops.com" style="color:#475569">GetExcelOps.com</a> · Built for operations teams who get things done.</div>
+</div>
+</footer>
+<script defer src="/js/main.js"></script>
+<script>
+const FF_DATA = [{"id": "xlookup-exact", "title": "Find a value with XLOOKUP", "cat": "Lookup", "formula": "=XLOOKUP(E2,A:A,B:B,\"Not found\")", "example": "Find the price for SKU in E2 by searching SKUs in column A and returning prices from column B.", "desc": "Use XLOOKUP when you need to pull a related value from another column. It is the modern replacement for VLOOKUP in Microsoft 365 and newer Excel versions.", "tags": ["lookup", "xlookup", "find price", "sku", "match", "return value"]}, {"id": "vlookup-basic", "title": "Find a value with VLOOKUP", "cat": "Lookup", "formula": "=VLOOKUP(E2,A:B,2,FALSE)", "example": "Search for the SKU in E2 inside column A and return the matching value from column B.", "desc": "Use VLOOKUP when your lookup column is the first column of the table. FALSE means exact match.", "tags": ["vlookup", "lookup", "find", "sku", "exact match"]}, {"id": "index-match", "title": "Flexible lookup with INDEX + MATCH", "cat": "Lookup", "formula": "=INDEX(B:B,MATCH(E2,A:A,0))", "example": "Find SKU E2 in column A and return the matching price from column B.", "desc": "INDEX + MATCH is useful when the return column is not to the right of the lookup column, or when you need a more flexible lookup pattern.", "tags": ["index match", "lookup left", "match", "find"]}, {"id": "two-way-lookup", "title": "Two-way lookup by row and column", "cat": "Lookup", "formula": "=INDEX(B2:E10,MATCH(H2,A2:A10,0),MATCH(H3,B1:E1,0))", "example": "Find a product row from H2 and a month column from H3, then return the intersecting value.", "desc": "Use a two-way lookup when both the row label and the column header change, such as product-by-month reports.", "tags": ["two way lookup", "matrix", "row column", "index match"]}, {"id": "sumif", "title": "Sum values by one condition", "cat": "Reporting", "formula": "=SUMIF(A:A,E2,C:C)", "example": "Add all sales in column C where the region in column A equals E2.", "desc": "SUMIF totals numbers that meet a single condition. Great for quick category, region, vendor, or SKU summaries.", "tags": ["sumif", "sum by category", "total by region", "condition"]}, {"id": "sumifs", "title": "Sum values by multiple conditions", "cat": "Reporting", "formula": "=SUMIFS(D:D,A:A,G2,B:B,H2)", "example": "Add sales in column D where Region equals G2 and Product equals H2.", "desc": "SUMIFS totals numbers using multiple criteria. It is one of the most useful formulas for business reporting.", "tags": ["sumifs", "multiple criteria", "sales report", "total"]}, {"id": "countif", "title": "Count rows matching one condition", "cat": "Reporting", "formula": "=COUNTIF(A:A,E2)", "example": "Count how many rows in column A match the status in E2.", "desc": "COUNTIF counts cells that meet one condition, such as Open orders, a region name, or a product category.", "tags": ["countif", "count", "status", "condition"]}, {"id": "countifs", "title": "Count rows matching multiple conditions", "cat": "Reporting", "formula": "=COUNTIFS(A:A,G2,B:B,H2)", "example": "Count rows where Region equals G2 and Status equals H2.", "desc": "COUNTIFS counts records that meet multiple conditions. Use it for dashboards, QA checks, and filtered totals.", "tags": ["countifs", "multiple criteria", "dashboard", "count rows"]}, {"id": "averageifs", "title": "Average values by conditions", "cat": "Reporting", "formula": "=AVERAGEIFS(D:D,A:A,G2,B:B,H2)", "example": "Average order value in column D where Region equals G2 and Channel equals H2.", "desc": "AVERAGEIFS calculates an average only for rows that match your criteria.", "tags": ["averageifs", "average", "conditions", "kpi"]}, {"id": "if-basic", "title": "Return one result or another with IF", "cat": "Logic", "formula": "=IF(C2>=D2,\"OK\",\"Reorder\")", "example": "If stock on hand in C2 is greater than or equal to reorder point in D2, show OK. Otherwise show Reorder.", "desc": "IF is the basic decision formula in Excel. It checks a condition and returns one value when TRUE and another when FALSE.", "tags": ["if", "logic", "reorder", "status", "condition"]}, {"id": "ifs", "title": "Create multiple status levels with IFS", "cat": "Logic", "formula": "=IFS(C2=0,\"Out of stock\",C2<10,\"Low\",C2>=10,\"OK\")", "example": "Label inventory as Out of stock, Low, or OK based on quantity in C2.", "desc": "IFS is cleaner than nesting many IF formulas when you have several possible outcomes.", "tags": ["ifs", "multiple conditions", "status", "inventory"]}, {"id": "iferror", "title": "Hide errors with IFERROR", "cat": "Logic", "formula": "=IFERROR(A2/B2,0)", "example": "Divide A2 by B2, but show 0 if the calculation returns an error.", "desc": "IFERROR replaces errors such as #DIV/0!, #N/A, or #VALUE! with a cleaner result.", "tags": ["iferror", "error", "divide by zero", "clean report"]}, {"id": "and-if", "title": "Check two conditions with IF + AND", "cat": "Logic", "formula": "=IF(AND(C2>0,D2=\"Active\"),\"Include\",\"Exclude\")", "example": "Include the row only when quantity is above zero and status is Active.", "desc": "AND is used inside IF when all conditions must be true.", "tags": ["and", "if and", "multiple conditions", "include exclude"]}, {"id": "or-if", "title": "Check either condition with IF + OR", "cat": "Logic", "formula": "=IF(OR(C2=\"Urgent\",D2>1000),\"Review\",\"OK\")", "example": "Flag a row for review if the priority is Urgent or the value is over 1000.", "desc": "OR is used inside IF when any one condition can trigger the result.", "tags": ["or", "if or", "flag", "review"]}, {"id": "left", "title": "Get characters from the left", "cat": "Text", "formula": "=LEFT(A2,3)", "example": "Return the first 3 characters from SKU in A2.", "desc": "LEFT extracts a set number of characters from the beginning of a text value.", "tags": ["left", "text", "sku prefix", "extract"]}, {"id": "right", "title": "Get characters from the right", "cat": "Text", "formula": "=RIGHT(A2,4)", "example": "Return the last 4 characters from order number in A2.", "desc": "RIGHT extracts characters from the end of a text value.", "tags": ["right", "text", "suffix", "extract"]}, {"id": "mid", "title": "Get characters from the middle", "cat": "Text", "formula": "=MID(A2,4,5)", "example": "Starting at character 4 in A2, return 5 characters.", "desc": "MID extracts text from the middle of a value when you know the starting position and length.", "tags": ["mid", "middle", "extract", "text"]}, {"id": "textbefore", "title": "Get text before a delimiter", "cat": "Text", "formula": "=TEXTBEFORE(A2,\"-\")", "example": "From SKU ABC-123, return ABC.", "desc": "TEXTBEFORE extracts everything before a chosen delimiter. Useful for SKUs, codes, and combined fields.", "tags": ["textbefore", "delimiter", "split", "sku"]}, {"id": "textafter", "title": "Get text after a delimiter", "cat": "Text", "formula": "=TEXTAFTER(A2,\"-\")", "example": "From SKU ABC-123, return 123.", "desc": "TEXTAFTER extracts everything after a chosen delimiter.", "tags": ["textafter", "delimiter", "split", "sku"]}, {"id": "concat", "title": "Combine text values", "cat": "Text", "formula": "=TEXTJOIN(\" - \",TRUE,A2,B2,C2)", "example": "Combine product name, color, and size into one clean product title.", "desc": "TEXTJOIN combines multiple text values and lets you choose a separator while ignoring blank cells.", "tags": ["combine", "concat", "textjoin", "product title"]}, {"id": "trim", "title": "Remove extra spaces", "cat": "Cleaning", "formula": "=TRIM(A2)", "example": "Clean a product name that has leading, trailing, or repeated spaces.", "desc": "TRIM removes extra spaces from text, which helps fix lookup failures and messy imports.", "tags": ["trim", "spaces", "clean text", "messy data"]}, {"id": "clean", "title": "Remove non-printing characters", "cat": "Cleaning", "formula": "=CLEAN(A2)", "example": "Remove hidden line breaks or non-printing characters from imported data.", "desc": "CLEAN removes many non-printing characters that can appear in copied or exported data.", "tags": ["clean", "hidden characters", "import", "csv"]}, {"id": "substitute", "title": "Replace specific text", "cat": "Cleaning", "formula": "=SUBSTITUTE(A2,\"/\",\"-\")", "example": "Change slashes in a date-like code to hyphens.", "desc": "SUBSTITUTE replaces exact text inside a cell. It is useful for standardizing values.", "tags": ["substitute", "replace", "standardize", "clean"]}, {"id": "proper", "title": "Convert names to title case", "cat": "Cleaning", "formula": "=PROPER(A2)", "example": "Convert john smith to John Smith.", "desc": "PROPER capitalizes the first letter of each word, which is useful for names and labels.", "tags": ["proper", "title case", "capitalize", "names"]}, {"id": "upper", "title": "Convert text to uppercase", "cat": "Cleaning", "formula": "=UPPER(A2)", "example": "Convert sku-ab12 to SKU-AB12.", "desc": "UPPER converts all letters to uppercase for consistent codes and IDs.", "tags": ["upper", "uppercase", "sku", "standardize"]}, {"id": "remove-duplicates-helper", "title": "Flag duplicate values", "cat": "Cleaning", "formula": "=IF(COUNTIF(A:A,A2)>1,\"Duplicate\",\"Unique\")", "example": "Flag repeated email addresses or SKUs in column A.", "desc": "This formula marks values that appear more than once. It is useful before importing customer, product, or vendor files.", "tags": ["duplicates", "countif", "unique", "email", "sku"]}, {"id": "unique", "title": "Return a unique list", "cat": "Cleaning", "formula": "=UNIQUE(A2:A100)", "example": "Create a unique list of vendors from a column with repeated vendor names.", "desc": "UNIQUE returns each distinct value from a range. Available in Microsoft 365 and newer Excel versions.", "tags": ["unique", "distinct", "dedupe", "list"]}, {"id": "filter", "title": "Filter rows with a formula", "cat": "Reporting", "formula": "=FILTER(A2:D100,D2:D100=\"Open\")", "example": "Return only rows where Status in column D is Open.", "desc": "FILTER returns matching rows dynamically. It is useful for live report tabs and exception lists.", "tags": ["filter", "dynamic array", "open orders", "report"]}, {"id": "sort", "title": "Sort a range with a formula", "cat": "Reporting", "formula": "=SORT(A2:D100,4,-1)", "example": "Sort a table by the 4th column in descending order.", "desc": "SORT creates a sorted copy of your data without changing the source table.", "tags": ["sort", "dynamic array", "rank", "descending"]}, {"id": "today", "title": "Show today's date", "cat": "Dates", "formula": "=TODAY()", "example": "Return the current date for aging, due date, or dashboard calculations.", "desc": "TODAY updates automatically whenever the workbook recalculates.", "tags": ["today", "current date", "date", "aging"]}, {"id": "datedif", "title": "Calculate age or days between dates", "cat": "Dates", "formula": "=DATEDIF(A2,TODAY(),\"d\")", "example": "Calculate how many days have passed since the order date in A2.", "desc": "DATEDIF calculates the difference between two dates in days, months, or years.", "tags": ["datedif", "date difference", "aging", "days old"]}, {"id": "eomonth", "title": "Find the end of the month", "cat": "Dates", "formula": "=EOMONTH(A2,0)", "example": "Return the last day of the month for the date in A2.", "desc": "EOMONTH is useful for monthly reporting, payment terms, and period-end calculations.", "tags": ["eomonth", "month end", "reporting period", "date"]}, {"id": "networkdays", "title": "Count working days between dates", "cat": "Dates", "formula": "=NETWORKDAYS(A2,B2)", "example": "Count business days between order date A2 and ship date B2.", "desc": "NETWORKDAYS excludes weekends. You can also add a holiday range as a third argument.", "tags": ["networkdays", "business days", "working days", "lead time"]}, {"id": "workday", "title": "Add working days to a date", "cat": "Dates", "formula": "=WORKDAY(A2,5)", "example": "Find the due date 5 business days after the request date in A2.", "desc": "WORKDAY adds business days and skips weekends. Useful for SLAs, due dates, and delivery schedules.", "tags": ["workday", "due date", "business days", "sla"]}, {"id": "round", "title": "Round a number", "cat": "Math", "formula": "=ROUND(A2,2)", "example": "Round a landed cost or unit price to 2 decimal places.", "desc": "ROUND rounds a number to a set number of digits.", "tags": ["round", "decimal", "price", "cost"]}, {"id": "roundup", "title": "Round up to the next number", "cat": "Math", "formula": "=ROUNDUP(A2,0)", "example": "Round up a case requirement so you always order enough units.", "desc": "ROUNDUP always rounds away from zero, which is useful for inventory and packaging calculations.", "tags": ["roundup", "order quantity", "inventory", "case pack"]}, {"id": "ceiling", "title": "Round up to a pack size", "cat": "Math", "formula": "=CEILING(A2,12)", "example": "Round required units in A2 up to the nearest case pack of 12.", "desc": "CEILING rounds a number up to the nearest multiple you choose.", "tags": ["ceiling", "case pack", "multiple", "round up"]}, {"id": "percent-change", "title": "Calculate percent change", "cat": "Math", "formula": "=(B2-A2)/A2", "example": "Calculate sales growth from last month in A2 to this month in B2.", "desc": "Percent change shows how much a value increased or decreased compared with the original value.", "tags": ["percent change", "growth", "increase", "decrease"]}, {"id": "subtotal", "title": "Subtotal visible filtered rows", "cat": "Reporting", "formula": "=SUBTOTAL(9,D:D)", "example": "Sum only the visible values in column D after applying a filter.", "desc": "SUBTOTAL can ignore filtered-out rows, making it useful for filtered reports.", "tags": ["subtotal", "filtered rows", "visible cells", "sum"]}, {"id": "choosecols", "title": "Return selected columns", "cat": "Reporting", "formula": "=CHOOSECOLS(A2:F100,1,3,6)", "example": "Return only columns 1, 3, and 6 from a larger table.", "desc": "CHOOSECOLS lets you build a cleaner report view from selected source columns.", "tags": ["choosecols", "select columns", "report view", "dynamic array"]}, {"id": "conditional-low-stock", "title": "Low stock flag", "cat": "Business", "formula": "=IF(B2<=C2,\"Reorder\",\"OK\")", "example": "If On Hand in B2 is less than or equal to Reorder Point in C2, show Reorder.", "desc": "A simple inventory formula for low-stock alerts and reorder reports.", "tags": ["low stock", "reorder", "inventory", "stock alert"]}, {"id": "gross-margin", "title": "Gross margin percentage", "cat": "Business", "formula": "=(B2-C2)/B2", "example": "If sale price is in B2 and cost is in C2, calculate gross margin percent.", "desc": "Gross margin helps you understand profitability after product cost.", "tags": ["margin", "gross margin", "profit", "price cost"]}, {"id": "landed-cost", "title": "Landed cost per unit", "cat": "Business", "formula": "=(B2+C2+D2)/A2", "example": "Divide total product cost, freight, and duty by units received.", "desc": "Use landed cost to calculate the true per-unit cost after freight, duty, and fees.", "tags": ["landed cost", "freight", "duty", "unit cost"]}, {"id": "reorder-point", "title": "Reorder point formula", "cat": "Business", "formula": "=(B2*C2)+D2", "example": "Daily demand in B2 times lead time in C2, plus safety stock in D2.", "desc": "Reorder point tells you when to place a new order before stock runs out.", "tags": ["reorder point", "inventory", "lead time", "safety stock"]}, {"id": "stock-cover", "title": "Days of stock cover", "cat": "Business", "formula": "=A2/B2", "example": "On-hand units in A2 divided by average daily sales in B2.", "desc": "Stock cover estimates how many days current inventory will last.", "tags": ["stock cover", "days inventory", "inventory", "daily sales"]}, {"id": "match-two-columns", "title": "Check whether two columns match", "cat": "Cleaning", "formula": "=IF(A2=B2,\"Match\",\"Different\")", "example": "Compare an old SKU value in A2 with a new SKU value in B2.", "desc": "Use this to compare exports, validate changes, or check two versions of a dataset.", "tags": ["compare columns", "match", "different", "validate"]}, {"id": "isnumber-search", "title": "Check if cell contains text", "cat": "Text", "formula": "=ISNUMBER(SEARCH(\"apple\",A2))", "example": "Return TRUE if product name in A2 contains the word apple.", "desc": "SEARCH finds text inside a cell. ISNUMBER converts the result into TRUE or FALSE.", "tags": ["contains", "search text", "keyword", "product name"]}, {"id": "category-keyword", "title": "Assign category by keyword", "cat": "Business", "formula": "=IF(ISNUMBER(SEARCH(\"shoe\",A2)),\"Footwear\",\"Other\")", "example": "If product name in A2 contains shoe, categorize it as Footwear.", "desc": "A simple way to classify rows by keyword. For larger product catalogs, use multiple rules or automation.", "tags": ["category", "keyword", "classification", "product data"]}];
+let activeF = "all", query = "", openId = null;
+function catClass(cat) { return String(cat || "").toLowerCase().replace(/[^a-z0-9]+/g, ""); }
+function norm(s) { return String(s || "").toLowerCase(); }
+function scoreFormula(f, q) {
+  if (!q) return 1;
+  const terms = q.split(/\s+/).filter(Boolean);
+  const title = norm(f.title), cat = norm(f.cat), formula = norm(f.formula), desc = norm(f.desc), example = norm(f.example), tags = (f.tags || []).map(norm).join(" ");
+  let score = 0;
+  for (const t of terms) {
+    if (title.includes(t)) score += 8;
+    if (tags.includes(t)) score += 6;
+    if (formula.includes(t)) score += 5;
+    if (cat.includes(t)) score += 4;
+    if (desc.includes(t)) score += 2;
+    if (example.includes(t)) score += 2;
+  }
+  return score;
+}
+function getFiltered() {
+  const q = norm(query).trim();
+  return FF_DATA
+    .map(f => ({...f, _score: scoreFormula(f, q)}))
+    .filter(f => (activeF === "all" || f.cat === activeF) && (!q || f._score > 0))
+    .sort((a,b) => q ? b._score - a._score : FF_DATA.findIndex(x => x.id === a.id) - FF_DATA.findIndex(x => x.id === b.id));
+}
+function escapeHtml(s) { return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    const old = btn.innerHTML;
+    btn.classList.add('copied'); btn.innerHTML = '✓ Copied';
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = old; }, 1300);
+  }).catch(() => { btn.textContent = 'Copy failed'; });
+}
+function scrollToAi() { document.getElementById('formula-ai')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+function setAiStatus(text) { const el = document.getElementById('ff-ai-status'); if (el) el.textContent = text; }
+function renderAiResult(payload) {
+  const box = document.getElementById('ff-ai-result');
+  if (!box) return;
+  const r = payload.result || {};
+  const notes = Array.isArray(r.notes) && r.notes.length ? `<ul>${r.notes.map(n => `<li>${escapeHtml(n)}</li>`).join('')}</ul>` : '<p>No extra notes.</p>';
+  box.classList.add('show');
+  box.innerHTML = `
+    <div class="ff-ai-result-head">
+      <div><div class="ff-ai-result-title">AI formula result</div><div class="ff-ai-source">Source: ${escapeHtml(payload.source || 'formula-ai')}${payload.reason ? ' · ' + escapeHtml(payload.reason) : ''}</div></div>
+      <button class="ff-copy-btn ai-copy" type="button" data-ai-copy>Copy formula</button>
+    </div>
+    <div class="ff-ai-formula">${escapeHtml(r.formula || '')}</div>
+    <div class="ff-ai-detail">
+      <div class="ff-ai-detail-box"><h4>Explanation</h4><p>${escapeHtml(r.explanation || '')}</p></div>
+      <div class="ff-ai-detail-box"><h4>Example</h4><p>${escapeHtml(r.example || '')}</p></div>
+      <div class="ff-ai-detail-box" style="grid-column:1 / -1"><h4>Notes</h4>${notes}</div>
+    </div>`;
+  box.querySelector('[data-ai-copy]')?.addEventListener('click', e => copyText(r.formula || '', e.currentTarget));
+}
+async function askFormulaAi() {
+  const taskEl = document.getElementById('ff-ai-task');
+  const contextEl = document.getElementById('ff-ai-context');
+  const baseEl = document.getElementById('ff-ai-base');
+  const btn = document.getElementById('ff-ai-submit');
+  const result = document.getElementById('ff-ai-result');
+  const task = taskEl?.value.trim() || '';
+  if (task.length < 6) { setAiStatus('Please describe the formula you need first.'); taskEl?.focus(); return; }
+  btn.disabled = true;
+  if (result) result.classList.remove('show');
+  setAiStatus('Asking Gemini through /api/formula-ai...');
+  try {
+    const res = await fetch('/api/formula-ai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ task, context: contextEl?.value.trim() || '', baseFormula: baseEl?.value.trim() || '' })
+    });
+    const data = await res.json();
+    if (!res.ok || !data.ok) throw new Error(data.error || 'Formula AI failed.');
+    renderAiResult(data);
+    setAiStatus(data.source === 'gemini' ? 'AI result generated with Gemini.' : 'Gemini was unavailable or rate-limited. Showing safe local fallback.');
+  } catch (err) {
+    setAiStatus(err.message || 'Could not reach Formula AI.');
+  } finally {
+    btn.disabled = false;
+  }
+}
+function fillAiFromFormula(f) {
+  const taskEl = document.getElementById('ff-ai-task');
+  const contextEl = document.getElementById('ff-ai-context');
+  const baseEl = document.getElementById('ff-ai-base');
+  if (taskEl) taskEl.value = `Customize this Excel formula for my workbook: ${f.title}. I need a formula similar to ${f.formula}.`;
+  if (contextEl && !contextEl.value.trim()) contextEl.value = 'Tell AI your columns here, for example: A = SKU, B = product name, C = price, D = category.';
+  if (baseEl) baseEl.value = f.formula;
+  setAiStatus('Formula loaded. Add your real columns, then ask AI.');
+  scrollToAi();
+  setTimeout(() => taskEl?.focus(), 350);
+}
+function render() {
+  const list = document.getElementById('ff-list');
+  const meta = document.getElementById('ff-meta');
+  const items = getFiltered();
+  const label = activeF === 'all' ? 'all formulas' : activeF + ' formulas';
+  meta.textContent = query ? `Showing ${items.length} result${items.length===1?'':'s'} for “${query}” in ${label}` : `Showing ${items.length} ${label}`;
+  if (!items.length) {
+    list.innerHTML = `<div class="ff-empty"><div class="ff-empty-icon">🔎</div>No formula found. Try “lookup”, “sum by”, “remove spaces”, “date”, “low stock”, or “duplicate”.</div>`;
+    return;
+  }
+  list.innerHTML = items.map(f => `
+    <div class="ff-card ${openId === f.id ? 'open' : ''}" data-id="${f.id}">
+      <div class="ff-card-head">
+        <div class="ff-card-left"><span class="ff-dot ${catClass(f.cat)}"></span><div><div class="ff-title">${escapeHtml(f.title)}</div><div class="ff-cat-lbl">${escapeHtml(f.cat)}</div></div></div>
+        <div class="ff-chip">${escapeHtml(f.formula)}</div>
+        <div class="ff-chevron">⌄</div>
+      </div>
+      <div class="ff-card-body">
+        <div class="ff-formula-box">${escapeHtml(f.formula)}</div>
+        <div class="ff-body-grid">
+          <div class="ff-info"><h4>What it does</h4><p>${escapeHtml(f.desc)}</p></div>
+          <div class="ff-info"><h4>Example</h4><p>${escapeHtml(f.example)}</p></div>
+        </div>
+        <div class="ff-copy-row"><button class="ff-copy-btn" data-copy="formula">Copy formula</button><button class="ff-copy-btn" data-copy="example">Copy example</button><button class="ff-copy-btn" data-copy="ai">Customize with AI</button></div>
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('.ff-card-head').forEach(head => {
+    head.addEventListener('click', () => { const card = head.closest('.ff-card'); openId = openId === card.dataset.id ? null : card.dataset.id; render(); });
+  });
+  document.querySelectorAll('.ff-copy-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const card = btn.closest('.ff-card');
+      if (!card) return;
+      const f = FF_DATA.find(x => x.id === card.dataset.id);
+      if (!f) return;
+      if (btn.dataset.copy === 'ai') return fillAiFromFormula(f);
+      copyText(btn.dataset.copy === 'formula' ? f.formula : f.example, btn);
+    });
+  });
+}
+document.querySelectorAll('.ff-pill').forEach(btn => btn.addEventListener('click', () => { document.querySelectorAll('.ff-pill').forEach(b => b.classList.remove('active')); btn.classList.add('active'); activeF = btn.dataset.f; openId = null; render(); }));
+const input = document.getElementById('ff-input');
+input.addEventListener('input', e => { query = e.target.value.trim(); openId = null; render(); });
+document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); input.focus(); input.select(); } });
+document.getElementById('ff-ai-submit')?.addEventListener('click', askFormulaAi);
+document.getElementById('ff-ai-clear')?.addEventListener('click', () => {
+  ['ff-ai-task','ff-ai-context','ff-ai-base'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  document.getElementById('ff-ai-result')?.classList.remove('show');
+  setAiStatus('Uses /api/formula-ai with the same Gemini API key setup.');
+});
+render();
+</script>
+</body>
+</html>
