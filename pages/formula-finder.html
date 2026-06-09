@@ -39,11 +39,18 @@
     .ff-intro h2 { font-size:18px; font-weight:600; color:#1e293b; margin-bottom:.5rem; }
     .ff-intro p { font-size:14px; color:#64748b; line-height:1.7; }
     .ff-main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 3rem; }
-    .ff-filter-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:1.25rem; }
+    .ff-main-search { margin-top:-1.25rem; padding-top:0; position:relative; z-index:2; }
+    .ff-main-search::before { content:''; display:block; height:1px; }
+    .ff-results-top { background:#fff; border:1px solid #e2e8f0; border-bottom:0; border-radius:16px 16px 0 0; padding:1rem 1.25rem .75rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; box-shadow:0 12px 30px rgba(15,23,42,.06); }
+    .ff-results-kicker { font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:#0ea5a0; margin-bottom:.2rem; }
+    .ff-results-top h2 { font-size:16px; color:#1e293b; margin:0; }
+    .ff-ai-jump { color:#0ea5a0; font-size:12px; font-weight:700; text-decoration:none; white-space:nowrap; }
+    .ff-filter-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:1.25rem; background:#fff; border-left:1px solid #e2e8f0; border-right:1px solid #e2e8f0; padding:0 1.25rem .75rem; }
     .ff-pill { font-size:12px; font-weight:500; padding:6px 16px; border-radius:20px; border:1px solid #e2e8f0; background:#fff; color:#64748b; cursor:pointer; transition:all .15s; font-family:'DM Sans',sans-serif; }
     .ff-pill:hover { border-color:#0ea5a0; color:#0ea5a0; }
     .ff-pill.active { background:#0f172a; color:#fff; border-color:#0f172a; }
-    .ff-meta { font-size:12px; color:#94a3b8; margin-bottom:1rem; }
+    .ff-meta { font-size:12px; color:#94a3b8; margin-bottom:0; background:#fff; border-left:1px solid #e2e8f0; border-right:1px solid #e2e8f0; padding:0 1.25rem 1rem; }
+    #ff-list { background:#fff; border:1px solid #e2e8f0; border-top:0; border-radius:0 0 16px 16px; padding:0 1.25rem 1.25rem; box-shadow:0 12px 30px rgba(15,23,42,.06); }
     .ff-card { background:#fff; border:1px solid #e8ecf0; border-radius:12px; margin-bottom:10px; overflow:hidden; transition:border-color .15s; }
     .ff-card:hover { border-color:#cbd5e1; }
     .ff-card.open { border-color:#0ea5a0; }
@@ -104,32 +111,31 @@
     .ff-ai-detail-box ul { padding-left:1.1rem; margin:.2rem 0 0; }
     .ff-ai-card .ff-copy-btn.ai-copy { margin:0; }
 
-    @media (max-width:700px) { .ff-stats { gap:1.2rem; } .ff-body-grid { grid-template-columns:1fr; } .ff-ai-grid, .ff-ai-detail { grid-template-columns:1fr; } .ff-ai-top { flex-direction:column; } .ff-card-head { align-items:flex-start; flex-wrap:wrap; padding:1rem; } .ff-chip { width:100%; max-width:100%; white-space:normal; } }
+    @media (max-width:700px) { .ff-stats { gap:1.2rem; } .ff-body-grid { grid-template-columns:1fr; } .ff-ai-grid, .ff-ai-detail { grid-template-columns:1fr; } .ff-ai-top,.ff-results-top { flex-direction:column; align-items:flex-start; } .ff-ai-jump { white-space:normal; } .ff-card-head { align-items:flex-start; flex-wrap:wrap; padding:1rem; } .ff-chip { width:100%; max-width:100%; white-space:normal; } }
   </style>
 <script data-excelops="true" type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Excel Formula Finder","url":"https://getexcelops.com/pages/formula-finder","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Search common Excel formulas by task and get copy-ready formulas with simple examples."}</script>
 </head>
 <body>
 <nav>
 <a class="logo" href="/"><div class="logo-mark">EO</div> ExcelOps</a>
-<div class="nav-links">
+<div class="nav-links" data-nav="main">
 <a href="/pages/templates">Templates</a>
+<a href="/pages/formula-finder">Formula Finder</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
 <a href="/pages/services">Services</a>
 <a href="/pages/sql">SQL Reports</a>
-<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
-<a class="active" href="/pages/formula-finder">Formula Finder</a>
 <a href="/pages/blog">Blog</a>
 <a href="/pages/about">About</a>
-<a href="/pages/contact">Contact</a>
 </div>
 <a class="nav-cta" href="/pages/contact">Start a Project ↗</a>
 <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
-<div class="mobile-menu" id="mobile-menu">
+<div class="mobile-menu" id="mobile-menu" data-nav="mobile">
 <a href="/pages/templates">Templates</a>
+<a href="/pages/formula-finder">Formula Finder</a>
+<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
 <a href="/pages/services">Services</a>
 <a href="/pages/sql">SQL Reports</a>
-<a href="/pages/excel-shortcut-finder">Excel Shortcuts</a>
-<a href="/pages/formula-finder">Formula Finder</a>
 <a href="/pages/blog">Blog</a>
 <a href="/pages/about">About</a>
 <a href="/pages/contact">Contact</a>
@@ -143,12 +149,34 @@
 <input autocomplete="off" id="ff-input" placeholder="e.g. find price by SKU, remove spaces, low stock alert…" type="text"/>
 <span class="ff-kbd">Ctrl K</span>
 </div>
-<div class="ff-note">Local formula library first. AI customization uses your server-side Gemini API only when you ask.</div>
+<div class="ff-note">Type above and the local formula results update directly below. AI customization uses your server-side Gemini API only when you ask.</div>
 <div class="ff-stats">
 <div><div class="ff-stat-num">45+</div><div class="ff-stat-lbl">Common formulas</div></div>
 <div><div class="ff-stat-num">8</div><div class="ff-stat-lbl">Categories</div></div>
 <div><div class="ff-stat-num">AI</div><div class="ff-stat-lbl">Custom formulas</div></div>
 </div>
+</div>
+<div class="ff-main ff-main-search" id="formula-results">
+<div class="ff-results-top">
+<div>
+<div class="ff-results-kicker">Local formula results</div>
+<h2>Search results appear here first</h2>
+</div>
+<a class="ff-ai-jump" href="#formula-ai">Need a custom version? Use AI ↓</a>
+</div>
+<div class="ff-filter-row">
+<button class="ff-pill active" data-f="all">All</button>
+<button class="ff-pill" data-f="Lookup">Lookup</button>
+<button class="ff-pill" data-f="Reporting">Reporting</button>
+<button class="ff-pill" data-f="Logic">Logic</button>
+<button class="ff-pill" data-f="Text">Text</button>
+<button class="ff-pill" data-f="Cleaning">Cleaning</button>
+<button class="ff-pill" data-f="Dates">Dates</button>
+<button class="ff-pill" data-f="Math">Math</button>
+<button class="ff-pill" data-f="Business">Business</button>
+</div>
+<div class="ff-meta" id="ff-meta">Showing all formulas</div>
+<div id="ff-list"></div>
 </div>
 <div class="ff-intro">
 <h2>Common Excel formulas with simple explanations and examples</h2>
@@ -185,21 +213,6 @@
 </div>
 </div>
 
-<div class="ff-main">
-<div class="ff-filter-row">
-<button class="ff-pill active" data-f="all">All</button>
-<button class="ff-pill" data-f="Lookup">Lookup</button>
-<button class="ff-pill" data-f="Reporting">Reporting</button>
-<button class="ff-pill" data-f="Logic">Logic</button>
-<button class="ff-pill" data-f="Text">Text</button>
-<button class="ff-pill" data-f="Cleaning">Cleaning</button>
-<button class="ff-pill" data-f="Dates">Dates</button>
-<button class="ff-pill" data-f="Math">Math</button>
-<button class="ff-pill" data-f="Business">Business</button>
-</div>
-<div class="ff-meta" id="ff-meta">Showing all formulas</div>
-<div id="ff-list"></div>
-</div>
 <div class="ff-seo-grid">
 <div class="ff-seo-card"><h3>Use formulas before automation</h3><p>Many spreadsheet problems can be solved with a simple formula first. When your workflow becomes repetitive, ExcelOps can help turn it into a cleaner automated process.</p></div>
 <div class="ff-seo-card"><h3>Good for messy business data</h3><p>Search formulas for product SKUs, vendor files, CSV cleanup, reporting dashboards, inventory reorder logic, and category checks.</p></div>
@@ -221,6 +234,7 @@
 <div class="footer-bottom">© 2026 ExcelOps · <a href="https://getexcelops.com" style="color:#475569">GetExcelOps.com</a> · Built for operations teams who get things done.</div>
 </div>
 </footer>
+<script defer src="/js/nav-data.js"></script>
 <script defer src="/js/main.js"></script>
 <script>
 const FF_DATA = [{"id": "xlookup-exact", "title": "Find a value with XLOOKUP", "cat": "Lookup", "formula": "=XLOOKUP(E2,A:A,B:B,\"Not found\")", "example": "Find the price for SKU in E2 by searching SKUs in column A and returning prices from column B.", "desc": "Use XLOOKUP when you need to pull a related value from another column. It is the modern replacement for VLOOKUP in Microsoft 365 and newer Excel versions.", "tags": ["lookup", "xlookup", "find price", "sku", "match", "return value"]}, {"id": "vlookup-basic", "title": "Find a value with VLOOKUP", "cat": "Lookup", "formula": "=VLOOKUP(E2,A:B,2,FALSE)", "example": "Search for the SKU in E2 inside column A and return the matching value from column B.", "desc": "Use VLOOKUP when your lookup column is the first column of the table. FALSE means exact match.", "tags": ["vlookup", "lookup", "find", "sku", "exact match"]}, {"id": "index-match", "title": "Flexible lookup with INDEX + MATCH", "cat": "Lookup", "formula": "=INDEX(B:B,MATCH(E2,A:A,0))", "example": "Find SKU E2 in column A and return the matching price from column B.", "desc": "INDEX + MATCH is useful when the return column is not to the right of the lookup column, or when you need a more flexible lookup pattern.", "tags": ["index match", "lookup left", "match", "find"]}, {"id": "two-way-lookup", "title": "Two-way lookup by row and column", "cat": "Lookup", "formula": "=INDEX(B2:E10,MATCH(H2,A2:A10,0),MATCH(H3,B1:E1,0))", "example": "Find a product row from H2 and a month column from H3, then return the intersecting value.", "desc": "Use a two-way lookup when both the row label and the column header change, such as product-by-month reports.", "tags": ["two way lookup", "matrix", "row column", "index match"]}, {"id": "sumif", "title": "Sum values by one condition", "cat": "Reporting", "formula": "=SUMIF(A:A,E2,C:C)", "example": "Add all sales in column C where the region in column A equals E2.", "desc": "SUMIF totals numbers that meet a single condition. Great for quick category, region, vendor, or SKU summaries.", "tags": ["sumif", "sum by category", "total by region", "condition"]}, {"id": "sumifs", "title": "Sum values by multiple conditions", "cat": "Reporting", "formula": "=SUMIFS(D:D,A:A,G2,B:B,H2)", "example": "Add sales in column D where Region equals G2 and Product equals H2.", "desc": "SUMIFS totals numbers using multiple criteria. It is one of the most useful formulas for business reporting.", "tags": ["sumifs", "multiple criteria", "sales report", "total"]}, {"id": "countif", "title": "Count rows matching one condition", "cat": "Reporting", "formula": "=COUNTIF(A:A,E2)", "example": "Count how many rows in column A match the status in E2.", "desc": "COUNTIF counts cells that meet one condition, such as Open orders, a region name, or a product category.", "tags": ["countif", "count", "status", "condition"]}, {"id": "countifs", "title": "Count rows matching multiple conditions", "cat": "Reporting", "formula": "=COUNTIFS(A:A,G2,B:B,H2)", "example": "Count rows where Region equals G2 and Status equals H2.", "desc": "COUNTIFS counts records that meet multiple conditions. Use it for dashboards, QA checks, and filtered totals.", "tags": ["countifs", "multiple criteria", "dashboard", "count rows"]}, {"id": "averageifs", "title": "Average values by conditions", "cat": "Reporting", "formula": "=AVERAGEIFS(D:D,A:A,G2,B:B,H2)", "example": "Average order value in column D where Region equals G2 and Channel equals H2.", "desc": "AVERAGEIFS calculates an average only for rows that match your criteria.", "tags": ["averageifs", "average", "conditions", "kpi"]}, {"id": "if-basic", "title": "Return one result or another with IF", "cat": "Logic", "formula": "=IF(C2>=D2,\"OK\",\"Reorder\")", "example": "If stock on hand in C2 is greater than or equal to reorder point in D2, show OK. Otherwise show Reorder.", "desc": "IF is the basic decision formula in Excel. It checks a condition and returns one value when TRUE and another when FALSE.", "tags": ["if", "logic", "reorder", "status", "condition"]}, {"id": "ifs", "title": "Create multiple status levels with IFS", "cat": "Logic", "formula": "=IFS(C2=0,\"Out of stock\",C2<10,\"Low\",C2>=10,\"OK\")", "example": "Label inventory as Out of stock, Low, or OK based on quantity in C2.", "desc": "IFS is cleaner than nesting many IF formulas when you have several possible outcomes.", "tags": ["ifs", "multiple conditions", "status", "inventory"]}, {"id": "iferror", "title": "Hide errors with IFERROR", "cat": "Logic", "formula": "=IFERROR(A2/B2,0)", "example": "Divide A2 by B2, but show 0 if the calculation returns an error.", "desc": "IFERROR replaces errors such as #DIV/0!, #N/A, or #VALUE! with a cleaner result.", "tags": ["iferror", "error", "divide by zero", "clean report"]}, {"id": "and-if", "title": "Check two conditions with IF + AND", "cat": "Logic", "formula": "=IF(AND(C2>0,D2=\"Active\"),\"Include\",\"Exclude\")", "example": "Include the row only when quantity is above zero and status is Active.", "desc": "AND is used inside IF when all conditions must be true.", "tags": ["and", "if and", "multiple conditions", "include exclude"]}, {"id": "or-if", "title": "Check either condition with IF + OR", "cat": "Logic", "formula": "=IF(OR(C2=\"Urgent\",D2>1000),\"Review\",\"OK\")", "example": "Flag a row for review if the priority is Urgent or the value is over 1000.", "desc": "OR is used inside IF when any one condition can trigger the result.", "tags": ["or", "if or", "flag", "review"]}, {"id": "left", "title": "Get characters from the left", "cat": "Text", "formula": "=LEFT(A2,3)", "example": "Return the first 3 characters from SKU in A2.", "desc": "LEFT extracts a set number of characters from the beginning of a text value.", "tags": ["left", "text", "sku prefix", "extract"]}, {"id": "right", "title": "Get characters from the right", "cat": "Text", "formula": "=RIGHT(A2,4)", "example": "Return the last 4 characters from order number in A2.", "desc": "RIGHT extracts characters from the end of a text value.", "tags": ["right", "text", "suffix", "extract"]}, {"id": "mid", "title": "Get characters from the middle", "cat": "Text", "formula": "=MID(A2,4,5)", "example": "Starting at character 4 in A2, return 5 characters.", "desc": "MID extracts text from the middle of a value when you know the starting position and length.", "tags": ["mid", "middle", "extract", "text"]}, {"id": "textbefore", "title": "Get text before a delimiter", "cat": "Text", "formula": "=TEXTBEFORE(A2,\"-\")", "example": "From SKU ABC-123, return ABC.", "desc": "TEXTBEFORE extracts everything before a chosen delimiter. Useful for SKUs, codes, and combined fields.", "tags": ["textbefore", "delimiter", "split", "sku"]}, {"id": "textafter", "title": "Get text after a delimiter", "cat": "Text", "formula": "=TEXTAFTER(A2,\"-\")", "example": "From SKU ABC-123, return 123.", "desc": "TEXTAFTER extracts everything after a chosen delimiter.", "tags": ["textafter", "delimiter", "split", "sku"]}, {"id": "concat", "title": "Combine text values", "cat": "Text", "formula": "=TEXTJOIN(\" - \",TRUE,A2,B2,C2)", "example": "Combine product name, color, and size into one clean product title.", "desc": "TEXTJOIN combines multiple text values and lets you choose a separator while ignoring blank cells.", "tags": ["combine", "concat", "textjoin", "product title"]}, {"id": "trim", "title": "Remove extra spaces", "cat": "Cleaning", "formula": "=TRIM(A2)", "example": "Clean a product name that has leading, trailing, or repeated spaces.", "desc": "TRIM removes extra spaces from text, which helps fix lookup failures and messy imports.", "tags": ["trim", "spaces", "clean text", "messy data"]}, {"id": "clean", "title": "Remove non-printing characters", "cat": "Cleaning", "formula": "=CLEAN(A2)", "example": "Remove hidden line breaks or non-printing characters from imported data.", "desc": "CLEAN removes many non-printing characters that can appear in copied or exported data.", "tags": ["clean", "hidden characters", "import", "csv"]}, {"id": "substitute", "title": "Replace specific text", "cat": "Cleaning", "formula": "=SUBSTITUTE(A2,\"/\",\"-\")", "example": "Change slashes in a date-like code to hyphens.", "desc": "SUBSTITUTE replaces exact text inside a cell. It is useful for standardizing values.", "tags": ["substitute", "replace", "standardize", "clean"]}, {"id": "proper", "title": "Convert names to title case", "cat": "Cleaning", "formula": "=PROPER(A2)", "example": "Convert john smith to John Smith.", "desc": "PROPER capitalizes the first letter of each word, which is useful for names and labels.", "tags": ["proper", "title case", "capitalize", "names"]}, {"id": "upper", "title": "Convert text to uppercase", "cat": "Cleaning", "formula": "=UPPER(A2)", "example": "Convert sku-ab12 to SKU-AB12.", "desc": "UPPER converts all letters to uppercase for consistent codes and IDs.", "tags": ["upper", "uppercase", "sku", "standardize"]}, {"id": "remove-duplicates-helper", "title": "Flag duplicate values", "cat": "Cleaning", "formula": "=IF(COUNTIF(A:A,A2)>1,\"Duplicate\",\"Unique\")", "example": "Flag repeated email addresses or SKUs in column A.", "desc": "This formula marks values that appear more than once. It is useful before importing customer, product, or vendor files.", "tags": ["duplicates", "countif", "unique", "email", "sku"]}, {"id": "unique", "title": "Return a unique list", "cat": "Cleaning", "formula": "=UNIQUE(A2:A100)", "example": "Create a unique list of vendors from a column with repeated vendor names.", "desc": "UNIQUE returns each distinct value from a range. Available in Microsoft 365 and newer Excel versions.", "tags": ["unique", "distinct", "dedupe", "list"]}, {"id": "filter", "title": "Filter rows with a formula", "cat": "Reporting", "formula": "=FILTER(A2:D100,D2:D100=\"Open\")", "example": "Return only rows where Status in column D is Open.", "desc": "FILTER returns matching rows dynamically. It is useful for live report tabs and exception lists.", "tags": ["filter", "dynamic array", "open orders", "report"]}, {"id": "sort", "title": "Sort a range with a formula", "cat": "Reporting", "formula": "=SORT(A2:D100,4,-1)", "example": "Sort a table by the 4th column in descending order.", "desc": "SORT creates a sorted copy of your data without changing the source table.", "tags": ["sort", "dynamic array", "rank", "descending"]}, {"id": "today", "title": "Show today's date", "cat": "Dates", "formula": "=TODAY()", "example": "Return the current date for aging, due date, or dashboard calculations.", "desc": "TODAY updates automatically whenever the workbook recalculates.", "tags": ["today", "current date", "date", "aging"]}, {"id": "datedif", "title": "Calculate age or days between dates", "cat": "Dates", "formula": "=DATEDIF(A2,TODAY(),\"d\")", "example": "Calculate how many days have passed since the order date in A2.", "desc": "DATEDIF calculates the difference between two dates in days, months, or years.", "tags": ["datedif", "date difference", "aging", "days old"]}, {"id": "eomonth", "title": "Find the end of the month", "cat": "Dates", "formula": "=EOMONTH(A2,0)", "example": "Return the last day of the month for the date in A2.", "desc": "EOMONTH is useful for monthly reporting, payment terms, and period-end calculations.", "tags": ["eomonth", "month end", "reporting period", "date"]}, {"id": "networkdays", "title": "Count working days between dates", "cat": "Dates", "formula": "=NETWORKDAYS(A2,B2)", "example": "Count business days between order date A2 and ship date B2.", "desc": "NETWORKDAYS excludes weekends. You can also add a holiday range as a third argument.", "tags": ["networkdays", "business days", "working days", "lead time"]}, {"id": "workday", "title": "Add working days to a date", "cat": "Dates", "formula": "=WORKDAY(A2,5)", "example": "Find the due date 5 business days after the request date in A2.", "desc": "WORKDAY adds business days and skips weekends. Useful for SLAs, due dates, and delivery schedules.", "tags": ["workday", "due date", "business days", "sla"]}, {"id": "round", "title": "Round a number", "cat": "Math", "formula": "=ROUND(A2,2)", "example": "Round a landed cost or unit price to 2 decimal places.", "desc": "ROUND rounds a number to a set number of digits.", "tags": ["round", "decimal", "price", "cost"]}, {"id": "roundup", "title": "Round up to the next number", "cat": "Math", "formula": "=ROUNDUP(A2,0)", "example": "Round up a case requirement so you always order enough units.", "desc": "ROUNDUP always rounds away from zero, which is useful for inventory and packaging calculations.", "tags": ["roundup", "order quantity", "inventory", "case pack"]}, {"id": "ceiling", "title": "Round up to a pack size", "cat": "Math", "formula": "=CEILING(A2,12)", "example": "Round required units in A2 up to the nearest case pack of 12.", "desc": "CEILING rounds a number up to the nearest multiple you choose.", "tags": ["ceiling", "case pack", "multiple", "round up"]}, {"id": "percent-change", "title": "Calculate percent change", "cat": "Math", "formula": "=(B2-A2)/A2", "example": "Calculate sales growth from last month in A2 to this month in B2.", "desc": "Percent change shows how much a value increased or decreased compared with the original value.", "tags": ["percent change", "growth", "increase", "decrease"]}, {"id": "subtotal", "title": "Subtotal visible filtered rows", "cat": "Reporting", "formula": "=SUBTOTAL(9,D:D)", "example": "Sum only the visible values in column D after applying a filter.", "desc": "SUBTOTAL can ignore filtered-out rows, making it useful for filtered reports.", "tags": ["subtotal", "filtered rows", "visible cells", "sum"]}, {"id": "choosecols", "title": "Return selected columns", "cat": "Reporting", "formula": "=CHOOSECOLS(A2:F100,1,3,6)", "example": "Return only columns 1, 3, and 6 from a larger table.", "desc": "CHOOSECOLS lets you build a cleaner report view from selected source columns.", "tags": ["choosecols", "select columns", "report view", "dynamic array"]}, {"id": "conditional-low-stock", "title": "Low stock flag", "cat": "Business", "formula": "=IF(B2<=C2,\"Reorder\",\"OK\")", "example": "If On Hand in B2 is less than or equal to Reorder Point in C2, show Reorder.", "desc": "A simple inventory formula for low-stock alerts and reorder reports.", "tags": ["low stock", "reorder", "inventory", "stock alert"]}, {"id": "gross-margin", "title": "Gross margin percentage", "cat": "Business", "formula": "=(B2-C2)/B2", "example": "If sale price is in B2 and cost is in C2, calculate gross margin percent.", "desc": "Gross margin helps you understand profitability after product cost.", "tags": ["margin", "gross margin", "profit", "price cost"]}, {"id": "landed-cost", "title": "Landed cost per unit", "cat": "Business", "formula": "=(B2+C2+D2)/A2", "example": "Divide total product cost, freight, and duty by units received.", "desc": "Use landed cost to calculate the true per-unit cost after freight, duty, and fees.", "tags": ["landed cost", "freight", "duty", "unit cost"]}, {"id": "reorder-point", "title": "Reorder point formula", "cat": "Business", "formula": "=(B2*C2)+D2", "example": "Daily demand in B2 times lead time in C2, plus safety stock in D2.", "desc": "Reorder point tells you when to place a new order before stock runs out.", "tags": ["reorder point", "inventory", "lead time", "safety stock"]}, {"id": "stock-cover", "title": "Days of stock cover", "cat": "Business", "formula": "=A2/B2", "example": "On-hand units in A2 divided by average daily sales in B2.", "desc": "Stock cover estimates how many days current inventory will last.", "tags": ["stock cover", "days inventory", "inventory", "daily sales"]}, {"id": "match-two-columns", "title": "Check whether two columns match", "cat": "Cleaning", "formula": "=IF(A2=B2,\"Match\",\"Different\")", "example": "Compare an old SKU value in A2 with a new SKU value in B2.", "desc": "Use this to compare exports, validate changes, or check two versions of a dataset.", "tags": ["compare columns", "match", "different", "validate"]}, {"id": "isnumber-search", "title": "Check if cell contains text", "cat": "Text", "formula": "=ISNUMBER(SEARCH(\"apple\",A2))", "example": "Return TRUE if product name in A2 contains the word apple.", "desc": "SEARCH finds text inside a cell. ISNUMBER converts the result into TRUE or FALSE.", "tags": ["contains", "search text", "keyword", "product name"]}, {"id": "category-keyword", "title": "Assign category by keyword", "cat": "Business", "formula": "=IF(ISNUMBER(SEARCH(\"shoe\",A2)),\"Footwear\",\"Other\")", "example": "If product name in A2 contains shoe, categorize it as Footwear.", "desc": "A simple way to classify rows by keyword. For larger product catalogs, use multiple rules or automation.", "tags": ["category", "keyword", "classification", "product data"]}];

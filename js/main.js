@@ -1,6 +1,23 @@
 // ExcelOps site interactions
 // Static nav/footer stay in the HTML for faster rendering and better SEO.
 
+
+// Render shared navigation from /js/nav-data.js when available.
+function renderSharedNavigation() {
+  const items = Array.isArray(window.EXCELOPS_NAV_ITEMS) ? window.EXCELOPS_NAV_ITEMS : [];
+  if (!items.length) return;
+  const linkHtml = items.map(item => `<a href="${item.href}">${item.label}</a>`).join('');
+  document.querySelectorAll('[data-nav="main"], nav .nav-links').forEach(el => {
+    el.innerHTML = linkHtml;
+    el.setAttribute('data-nav', 'main');
+  });
+  document.querySelectorAll('[data-nav="mobile"], #mobile-menu').forEach(el => {
+    el.innerHTML = linkHtml + '<a href="/pages/contact">Contact</a>';
+    el.setAttribute('data-nav', 'mobile');
+  });
+}
+renderSharedNavigation();
+
 // Highlight current page navigation links
 const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
 document.querySelectorAll('nav .nav-links a, .mobile-menu a').forEach(link => {
